@@ -2,7 +2,7 @@
 <openerp>
    <data>
         <!--Report template:-->
-        <template id="report_account_ddt">
+        <template id="report_sale_block">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
@@ -212,16 +212,16 @@
           </xpath>
         </template>
         -->
-        <template id="report_ddt_lang">
+        <template id="report_sale_block_lang">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="logistic_account_report.report_account_ddt" t-lang="doc.partner_id.lang"/>
+                    <t t-call="sale_order_block.report_sale_block" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>
         </template>
 
         <record id="paperformat_accounting" model="report.paperformat">
-            <field name="name">Account report</field>
+            <field name="name">Sale report</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
             <field name="page_height">297</field>
@@ -238,15 +238,15 @@
         
         <!--Report action:-->
         <report
-            id="action_report_ddt_lang"
+            id="action_report_sale_block_lang"
             model="stock.picking"
-            string="Account DDT report"
+            string="Sale Block report"
             report_type="qweb-pdf"
-            name="logistic_account_report.report_ddt_lang"
-            file="logistic_account_report.report_ddt_lang"
+            name="sale_order_block.report_sale_block_lang"
+            file="sale_order_block.report_sale_block_lang"
             attachment_use="True"
-            attachment="'%s.pdf' % (object.ddt_number or 'draft').replace('/', '_')"
-            print_report_name="'%s.pdf' % (object.ddt_number or 'draft').replace('/', '_')"
+            attachment="'%s.pdf' % (object.name or 'draft').replace('/', '_')"
+            print_report_name="'%s.pdf' % (object.name or 'draft').replace('/', '_')"
             paperformat="paperformat_accounting"
         />
 

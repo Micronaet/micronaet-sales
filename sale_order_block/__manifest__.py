@@ -5,9 +5,9 @@
     'name': 'Sale order in block',
     'version': '11.0.2.0.0',
     'category': 'Sales',
-    'description': '''
+    'description': """
         Manage report block for sales
-        ''',
+        """,
     'summary': 'Sale, Block, report',
     'author': 'Micronaet S.r.l. - Nicola Riolini',
     'website': 'http://www.micronaet.it',
@@ -18,8 +18,9 @@
         'web',
     ],
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/block_view.xml',
+        'report/sales_report.xml',
     ],
     'external_dependencies': {},
     'application': False,

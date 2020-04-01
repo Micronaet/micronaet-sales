@@ -21,10 +21,10 @@ class SaleOrderBlockGroup(models.Model):
     def print_only_this(self):
         """ Print sale order only with this block
         """
-        sale_pool = self.env['sale.order']
-        return sale_pool.with_context(only_block=[self.id]).print_quotation()
+        order = self.order_id
+        return order.with_context(only_block=[self.id]).print_quotation()
 
-    @api.depends
+    @api.multi
     def _function_get_total_block(self):
         """ Fields function for calculate
         """
@@ -106,8 +106,9 @@ class SaleOrder(models.Model):
 
         new_order = super(SaleOrder, self).copy(default)
         new_id = new_order.id
+        old_id = self.id
 
-        if self.block_ids:
+        if not self.block_ids:
             return new_order
 
         blocks = block_pool.search([
@@ -139,6 +140,9 @@ class SaleOrder(models.Model):
                 'show_price': block.show_detail,
                 # 'show_subtotal': fields.boolean('Show Subtotal'),
                 'show_total': block.show_total,
+
+                'hide_block': block.hide_block,
+                'not_confirmed': False,
             }
             convert_db.append((block.id, block_pool.create(data).id))
 
@@ -158,45 +162,39 @@ class SaleOrder(models.Model):
             })
         return new_order
 
-    '''
     @api.multi
     def print_quotation(self):
         """ This function prints the sales order and mark it as sent
             so that we can see more easily the next step of the workflow
         """
-        self.ensureone()
-
-        # Mark as sent: TODO use workflow?
-        # wf_service = netsvc.LocalService("workflow")
-        # wf_service.trg_validate(
-        #    uid, 'sale.order', ids[0], 'quotation_sent', cr)
-
+        import pdb; pdb.set_trace()
+        self.ensure_one()
         datas = {
             'model': 'sale.order',
-            'ids': ids,
-            'form': self.read(cr, uid, ids[0], context=context),
+            'ids': [item.id for item in self],
+            # TODO 'form': self.read(cr, uid, ids[0], context=context),
         }
-        only_this_block = context.get('only_this_block')
+        only_this_block = self.env.context.get('only_this_block')
         if only_this_block:
             datas['only_this_block'] = only_this_block
 
         return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'custom_block_sale_order_report',
+            'type': 'ir.actions.report',
+            'report_name': 'sale_order_block.report_sale_block_lang',
+            'model': 'sale.order',
+            'report_type': "qweb-pdf",
             'datas': datas,
-            'nodestroy': True,
         }
-    '''
 
     # Fields function:
-    @api.depends
+    @api.multi
     def _function_get_total_block(self):
         """ Fields function for calculate
         """
         for order in self:
             total = 0.0
             for block in order.block_ids:
-                total += block.total or block.real_total
+                total += block.total or block.real_total # price_subtotal
             order.real_total = total
 
     # Columns:
@@ -220,6 +218,14 @@ class SaleOrderLine(models.Model):
     # Columns:
     block_id = fields.Many2one(
         'sale.order.block.group', 'Block', ondelete='set null')
+
+    # Parameter for line:
+    hide_block = fields.Boolean(
+        'Hide block', related='block_id.hide_block',
+        help='Hide in report for simulation')
+    not_confirmed = fields.Boolean(
+        'Not confirmed', related='block_id.not_confirmed',
+        help='Removed from order')
 
 
 class SaleOrderBlockGroupRelation(models.Model):
