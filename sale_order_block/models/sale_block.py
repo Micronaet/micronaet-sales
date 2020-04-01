@@ -85,7 +85,9 @@ class SaleOrder(models.Model):
     """
     _inherit = 'sale.order'
 
+    # -------------------------------------------------------------------------
     # Button events:
+    # -------------------------------------------------------------------------
     @api.multi
     def dummy_action(self):
         """ Dummy button to refresh data
@@ -93,42 +95,32 @@ class SaleOrder(models.Model):
         return True
 
     # Override function:
-    # TODO
-    '''
     @api.one
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
-        default = dict(default or {})
-        default.update({
-            'invoice_date': ''})
-        return super(AccountInvoice, self).copy(default)
-    
-    @api.multi
-    def copy(self, cr, uid, old_id, default=None, context=None):
-        """ Create a new record in ClassName model from existing one
-            @param cr: cursor to database
-            @param uid: id of current user
-            @param id: list of record ids on which copy method executes
-            @param default: dict type contains the values to override copy op.
-            @param context: context arguments
-
-            @return: returns a id of newly created record
+        """ Duplicate also block information
         """
-        new_id = super(SaleOrder, self).copy(
-            cr, uid, old_id, default=default, context=context)
+        # Pool used:
+        block_pool = self.env['sale.order.block.group']
+        sol_pool = self.env['sale.order.line']
 
-        block_pool = self.pool.get('sale.order.block.group')
-        block_ids = block_pool.search(cr, uid, [
+        new_order = super(SaleOrder, self).copy(default)
+        new_id = new_order.id
+
+        if self.block_ids:
+            return new_order
+
+        blocks = block_pool.search([
             ('order_id', '=', old_id),
-        ], context=context)
+        ])
         convert_db = []
 
-        # XXX When adding new parameter put here!
+        # TODO When adding new parameter put here!
         # ---------------------------------------------------------------------
         # Duplicate block list:
         # ---------------------------------------------------------------------
-        _logger.warning('Duplicate extra block in sale: %s' % len(block_ids))
-        for block in block_pool.browse(cr, uid, block_ids, context=context):
+        _logger.warning('Duplicate extra block in sale: %s' % len(blocks))
+        for block in blocks:
             data = {
                 'code': block.code,
                 'name': block.name,
@@ -148,27 +140,24 @@ class SaleOrder(models.Model):
                 # 'show_subtotal': fields.boolean('Show Subtotal'),
                 'show_total': block.show_total,
             }
-            convert_db.append((
-                block.id, block_pool.create(cr, uid, data, context=context)))
+            convert_db.append((block.id, block_pool.create(data).id))
 
         # ---------------------------------------------------------------------
         # Change reference for block in detail list:
         # ---------------------------------------------------------------------
-        sol_pool = self.pool.get('sale.order.line')
         _logger.warning('Update reference in details: %s' % len(convert_db))
         for old, new in convert_db:
-            sol_ids = sol_pool.search(cr, uid, [
+            lines = sol_pool.search([
                 ('order_id', '=', new_id),
                 ('block_id', '=', old),
-            ], context=context)
-            if not sol_ids:
+            ])
+            if not lines:
                 continue
-            sol_pool.write(cr, uid, sol_ids, {
+            lines.write({
                 'block_id': new,
-            }, context=context)
-        return new_id
-    '''
-    # TODO
+            })
+        return new_order
+
     '''
     @api.multi
     def print_quotation(self):
