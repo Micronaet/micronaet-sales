@@ -13,12 +13,13 @@
     'website': 'http://www.micronaet.it',
     'license': 'AGPL-3',
     'depends': [
-        'sales',
+        'sale',
+        'sale_management',
         'web',
     ],
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/excel_report_view.xml',
+        'views/block_view.xml',
     ],
     'external_dependencies': {},
     'application': False,
