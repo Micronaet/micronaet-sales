@@ -17,8 +17,8 @@
         'web',
     ],
     'data': [
-        #'security/ir.model.access.csv',
-        #'views/excel_report_view.xml',
+        # 'security/ir.model.access.csv',
+        # 'views/excel_report_view.xml',
     ],
     'external_dependencies': {},
     'application': False,
