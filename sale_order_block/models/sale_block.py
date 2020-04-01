@@ -181,7 +181,7 @@ class SaleOrder(models.Model):
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',
             'model': 'sale.order',
-            'report_type': "qweb-pdf",
+            'report_type': 'qweb-pdf',
             'datas': datas,
         }
 
@@ -228,7 +228,7 @@ class SaleOrderLine(models.Model):
 
 
 class SaleOrderBlockGroupRelation(models.Model):
-    """ Model name: SaleOrderBlockGroup
+    """ Model name: Sale Order Block Group
     """
 
     _inherit = 'sale.order.block.group'

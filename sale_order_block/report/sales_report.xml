@@ -7,7 +7,7 @@
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
                         <div class="page">
-                             <!-- HEADER: -->
+                            <!-- HEADER: -->
                             <div class="row">
                                 <div class="col-xs-2">
                                     <!--LOGO-->
@@ -29,108 +29,134 @@
                             <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-5">
-                                    Destinatario
                                 </div>
-                                <div class="col-xs-1">
-                                </div>
-                                <div class="col-xs-6">
-                                    Destinazione
+                                <div class="col-xs-7" style="height: 150px; background-color: #f0f0f5;">
+                                    <div t-field="o.partner_id.name" />
+                                    <div t-field="o.partner_id.street" /> - <div t-field="o.partner_id.zip" />
+                                    <div t-field="o.partner_id.city" />
+                                    Tel.: <div t-field="o.partner_id.phone" />
+                                    <!--Fax: <div t-field="o.partner_id.fax" />-->
+                                    E-mail: <div t-field="o.partner_id.email" />
+                                    <!--Cod. Fiscale: <div t-field="o.partner_id.fiscalcode" />-->
+                                    P. IVA: <div t-field="o.partner_id.vat" />
                                 </div>
                             </div>
+
                             <div class="oe_structure"/>
                             <div class="row">
-                                <div class="col-xs-5" style="height: 150px; border: 1px solid black;">
-                                    <div t-field="o.partner_id.name" />
+                                <div class="col-xs-6">
+                                    <div>
+                                        <span t-esc="'PREVENTIVO' if o.state in ['draft','sent'] else 'ORDINE'"/>
+                                        <span t-esc="o.name"/>
+                                    </div>
+                                    Referente: <div t-esc="'' and 'o.client_order_ref or '" />
                                 </div>
-                                <div class="col-xs-1">
-                                </div>
-                                <div class="col-xs-6" style="height: 150px; border: 1px solid black;">
-                                    <div t-field="o.partner_id.name" />
-                                </div>
-                            </div>
-                            <div class="oe_structure"/>
-
-                            <!-- DETAIL: -->
-                            <br />
-                            <div class="oe_structure"/>
-                            <div class="row">
-                                <div class="col-xs-2">
-                                </div>
-                                <div class="col-xs-1">
-                                    <b>Q.ta'</b>
-                                </div>
-                                <div class="col-xs-4">
-                                    <b>Cod. Art.</b>
-                                </div>
-                                <div class="col-xs-5">
-                                    <b>Descrizione</b>
+                                <div class="col-xs-6">
+                                    <div t-esc="o.date_order or ''" />
                                 </div>
                             </div>
 
-                            <!--Order reference:-->
-                            <!--<div class="row">
-                                <div class="col-xs-6">
-                                </div>
-                                <div class="col-xs-6">
-                                    <b>Rif. Conferma d'ordine: <span t-field="o.sale_order_id.name" /></b>
-                                </div>
-                            </div>-->
-                            <div class="oe_structure"/>
+                            <!--                          DETAIL:                         -->
+                            <!-- BLOCK LOOP: -->
+                            <t t-foreach="o.block_ids" t-as="block">
+                                <t t-if="show_the_block(block, data)">
+                                    <t t-if="block.show_header">
+                                        <div class="col-xs-12">
+                                            <div t-esc="block.name.upper()" />
+                                        </div>
+                                    </t>
+                                    <div t-esc="block.pre_text or ''"/>
 
-                            <t t-foreach="o.order_line" t-as="line">
+                                    <!--<t t-if="block.show_price">
+                                    </t>-->
+                                    <t t-if="block.show_detail">
+                                        <div class="oe_structure"/>
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <b>DETTAGLIO</b>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <b>Q.</b>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <b>PREZZO</b>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <b>SCONTO</b>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <b>TOTALE</b>
+                                            </div>
+                                        </div>
 
+                                        <div class="oe_structure"/>
+                                        <t t-foreach="block.line_ids" t-as="l">
+                                            <div class="oe_structure"/>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <span t-esc="clean_name(l)"/>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <span t-esc="l.product_uom_qty"/>
+                                                    <span t-esc="(l.product_uom and l.product_uom.name) or ''"/>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <span t-esc="l.price_unit"/>
+                                                    <!--TODO format currency and symbol-->
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <span t-esc="l.discount"/>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <span t-esc="l.price_subtotal"/>
+                                                </div>
+                                            </div>
+                                        </t>
+
+                                        <t t-if="block.show_total">
+                                            <div class="oe_structure"/>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span t-esc="'TOTALE A CORPO' if block.total else 'TOTALE A SEZIONE'"/>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <span t-esc="block.total or block.real_total"/>
+                                                </div>
+                                            </div>
+                                        </t>
+
+                                        <div t-esc="block.post_text or ''"/>
+                                    </t>
+                                </t>
                             </t>
+                            <!--Master total:-->
+                            <t t-if="o.show_master_total">
+                                <div class="oe_structure"/>
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        TOTALE OFFERTA
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <span t-esc="o.real_total"/>
+                                    </div>
+                                </div>
+                            </t>
+
+
 
                             <!-- END OF PAGE: -->
                             <br />
                             <div class="oe_structure"/>
                             <div class="row">
-                                <div class="col-xs-6" style="height: 60px; border: 1px solid black;">
-                                    <b>Incaricato del trasporto:</b><br/>
-                                </div>
-                                <div class="col-xs-3" style="height: 60px; border: 1px solid black;">
-                                    <b>Causale del trasporto:</b><br/>
-                                </div>
-                                <div class="col-xs-3" style="height: 60px; border: 1px solid black;">
-                                    <b>Firma incaricato del trasporto:</b><br/>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-1" style="height: 60px; border: 1px solid black;">
-                                </div>
-                                <div class="col-xs-1" style="height: 60px; border: 1px solid black;">
-                                </div>
-                                <div class="col-xs-2" style="height: 60px; border: 1px solid black;">
-                                </div>
-                                <div class="col-xs-2" style="height: 60px; border: 1px solid black;">
-                                </div>
-                                <div class="col-xs-3" style="height: 60px; border: 1px solid black;">
-                                </div>
-                                <div class="col-xs-3" style="height: 60px; border: 1px solid black;">
-                                    <b>Firma destinatario:</b><br/>
-
-                                </div>
-                            </div>
-
-                            <!-- IMPORTANT: -->
-                            <br />
-                            <div class="oe_structure"/>
-                            <div class="row">
-                                <div class="col-xs-12" style="border: 1px solid black;">
-                                </div>
-                            </div>
-
-                            <!-- PRIVACY: -->
-                            <div class="oe_structure"/>
-                            <div class="row">
                                 <div class="col-xs-1">
-                                    Pag. 1
                                 </div>
-                                <div class="col-xs-11">
+                                <div class="col-xs-11" >
+                                    <b>N.B.:</b> I prezzi si intendono esclusi di IVA (ove applicata).<br/>
+                                    TERMINI DI PAGAMENTO:
+                                    <span t-esc="(o.payment_term_id and o.payment_term_id.name) or ''"/>
                                 </div>
                             </div>
-                            <br />
+
                         </div>
                     </t>
                 </t>
@@ -182,8 +208,8 @@
             name="sale_order_block.report_sale_block_lang"
             file="sale_order_block.report_sale_block_lang"
             attachment_use="True"
-            attachment="'%s.pdf' % (object.name or 'draft').replace('/', '_')"
-            print_report_name="'%s.pdf' % (object.name or 'draft').replace('/', '_')"
+            attachment="(object.name or 'draft').replace('/', '_')"
+            print_report_name="(object.name or 'draft').replace('/', '_')"
             paperformat="paperformat_accounting"
         />
 
