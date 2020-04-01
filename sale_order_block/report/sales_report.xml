@@ -18,65 +18,65 @@
                                 <div class="col-xs-4">
                                     <span t-field="res_company.partner_id.contact_info" /><br/>
                                     P. IVA: <span t-field="res_company.partner_id.vat" />
-                                </div>    
+                                </div>
                                 <div class="col-xs-6">
                                     <h1 t-esc="o.sale_order_id.partner_shipping_id.country_id.code if o.sale_order_id.partner_shipping_id else o.partner_id.country_id.code" /><br />
                                     <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('Code128', (o.ddt_number or '').split('/')[-1], 800, 50)" style="width:400px;height:50px;" /><br/>
                                     <span t-esc="'Reso cliente nr. ' if o.stock_mode == 'in' else 'Doc. di trasporto nr. '" /><span t-esc="o.ddt_number" /> del <span t-esc="o.ddt_date" />
-                                </div>    
-                            </div>                            
+                                </div>
+                            </div>
                             <div class="oe_structure"/>
                             <hr />
-                            
+
                              <!-- DESTINATION BOX: -->
-                            <div class="oe_structure"/>                            
+                            <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-5">
                                     Destinatario
-                                </div>    
+                                </div>
                                 <div class="col-xs-1">
-                                </div>                                
+                                </div>
                                 <div class="col-xs-6">
                                     Destinazione
-                                </div>    
-                            </div>    
+                                </div>
+                            </div>
                             <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-5" style="height: 150px; border: 1px solid black;">
                                     <div t-field="o.sale_order_id.partner_id.contact_info" />
-                                </div>    
+                                </div>
                                 <div class="col-xs-1">
-                                </div>                                
+                                </div>
                                 <div class="col-xs-6" style="height: 150px; border: 1px solid black;">
                                     <div t-field="(o.sale_order_id.partner_shipping_id or o.sale_order_id.partner_id).contact_info" />
-                                </div>    
-                            </div>    
+                                </div>
+                            </div>
                             <div class="oe_structure"/>
-                            
+
                             <!-- DETAIL: -->
                             <br />
-                            <div class="oe_structure"/>                            
+                            <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-2">
                                 </div>
                                 <div class="col-xs-1">
                                     <b>Q.ta'</b>
-                                </div>    
+                                </div>
                                 <div class="col-xs-4">
                                     <b>Cod. Art.</b>
-                                </div>    
+                                </div>
                                 <div class="col-xs-5">
                                     <b>Descrizione</b>
-                                </div>    
+                                </div>
                             </div>
-                            
-                            <!--Order reference:-->    
+
+                            <!--Order reference:-->
                             <!--<div class="row">
                                 <div class="col-xs-6">
-                                </div>    
+                                </div>
                                 <div class="col-xs-6">
                                     <b>Rif. Conferma d'ordine: <span t-field="o.sale_order_id.name" /></b>
-                                </div>    
+                                </div>
                             </div>-->
                             <div class="oe_structure"/>
 
@@ -84,55 +84,53 @@
                                 <!--Order header-->
                                 <div t-if="move[14]" class="row">
                                     <div class="col-xs-1">
-                                    </div>    
+                                    </div>
                                     <div class="col-xs-11">
                                         <b>Rif. Conferma d'ordine: <span t-esc="move[14]" /></b>
-                                    </div> 
+                                    </div>
                                 </div>
-                                
+
                                 <!--DATA ROW:-->
                                 <div class="row" style="max-height 80px">
                                     <div class="col-xs-2">
                                         <t t-if="not move[0].is_expence">
                                             <img t-att-src="'data:image/png;base64,%s' % to_text(move[0].new_image)" style="max-height:80px;max-width:80px"/>
                                         </t>
-                                    </div>    
-                                    
+                                    </div>
+
                                     <div class="col-xs-1" style="align:text-center;">
                                         <h4 t-esc="move[1]" />
-                                    </div>    
-                                    
+                                    </div>
+
                                     <div class="col-xs-2" style="float: left; align:text-left;">
                                         <!--product used:-->
                                         <h5><span t-esc="move[0].product_tmpl_id.default_code or &quot; &quot;" /><br/>
-                                        
+
                                         <!--original product:-->
-                                        <i><span t-if="move[2]" t-field="move[2].product_tmpl_id.default_code" /></i>                                        
+                                        <i><span t-if="move[2]" t-field="move[2].product_tmpl_id.default_code" /></i>
                                         <b><span t-if="move[0].product_tmpl_id.is_refund" t-esc="'%s %s' % (move[9], res_company.currency_id.symbol)" /></b></h5>
-                                        
-                                    </div>    
+
+                                    </div>
 
                                     <div class="col-xs-2" style="float: left; align:text-left;">
                                         <span t-esc="move[16].logistic_position" />
-                                    </div>    
+                                    </div>
 
                                     <div class="col-xs-5" style="float: left; align:text-left;">
                                         <t t-if="not move[0].is_expence">
                                             <img t-if="move[0].product_tmpl_id.default_code" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('Code128', move[0].product_tmpl_id.default_code, 800, 50)" style="width:400px;height:25px;"/><br/>
                                         </t>
-                                    </div>    
-                                    
-                                    
+                                    </div>
                                     <div class="col-xs-12">
                                         <h4 t-field="move[16].name" />
-                                    </div>    
-                                </div> 
-                                
+                                    </div>
+                                </div>
+
                             </t>
-                            
+
                             <!-- END OF PAGE: -->
                             <br />
-                            <div class="oe_structure"/>                            
+                            <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-6" style="height: 60px; border: 1px solid black;">
                                     <b>Incaricato del trasporto:</b><br/>
@@ -144,9 +142,9 @@
                                 </div>
                                 <div class="col-xs-3" style="height: 60px; border: 1px solid black;">
                                     <b>Firma incaricato del trasporto:</b><br/>
-                                    
+
                                 </div>
-                            </div>    
+                            </div>
                             <div class="row">
                                 <div class="col-xs-1" style="height: 60px; border: 1px solid black;">
                                     <b>Colli:</b><br/>
@@ -170,35 +168,35 @@
                                 </div>
                                 <div class="col-xs-3" style="height: 60px; border: 1px solid black;">
                                     <b>Firma destinatario:</b><br/>
-                                    
+
                                 </div>
-                            </div>    
+                            </div>
 
                             <!-- IMPORTANT: -->
                             <br />
-                            <div class="oe_structure"/>                            
+                            <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-12" style="border: 1px solid black;">
                                     <span t-field="res_company.report_text_thanks" />
-                                </div>    
-                            </div>    
+                                </div>
+                            </div>
 
                             <!-- PRIVACY: -->
                             <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-1">
                                     Pag. 1
-                                </div>    
+                                </div>
                                 <div class="col-xs-11">
                                     <span t-field="res_company.report_text_privacy" />
-                                </div>    
-                            </div>    
+                                </div>
+                            </div>
                             <br />
                         </div>
                     </t>
                 </t>
             </t>
-        </template>   
+        </template>
         <!--
         <template id="report_saleorder_document">
             <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
@@ -235,7 +233,7 @@
             <field name="header_spacing">3</field>
             <field name="dpi">90</field>
         </record>
-        
+
         <!--Report action:-->
         <report
             id="action_report_sale_block_lang"

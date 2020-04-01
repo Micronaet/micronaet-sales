@@ -167,7 +167,6 @@ class SaleOrder(models.Model):
         """ This function prints the sales order and mark it as sent
             so that we can see more easily the next step of the workflow
         """
-        import pdb; pdb.set_trace()
         self.ensure_one()
         datas = {
             'model': 'sale.order',
@@ -178,6 +177,7 @@ class SaleOrder(models.Model):
         if only_this_block:
             datas['only_this_block'] = only_this_block
 
+        import pdb; pdb.set_trace()
         return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',

@@ -2,7 +2,9 @@
   <dictionary name="thebrush">
     <words>
       <w>agpl</w>
+      <w>datas</w>
       <w>micronaet</w>
+      <w>qweb</w>
     </words>
   </dictionary>
 </component>
