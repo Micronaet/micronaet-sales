@@ -177,7 +177,6 @@ class SaleOrder(models.Model):
         if only_this_block:
             datas['only_this_block'] = only_this_block
 
-        import pdb; pdb.set_trace()
         return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',

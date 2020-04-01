@@ -18,9 +18,8 @@ class ReportSaleOrderBlock(models.AbstractModel):
     def get_report_values(self, docids, data=None):
         """ Render report invoice parser:
         """
-        import pdb; pdb.set_trace()
         return {
             'doc_ids': docids,
             'doc_model': 'sale.order',
-            'docs': self.env['sale.oder'].search([('id', 'in', docids)]),
+            'docs': self.env['sale.order'].search([('id', 'in', docids)]),
             }
