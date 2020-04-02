@@ -4,9 +4,9 @@
         <!--Override external layout-->
         <template id="web.external_layout_background">
             <div class="header o_background_header">
-                <div class="pull-right">
+                <!--<div class="pull-right">
                     <h3 class="mt0 text-right" t-field="company.report_header"/>
-                </div>
+                </div>-->
                 <!--<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" class="pull-left"/>-->
                 <!--<div class="pull-left company_address">
                     <div>
