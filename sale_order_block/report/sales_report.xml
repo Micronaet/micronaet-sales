@@ -122,7 +122,7 @@
                                                     <span t-esc="l.discount"/>
                                                 </div>
                                                 <div class="col-xs-2">
-                                                    <span t-esc="l.price_subtotal"/>
+                                                    <span t-esc="l.price_subtotal" />
                                                     <!--<t t-esc="tax_data['amount']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
                                                 </div>
                                             </div>
