@@ -224,9 +224,8 @@
             attachment_use="True"
             attachment="(object.name or 'draft').replace('/', '_')"
             print_report_name="(object.name or 'draft').replace('/', '_')"
-
+            paperformat="paperformat_accounting"
         />
-       <!--paperformat="paperformat_accounting"-->
 
    </data>
 </openerp>
