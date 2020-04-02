@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
    <data>
-        <!--<template id="minimal_layout_css_inherit" inherit_id="web.external_layout">
-            <xpath expr="." position="inside">
-                <link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>
-            </xpath>
-        </template>-->
-
         <template id="minimal_layout_css_inherit" inherit_id="web.report_assets_common">
             <xpath expr="link" position="before">
                 <link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>
@@ -156,8 +150,6 @@
                                 </div>
                             </t>
 
-
-
                             <!-- END OF PAGE: -->
                             <br />
                             <div class="oe_structure"/>
@@ -176,19 +168,6 @@
                 </t>
             </t>
         </template>
-        <!--
-        <template id="report_saleorder_document">
-            <t t-set="doc" t-value="doc.with_context({'lang':user.partner_id.lang})" />
-        <template id="report_saleorder_style" inherit_id="report.style">
-          <xpath expr=".">
-            <t>
-              .example-css-class {
-                background-color: red;
-              }
-            </t>
-          </xpath>
-        </template>
-        -->
         <template id="report_sale_block_lang_temp">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
