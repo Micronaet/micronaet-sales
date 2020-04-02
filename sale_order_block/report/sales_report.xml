@@ -78,6 +78,12 @@
                                     <!--<t t-if="block.show_price">
                                     </t>-->
                                     <t t-if="block.show_detail">
+                                        <table>
+                                            <tr><th>DETTAGLIO</th><th>Q.</th><th>PREZZO</th><th>SCONTO</th><th>TOTALE</th></tr>
+                                            <tr><td></td></tr>
+                                        </table>
+
+                                        <!-- Detail header -->
                                         <div class="oe_structure"/>
                                         <div class="row">
                                             <div class="col-xs-4">
@@ -97,6 +103,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- Detail data -->
                                         <div class="oe_structure"/>
                                         <t t-foreach="block.line_ids" t-as="l">
                                             <div class="oe_structure"/>
