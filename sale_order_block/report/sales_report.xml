@@ -7,7 +7,7 @@
                 <div class="pull-right">
                     <h3 class="mt0 text-right" t-field="company.report_header"/>
                 </div>
-                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" class="pull-left"/>
+                <!--<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" class="pull-left"/>-->
                 <!--<div class="pull-left company_address">
                     <div>
                         <strong t-field="company.partner_id.name"/>
