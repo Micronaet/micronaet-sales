@@ -7,16 +7,8 @@
             </xpath>
         </template>
 
-        <!--<template id="minimal_layout_css_inherit" inherit_id="web.minimal_layout">
-            <xpath expr="//head" position="inside">
-                <link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>
-            </xpath>
-        </template>-->
-
         <!--Report template:-->
-        <template id="report_sale_block">
-            <!--<link rel='stylesheet' href="/external_css_demo/static/src/css/invoice_report.css"/>-->
-
+        <template id="report_sale_block_lang">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
@@ -190,13 +182,13 @@
           </xpath>
         </template>
         -->
-        <template id="report_sale_block_lang">
+        <!--<template id="report_sale_block_lang2">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
                     <t t-call="sale_order_block.report_sale_block" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>
-        </template>
+        </template>-->
 
         <record id="paperformat_accounting" model="report.paperformat">
             <field name="name">Sale report</field>
