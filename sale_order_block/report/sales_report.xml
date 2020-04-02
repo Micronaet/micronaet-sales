@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
    <data>
+        <!--Add custom CSS:-->
         <template id="minimal_layout_css_inherit" inherit_id="web.report_assets_common">
             <xpath expr="link" position="before">
                 <link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>
             </xpath>
         </template>
 
-        <!--Report template:-->
+        <!--                         Report template:                                -->
         <template id="report_sale_block_lang">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout">
+                    <t t-call="web.internal_layout">
                         <div class="page">
                             <!-- HEADER: -->
                             <div class="row">
@@ -178,9 +179,9 @@
         <record id="paperformat_accounting" model="report.paperformat">
             <field name="name">Sale report</field>
             <field name="default" eval="True"/>
-            <field name="format">A4</field>
-            <!--<field name="page_height">297</field>
-            <field name="page_width">210</field>-->
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">10</field>
             <field name="margin_bottom">5</field>
