@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
    <data>
-        <template id="minimal_layout_css_inherit" inherit_id="web.external_layout">
+        <!--<template id="minimal_layout_css_inherit" inherit_id="web.external_layout">
             <xpath expr="." position="inside">
+                <link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>
+            </xpath>
+        </template>-->
+
+        <template id="minimal_layout_css_inherit" inherit_id="web.report_assets_common">
+            <xpath expr="link" position="before">
                 <link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>
             </xpath>
         </template>
@@ -10,6 +16,7 @@
         <!--Report template:-->
         <template id="report_sale_block_lang">
             <t t-call="web.html_container">
+                <!--<link rel='stylesheet' href="/sale_order_block/static/src/css/sale_report.css"/>-->
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
                         <div class="page">
@@ -182,13 +189,13 @@
           </xpath>
         </template>
         -->
-        <!--<template id="report_sale_block_lang2">
+        <template id="report_sale_block_lang_temp">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
                     <t t-call="sale_order_block.report_sale_block" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>
-        </template>-->
+        </template>
 
         <record id="paperformat_accounting" model="report.paperformat">
             <field name="name">Sale report</field>
@@ -217,8 +224,9 @@
             attachment_use="True"
             attachment="(object.name or 'draft').replace('/', '_')"
             print_report_name="(object.name or 'draft').replace('/', '_')"
-            paperformat="paperformat_accounting"
+
         />
+       <!--paperformat="paperformat_accounting"-->
 
    </data>
 </openerp>
