@@ -91,7 +91,7 @@
                                                 <tr t-foreach="block.line_ids" t-as="l" class="row">
                                                     <td colspan="4"><span t-esc="clean_name(l)"/></td>
                                                     <td><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
-                                                    <td><span t-esc="l.price_unit" class="text-right t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                                    <td class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                     <!--TODO format currency and symbol-->
                                                     <td><span t-esc="l.discount" t-options="{'widget': 'monetary'"/></td>
                                                     <td class="text-right"><span t-esc="l.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
