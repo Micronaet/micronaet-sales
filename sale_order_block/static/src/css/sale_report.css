@@ -1,11 +1,11 @@
 .right {
-    'align': 'right',
+    'text-align': 'right',
 }
 .left {
-    'align': 'left',
+    'text-align': 'left',
 }
 .center {
-    'align': 'center',
+    'text-align': 'center',
 }
 
 .font_red {
