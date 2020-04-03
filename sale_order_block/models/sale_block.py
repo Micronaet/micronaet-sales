@@ -219,6 +219,8 @@ class SaleOrderLine(models.Model):
         'sale.order.block.group', 'Block', ondelete='set null')
 
     # Parameter for line:
+    sequence = fields.Integer(
+        string='Sequence')
     hide_block = fields.Boolean(
         'Hide block',
         #related='block_id.hide_block',
