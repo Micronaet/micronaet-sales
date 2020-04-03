@@ -1,3 +1,13 @@
+.right {
+    'align': 'right',
+}
+.left {
+    'align': 'left',
+}
+.center {
+    'align': 'center',
+}
+
 .font_red {
     font-family: 'Ubuntu', sans-serif;
     font-weight:100;
