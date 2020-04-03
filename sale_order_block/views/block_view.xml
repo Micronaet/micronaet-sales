@@ -18,6 +18,18 @@
                                     <tree string="Block" decoration-danger="not_confirmed==True" decoration-muted="hide_block==True">
                                         <field name="hide_block" invisible="1" />
                                         <field name="not_confirmed" invisible="1" />
+                                        <field name="code" />
+                                        <field name="name" />
+                                        <field name="show_header" string="Header"/>
+                                        <field name="show_detail" string="Detail"/>
+                                        <field name="show_price" string="Price"/>
+                                        <field name="show_code" string="Code"/>
+                                        <field name="show_total" string="Total"/>
+                                        <field name="block_margin" string="Recharge"/>
+                                        <field name="real_total" sum="real_sum" string="Calculated total"/>
+                                        <field name="total" sum="total_sum" string="Printed total"/>
+                                        <button name="duplicate_block_items" string="Duplicate block items" type="object" icon="fa-2x fa-copy" />
+                                        <button name="print_only_this" string="Print only this" type="object" icon="fa-2x fa-print" />
                                     </tree>
                               </field>
                           </group>
@@ -40,19 +52,6 @@
                  </xpath>
 
 
-                                        <field name="code" />
-                                        <field name="name" />
-                                        <field name="show_header" string="Header"/>
-                                        <field name="show_detail" string="Detail"/>
-                                        <field name="show_price" string="Price"/>
-                                        <field name="show_code" string="Code"/>
-                                        <field name="show_total" string="Total"/>
-                                        <field name="block_margin" string="Recharge"/>
-                                        <field name="real_total" sum="real_sum" string="Calculated total"/>
-                                        <field name="total" sum="total_sum" string="Printed total"/>
-                                        <button name="duplicate_block_items" string="Duplicate block items" type="object" icon="fa-2x fa-copy" />
-                                        <button name="print_only_this" string="Print only this" type="object" icon="fa-2x fa-print" />
-                                    </tree>
                                     <form string="Block" version="7.0">
                                         <sheet>
                                             <group col="4" colspan="4">
