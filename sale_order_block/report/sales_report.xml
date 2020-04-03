@@ -75,10 +75,14 @@
 
                                     <table>
                                         <thead>
+                                            <row>
                                             <tr><th>DETTAGLIO</th><th>Q.</th><th>PREZZO</th><th>SCONTO</th><th>TOTALE</th></tr>
+                                            </row>
                                         </thead>
                                         <tbody>
+                                            <row>
                                             <tr><td>DETTAGLIO</td><td>Q.</td><td>PREZZO</td><td>SCONTO</td><td>TOTALE</td></tr>
+                                            </row>
                                         </tbody>
                                     </table>
                                     <!--<t t-if="block.show_price">
