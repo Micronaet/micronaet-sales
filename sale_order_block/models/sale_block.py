@@ -204,6 +204,8 @@ class SaleOrder(models.Model):
             order.real_total = total
 
     # Columns:
+    client_order_ref = fields.Char(
+        string='Client order ref')
     printed = fields.Integer(
         string='Printed', default=1, help='Printed version')
     show_master_total = fields.Boolean(
