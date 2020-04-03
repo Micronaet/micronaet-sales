@@ -191,6 +191,7 @@ class SaleOrder(models.Model):
         }"""
         #self.env.context = dict(self.env.context)
         #self.env.context['nicola'] = True
+        import pdb; pdb.set_trace()
         return self.env.ref(
             'sale_order_block.report_sale_block_lang').report_action(
                 datas=datas)
