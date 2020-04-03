@@ -56,7 +56,7 @@
                                     <strong>Referente: </strong><span t-esc="'/' or 'o.client_order_ref or '" />
                                 </div>
                                 <div class="col-xs-6">
-                                    <strong><span t-esc="company.city or 'Data: '"/> </strong><div t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
+                                    <strong><span t-esc="res_company.city or 'Data: '"/> </strong><div t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
                                 </div>
                             </div>
 
