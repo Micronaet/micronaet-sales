@@ -25,7 +25,7 @@ class SaleOrderBlockGroup(models.Model):
         order = self.order_id
         self.env.context = dict(self.env.context)
         self.env.context.update({
-            'only_block': self.id,
+            'only_this_block': self.id,
         })
         return order.print_quotation()
 
