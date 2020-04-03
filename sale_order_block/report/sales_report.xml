@@ -106,7 +106,7 @@
                                     <div class="row" t-if="block.show_total">
                                         <div class="col-xs-4">
                                             <table>
-                                                <tr><td>PROVA TOTALE</td></tr>
+                                                <tr><td>PROVA TOTALE</td><td>1000</td></tr>
                                             </table>
                                         </div>
                                     </div>
