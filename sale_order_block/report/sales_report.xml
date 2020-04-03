@@ -117,9 +117,6 @@
 
                             <!--Master total:-->
                             <div class="row">
-                                <div class="col-xs-8" >
-                                    <span t-esc="block.post_text or ''"/>
-                                </div>
                                 <div class="col-xs-4" t-if="o.show_master_total">
                                     <table>
                                         <tr><td><h2>TOTALE OFFERTA</h2></td></tr>
