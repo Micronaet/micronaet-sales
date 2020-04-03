@@ -186,7 +186,7 @@ class SaleOrder(models.Model):
         # self.env.context['nicola'] = True
         return self.env.ref(
             'sale_order_block.action_report_sale_block_lang').report_action(
-                self, data=datas)
+                self, docids=[self.id], data=datas)
         return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',
