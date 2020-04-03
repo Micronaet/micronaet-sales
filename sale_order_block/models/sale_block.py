@@ -184,6 +184,9 @@ class SaleOrder(models.Model):
 
         # self.env.context = dict(self.env.context)
         # self.env.context['nicola'] = True
+        return self.env.ref(
+            'sale_order_block.action_report_sale_block_lang').report_action(
+                self, data=datas)
         return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',
@@ -192,9 +195,6 @@ class SaleOrder(models.Model):
             'datas': datas,
         }
 
-        #return self.env.ref(
-        #    'sale_order_block.action_report_sale_block_lang').report_action(
-        #        self, data=datas)
 
     # Fields function:
     @api.multi
