@@ -17,6 +17,7 @@
                               <field name="block_ids" nolabel="1" colspan="4">
                                     <tree string="Block" decoration-danger="not_confirmed==True" decoration-muted="hide_block==True">
                                         <field name="hide_block" invisible="1" />
+                                        <field name="not_confirmed" invisible="1" />
                                     </tree>
                               </field>
                           </group>
@@ -39,7 +40,6 @@
                  </xpath>
 
 
-                                        <field name="not_confirmed" invisible="1" />
                                         <field name="code" />
                                         <field name="name" />
                                         <field name="show_header" string="Header"/>
