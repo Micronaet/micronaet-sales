@@ -25,7 +25,6 @@ class SaleOrderBlockGroup(models.Model):
         self.env.context.update({
             'only_this_block': self.id,
         })
-        import pdb; pdb.set_trace()
         return order.print_quotation()
 
     @api.multi
