@@ -10,7 +10,7 @@
                     <field name="hide_block" invisible="1" />
                     <field name="not_confirmed" invisible="1" />
                     <field name="order_id" invisible="1" />
-                    <field name="code" />
+                    <field name="name" />
                     <field name="title" />
                     <field name="show_header" string="Header"/>
                     <field name="show_detail" string="Detail"/>
@@ -33,7 +33,7 @@
                 <form string="Block">
                     <sheet>
                         <group col="4" colspan="4">
-                            <field name="code" />
+                            <field name="name" />
                             <field name="title" />
                             <separator string="Pre text:" colspan="2"/>
                             <separator string="Post text:" colspan="2"/>

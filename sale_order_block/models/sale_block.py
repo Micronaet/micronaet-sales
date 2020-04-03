@@ -13,8 +13,7 @@ class SaleOrderBlockGroup(models.Model):
 
     _name = 'sale.order.block.group'
     _description = 'Sale order block'
-    _rec_name = 'code'
-    _order = 'code'
+    _order = 'name'
 
     # Button events:
     @api.multi
@@ -43,7 +42,7 @@ class SaleOrderBlockGroup(models.Model):
             block.real_total = total
 
     # Columns:
-    code = fields.Integer(
+    name = fields.Integer(
         'Code', required=True)
     title = fields.Char(
         'Title', size=64, required=True)
@@ -127,8 +126,8 @@ class SaleOrder(models.Model):
         _logger.warning('Duplicate extra block in sale: %s' % len(blocks))
         for block in blocks:
             data = {
-                'code': block.code,
                 'name': block.name,
+                'title': block.title,
 
                 'pre_text': block.pre_text,
                 'post_text': block.post_text,
