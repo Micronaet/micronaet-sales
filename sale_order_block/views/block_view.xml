@@ -54,6 +54,10 @@
 
                                                 <field name="real_total" readonly="1"/>
                                                 <field name="total" />
+
+                                                <separator string="Order:" colspan="4"/>
+                                                <field name="hide_block" />
+                                                <field name="not_confirmed" />
                                             </group>
                                         </sheet>
                                     </form>
@@ -80,15 +84,6 @@
 
 
 
-                                                <separator string="Order:" colspan="4"/>
-                                                <field name="hide_block" />
-                                                <field name="not_confirmed" />
-                                            </group>
-                                        </sheet>
-                                    </form>
-                              </field>
-                          </group>
-                     </page>
                  </xpath>-->
     </data>
 </openerp>
