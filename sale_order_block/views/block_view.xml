@@ -33,7 +33,7 @@
                 <form string="Block">
                     <sheet>
                         <group col="4" colspan="4">
-                            <field name="order_id" invisible="1" required="1"/>
+                            <field name="order_id" invisible="1" />
                             <newline />
                             <field name="name" />
                             <field name="title" />
