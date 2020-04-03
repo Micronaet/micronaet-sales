@@ -216,7 +216,7 @@ class SaleOrderLine(models.Model):
 
     # Columns:
     block_order_id = fields.Many2one(
-        'sale.order', 'Block order', ondelete='set cascade')
+        'sale.order', 'Block order', ondelete='cascade')
 
     block_id = fields.Many2one(
         'sale.order.block.group', 'Block', ondelete='set null')
