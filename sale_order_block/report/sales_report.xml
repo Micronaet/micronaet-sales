@@ -58,7 +58,7 @@
                                     Referente: <div t-esc="'' and 'o.client_order_ref or '" />
                                 </div>
                                 <div class="col-xs-6">
-                                    <div t-esc="o.date_order or ''" />
+                                    <div t-esc="o.date_order or ''" t-options="{'widget': 'date'}/>
                                 </div>
                             </div>
 
