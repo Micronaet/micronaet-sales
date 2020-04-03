@@ -2,12 +2,12 @@
 <openerp>
     <data>
         <!--sale.order-->
-        <record model="ir.ui.view" id="view_sale_order_block_group_page_form">
+        <!--<record model="ir.ui.view" id="view_sale_order_block_group_page_form">
             <field name="name">Block page</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                 <!--<xpath expr="//field[@name='order_line']" position="attributes">
+                 <xpath expr="//field[@name='order_line']" position="attributes">
                       <attribute name="context">{'default_order_id': active_id}</attribute>
                  </xpath>
                  <xpath expr="//field[@name='order_line']/tree" position="attributes">
@@ -19,7 +19,7 @@
                      <field name="order_id" invisible="1" />
                      <field name="hide_block" invisible="1" />
                      <field name="not_confirmed" invisible="1" />
-                 </xpath>-->
+                 </xpath>
                  <xpath expr="//page[1]" position="after">
                      <page string="Block">
                           <group colspan="4" col="4">
@@ -79,7 +79,7 @@
                      </page>
                  </xpath>
             </field>
-        </record>
+        </record>-->
     </data>
 </openerp>
 
