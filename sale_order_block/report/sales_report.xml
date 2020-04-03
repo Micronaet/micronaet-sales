@@ -45,7 +45,7 @@
                                         <strong t-esc="'PREVENTIVO:' if o.state in ['draft','sent'] else 'ORDINE:'"/> <span t-esc="o.name"/>
                                 </div>
                                 <div class="col-xs-6">
-                                    <strong><span t-esc="('%s, ' % res_company.city) or 'Data: '"/> </strong><span t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
+                                    <strong><span t-esc="('%s, ' % res_company.city) if res_company.city else 'Data: '"/> </strong><span t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
                                 </div>
                             </div>
 
