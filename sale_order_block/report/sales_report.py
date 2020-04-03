@@ -45,6 +45,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
         """ Render report invoice parser:
         """
         print(data)
+        import pdb; pdb.set_trace()
         return {
             'doc_ids': docids,
             'doc_model': 'sale.order',
