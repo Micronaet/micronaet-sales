@@ -187,7 +187,7 @@ class SaleOrder(models.Model):
         import pdb; pdb.set_trace()
         return self.env.ref(
             'sale_order_block.action_report_sale_block_lang').report_action(
-                docids=[self.id], data=datas)
+                docids=self, data=datas)
         return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',
