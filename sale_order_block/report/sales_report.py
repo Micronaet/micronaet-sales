@@ -21,6 +21,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
     def show_the_block(self, block, data=None):
         """ Check if the block need to be showed
         """
+        import pdb; pdb.set_trace()
         if data is None:
             data = {}
         only_this_block = data.get('only_this_block')
@@ -43,6 +44,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
     def get_report_values(self, docids, data=None):
         """ Render report invoice parser:
         """
+        import pdb; pdb.set_trace()
         return {
             'doc_ids': docids,
             'doc_model': 'sale.order',
