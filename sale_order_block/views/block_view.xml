@@ -7,6 +7,17 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                     <field name="block_id" domain="[('order_id', '=', order_id)]" widget="selection"/>
+                     <!--<field name="order_id" invisible="1" />-->
+                     <field name="hide_block" invisible="1" />
+                     <field name="not_confirmed" invisible="1" />
+                 </xpath>
+                 <!--
+                 <xpath expr="//field[@name='order_line']" position="attributes">
+                      <attribute name="context">{'default_order_id': active_id}</attribute>
+                 </xpath>
+                 -->
                  <!--<xpath expr="//field[@name='order_line']/tree" position="attributes">
                       <attribute name="decoration-danger">not_confirmed==True</attribute>
                       <attribute name="decoration-muted">hide_block==True</attribute>
@@ -71,16 +82,6 @@
                  </xpath>
             </field>
         </record>
-                 <!--<xpath expr="//field[@name='order_line']" position="attributes">
-                      <attribute name="context">{'default_order_id': active_id}</attribute>
-                 </xpath>
-                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
-                     <field name="block_id" domain="[('order_id', '=', order_id)]" widget="selection"/>
-                     <field name="order_id" invisible="1" />
-                     <field name="hide_block" invisible="1" />
-                     <field name="not_confirmed" invisible="1" />
-                 </xpath>
-                 -->
     </data>
 </openerp>
 
