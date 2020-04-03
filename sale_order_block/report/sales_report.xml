@@ -79,10 +79,10 @@
                                             <thead>
                                                 <tr class="row">
                                                     <th colspan="4">DETTAGLIO</th>
-                                                    <th colspan="1">Q.</th>
-                                                    <th colspan="1">PREZZO</th>
-                                                    <th colspan="1">SCONTO</th>
-                                                    <th colspan="1">TOTALE</th>
+                                                    <th colspan="1" class="text-right">Q.</th>
+                                                    <th colspan="1" class="text-right">PREZZO</th>
+                                                    <th colspan="1" class="text-right">SCONTO</th>
+                                                    <th colspan="1" class="text-right">TOTALE</th>
                                                 </tr>
                                             </thead>
 
@@ -93,7 +93,7 @@
                                                     <td><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
                                                     <td class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                     <!--TODO format currency and symbol-->
-                                                    <td><span t-esc="l.discount" /></td>
+                                                    <tdclass="text-right"><span t-esc="l.discount" /></td>
                                                     <td class="text-right"><span t-esc="l.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                 </tr>
                                             </tbody>
