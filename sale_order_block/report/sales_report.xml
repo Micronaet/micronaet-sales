@@ -41,11 +41,11 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-7">
                                         <strong t-esc="'PREVENTIVO:' if o.state in ['draft','sent'] else 'ORDINE:'"/> <span t-esc="o.name"/>
                                 </div>
-                                <div class="col-xs-6">
-                                    <strong><span t-esc="('%s, ' % res_company.city) if res_company.city else 'Data: '"/> </strong><span t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
+                                <div class="col-xs-5">
+                                    <span t-esc="('%s, ' % res_company.city) if res_company.city else 'Data: '"/> <span t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
                                 </div>
                             </div>
 

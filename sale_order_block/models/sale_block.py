@@ -21,7 +21,6 @@ class SaleOrderBlockGroup(models.Model):
     def print_only_this(self):
         """ Print sale order only with this block
         """
-        import pdb; pdb.set_trace()
         order = self.order_id
         self.env.context = dict(self.env.context)
         self.env.context.update({
