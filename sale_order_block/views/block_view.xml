@@ -19,7 +19,7 @@
                     <field name="show_total" string="Total"/>
                     <field name="block_margin" string="Recharge"/>
                     <field name="real_total" sum="real_sum" string="Calculated total"/>
-                    <field name="total" sum="total_sum" string="Printed total"/>
+                    <field name="total" sum="total_sum" string="Forced total"/>
                     <button name="duplicate_block_items" string="Duplicate block items" type="object" icon="fa-2x fa-copy" />
                     <button name="print_only_this" string="Print only this" type="object" icon="fa-2x fa-print" />
                 </tree>
