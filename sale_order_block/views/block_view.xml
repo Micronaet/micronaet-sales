@@ -14,7 +14,7 @@
                      <field name="hide_block" invisible="1" />
                      <field name="not_confirmed" invisible="1" />
                      <field name="order_id" />
-                     <field name="block_id" domain="[('order_id', '=', order_id)]" widget="selection"/>
+                     <field name="block_id" domain="[('order_id', '=', order_id)]" />
                  </xpath>
                  <!--
                          <tree string="Block order line" editable="bottom" context="{'default_order_id': active_id}">
