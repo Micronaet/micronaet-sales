@@ -70,7 +70,7 @@
                                 <t t-if="show_the_block(block, data)">
                                     <t t-if="block.show_header">
                                         <div class="col-xs-12">
-                                            <div t-esc="block.name.upper()" />
+                                            <h3 t-esc="block.name.upper()" />
                                         </div>
                                     </t>
                                     <div t-esc="block.pre_text or ''"/>
