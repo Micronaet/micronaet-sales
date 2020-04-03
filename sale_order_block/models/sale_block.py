@@ -54,7 +54,7 @@ class SaleOrderBlockGroup(models.Model):
     post_text = fields.Text('Post text')
 
     total = fields.Float(
-        'Block total', digits=(16, 2),
+        'Forced total', digits=(16, 2),
         help='Total written in offer block')
     real_total = fields.Float(
         string='Real total', store=False,
