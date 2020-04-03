@@ -73,7 +73,7 @@
                                     </t>
                                     <div t-esc="block.pre_text or ''"/>
 
-                                    <table>
+                                    <table >
                                         <thead>
                                             <tr class="row"><th>DETTAGLIO</th><th>Q.</th><th>PREZZO</th><th>SCONTO</th><th>TOTALE</th></tr>
                                         </thead>
@@ -81,7 +81,7 @@
                                             <tr class="row"><td>RIGA1</td><td>Q.</td><td>PREZZO</td><td>SCONTO</td><td>TOTALE</td></tr>
                                         </tbody>
                                         <tbody>
-                                            <tr class="row"><td>RIGA2</td><td>Q.</td><td>PREZZO</td><td>SCONTO</td><td>TOTALE</td></tr>
+                                            <tr ><td>RIGA2</td><td>Q.</td><td>PREZZO</td><td>SCONTO</td><td>TOTALE</td></tr>
                                         </tbody>
                                     </table>
                                     <!--<t t-if="block.show_price">
