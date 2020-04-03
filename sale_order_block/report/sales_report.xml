@@ -10,8 +10,8 @@
         <!--                         Report template:                                -->
         <template id="report_sale_block_lang">
             <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout">
+                <div t-foreach="docs" t-as="o">
+                    <div t-call="web.external_layout">
                         <div class="page">
                             <!-- HEADER: -->
                             <div class="row">
@@ -66,8 +66,8 @@
 
                             <!--                          DETAIL:                         -->
                             <!-- BLOCK LOOP: -->
-                            <t t-foreach="o.block_ids" t-as="block">
-                                <t t-if="show_the_block(block, data)">
+                            <div t-foreach="o.block_ids" t-as="block">
+                                <div t-if="show_the_block(block, data)">
                                     <t t-if="block.show_header">
                                         <h3 t-esc="block.name.upper()" />
                                     </t>
@@ -109,7 +109,7 @@
                                                 <tr><td>PROVA TOTALE</td></tr>
                                             </table>
                                         </div>
-                                    </t>
+                                    </div>
                                     <div class="row">
                                             <div class="col-xs-3">
                                                 <span t-esc="'TOTALE A CORPO' if block.total else 'TOTALE A SEZIONE'"/>
@@ -119,8 +119,8 @@
                                             </div>
                                     </div>
                                     <div t-esc="block.post_text or ''"/>
-                                </t>
-                            </t>
+                                </div>
+                            </div>
                             <!--Master total:-->
                             <t t-if="o.show_master_total">
                                 <div class="oe_structure"/>
@@ -146,10 +146,9 @@
                                     <span t-esc="(o.payment_term_id and o.payment_term_id.name) or ''"/>
                                 </div>
                             </div>
-
                         </div>
-                    </t>
-                </t>
+                    </div>
+                </div>
             </t>
         </template>
         <!--<template id="report_sale_block_lang_temp">
