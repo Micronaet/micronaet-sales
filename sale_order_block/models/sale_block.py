@@ -212,7 +212,7 @@ class SaleOrderLine(models.Model):
     """ Model name: Sale Order Lie
     """
     _inherit = 'sale.order.line'
-    _order = 'block_id'
+    #_order = 'block_id'
 
     # Columns:
     block_id = fields.Many2one(
