@@ -73,7 +73,7 @@
                                     </t>
                                     <div t-esc="block.pre_text or ''"/>
 
-                                    <table >
+                                    <table class="table table-condensed">
                                         <thead>
                                             <tr class="row"><th>DETTAGLIO</th><th>Q.</th><th>PREZZO</th><th>SCONTO</th><th>TOTALE</th></tr>
                                         </thead>
