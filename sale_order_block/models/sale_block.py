@@ -193,7 +193,7 @@ class SaleOrder(models.Model):
         for order in self:
             total = 0.0
             for block in order.block_ids:
-                total += block.total or block.real_total # price_subtotal
+                total += block.total or block.real_total  # price_subtotal
             order.real_total = total
 
     # Columns:
@@ -204,7 +204,7 @@ class SaleOrder(models.Model):
 
     real_total = fields.Float(
         'Real total', store=False,
-        compute='_function_get_total_block',
+        # compute='_function_get_total_block',
         help='Total sum of sale line in this block')
 
 
@@ -212,7 +212,7 @@ class SaleOrderLine(models.Model):
     """ Model name: Sale Order Lie
     """
     _inherit = 'sale.order.line'
-    _order = 'block_id,sequence'
+    _order = 'block_id'#,sequence'
 
     # Columns:
     block_id = fields.Many2one(
@@ -220,10 +220,12 @@ class SaleOrderLine(models.Model):
 
     # Parameter for line:
     hide_block = fields.Boolean(
-        'Hide block', related='block_id.hide_block',
+        'Hide block',
+        #related='block_id.hide_block',
         help='Hide in report for simulation')
     not_confirmed = fields.Boolean(
-        'Not confirmed', related='block_id.not_confirmed',
+        'Not confirmed',
+        #related='block_id.not_confirmed',
         help='Removed from order')
 
 
