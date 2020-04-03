@@ -221,11 +221,11 @@ class SaleOrderLine(models.Model):
     # Parameter for line:
     hide_block = fields.Boolean(
         'Hide block',
-        #related='block_id.hide_block',
+        # related='block_id.hide_block',
         help='Hide in report for simulation')
     not_confirmed = fields.Boolean(
         'Not confirmed',
-        #related='block_id.not_confirmed',
+        # related='block_id.not_confirmed',
         help='Removed from order')
 
 
