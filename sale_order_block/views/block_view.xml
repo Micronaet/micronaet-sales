@@ -7,10 +7,10 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                 <!--<xpath expr="//field[@name='order_line']/tree" position="attributes">
                       <attribute name="decoration-danger">not_confirmed==True</attribute>
                       <attribute name="decoration-muted">hide_block==True</attribute>
-                 </xpath>
+                 </xpath>-->
                  <xpath expr="//page[1]" position="after">
                      <page string="Block">
                           <group colspan="4" col="4">
