@@ -86,7 +86,7 @@
                      <field name="hide_block" invisible="1" />
                      <field name="not_confirmed" invisible="1" />
                      <field name="order_id" invisible="1" />
-                     <field name="block_id" domain="[('order_id', '=', order_id)]" context="{'default_order_id': order_id}"/>
+                     <field name="block_id" domain="[('order_id', '=', order_id)]" context="{'default_order_id': order_id}" invisible="not context.get('order_id')"/>
                  </xpath>
                  <xpath expr="//page[1]" position="after">
                      <page string="Block">
