@@ -55,7 +55,7 @@ class SaleOrderBlockGroup(models.Model):
         help='Total written in offer block')
     real_total = fields.Float(
         string='Real total', store=False,
-        # compute='_function_get_total_block',
+        compute='_function_get_total_block',
         help='Total sum of sale line in this block')
     order_id = fields.Many2one(
         'sale.order', 'Order', ondelete='cascade')
@@ -204,7 +204,7 @@ class SaleOrder(models.Model):
 
     real_total = fields.Float(
         'Real total', store=False,
-        # compute='_function_get_total_block',
+        compute='_function_get_total_block',
         help='Total sum of sale line in this block')
 
 
@@ -212,7 +212,7 @@ class SaleOrderLine(models.Model):
     """ Model name: Sale Order Lie
     """
     _inherit = 'sale.order.line'
-    #_order = 'block_id'
+    order = 'block_id'
 
     # Columns:
     block_id = fields.Many2one(
@@ -221,11 +221,11 @@ class SaleOrderLine(models.Model):
     # Parameter for line:
     hide_block = fields.Boolean(
         'Hide block',
-        # related='block_id.hide_block',
+        related='block_id.hide_block',
         help='Hide in report for simulation')
     not_confirmed = fields.Boolean(
         'Not confirmed',
-        # related='block_id.not_confirmed',
+        related='block_id.not_confirmed',
         help='Removed from order')
 
 
