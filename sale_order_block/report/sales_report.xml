@@ -104,11 +104,9 @@
                                         </table>
                                     </t>
                                     <div class="row" t-if="block.show_total">
-                                        <div class="col-xs-4">
-                                            <table>
-                                                <tr><td>PROVA TOTALE</td></tr>
-                                            </table>
-                                        </div>
+                                        <table class="col-xs-4">
+                                            <tr><td>PROVA TOTALE</td></tr>
+                                        </table>
                                     </div>
                                     <div class="row">
                                             <div class="col-xs-3">
@@ -135,8 +133,6 @@
                             </t>
 
                             <!-- END OF PAGE: -->
-                            <br />
-                            <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-xs-1">
                                 </div>
