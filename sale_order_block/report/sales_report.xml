@@ -67,7 +67,7 @@
                             <!--                          DETAIL:                         -->
                             <!-- BLOCK LOOP: -->
                             <t t-foreach="o.block_ids" t-as="block">
-                                <t t-esc="'%s >> %s' % (block.name, show_the_block(block, data))" />
+                                <span t-esc="'%s >> %s' % (block.name, show_the_block(block, data))" />
                                 <t t-if="show_the_block(block, data)">
                                     <t t-if="block.show_header">
                                         <div class="col-xs-12">
