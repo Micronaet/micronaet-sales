@@ -7,18 +7,16 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                 <xpath expr="//field[@name='order_line']" position="attributes">
+                      <attribute name="context">{'default_order_id': active_id}</attribute>
+                 </xpath>
                  <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
                      <field name="hide_block" invisible="1" />
                      <field name="not_confirmed" invisible="1" />
                  </xpath>
                  <!--
-                 <xpath expr="//field[@name='order_line']" position="attributes">
-                     <attribute name="invisible">1</attribute>
-                 </xpath>
-                 <xpath expr="//field[@name='order_line']" position="after">
-                     <field name="block_order_line">
-                         <tree string="Block order line" editable="bottom" context="{'default_block_order_id': active_id}">
-                             <field name="block_id" domain="[('order_id', '=', block_order_id)]" widget="selection"/>
+                         <tree string="Block order line" editable="bottom" context="{'default_order_id': active_id}">
+                             <field name="block_id" domain="[('order_id', '=', order_id)]" widget="selection"/>
                              <field name="block_order_id" invisible="1" />
                              <field name="product_id" />
 
@@ -27,8 +25,6 @@
                  </xpath>
                  -->
 
-                 <!--<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
-                 </xpath>-->
                  <!--
                  <xpath expr="//field[@name='order_line']" position="attributes">
                       <attribute name="context">{'default_order_id': active_id}</attribute>
