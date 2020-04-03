@@ -76,7 +76,7 @@
                      <field name="client_order_ref"/>
                  </field>
                  <xpath expr="//notebook/page[1]" position="attributes">
-                      <attribute name="attrs">{'invisible': [('block_ids', '=', False)]}</attribute>
+                      <attribute name="attrs">{'invisible': [('block_ids', '=', []])]}</attribute>
                  </xpath>
                  <xpath expr="//field[@name='order_line']" position="attributes">
                       <attribute name="context">{'default_order_id': active_id}</attribute>
