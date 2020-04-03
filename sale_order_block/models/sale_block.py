@@ -183,13 +183,17 @@ class SaleOrder(models.Model):
         if only_this_block:
             datas['only_this_block'] = only_this_block
 
-        return {
+        """return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',
             'model': 'sale.order',
             'report_type': 'qweb-pdf',
             'datas': datas,
-        }
+        }"""
+        return self.env.ref(
+            'sale_order_block.report_sale_block_lang').report_action(
+                self, datas=datas)
+
 
     # Fields function:
     @api.multi
