@@ -112,11 +112,9 @@
 
                             <!-- END OF PAGE: -->
                             <div class="row">
-                                <div class="col-xs-1">
-                                </div>
-                                <div class="col-xs-11" >
+                                <div class="col-xs-12" >
                                     <strong>N.B.: I prezzi si intendono esclusi di IVA (ove applicata).</strong><br/>
-                                    <h5>TERMINI DI PAGAMENTO:</h5> <span t-esc="(o.payment_term_id and o.payment_term_id.name) or ''"/>
+                                    <strong t-if="o.payment_term_id">TERMINI DI PAGAMENTO:</strong> <span t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/>
                                 </div>
                             </div>
                         </div>
