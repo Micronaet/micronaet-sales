@@ -102,7 +102,7 @@
                                         <!-- Detail data -->
                                         <div class="oe_structure"/>
                                         <t t-foreach="block.line_ids" t-as="l">
-                                            <div class="oe_structure"/>
+                                            <!--<div class="oe_structure"/>-->
                                             <div class="row">
                                                 <div class="col-xs-4">
                                                     <span t-esc="clean_name(l)"/>
