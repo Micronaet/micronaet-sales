@@ -73,78 +73,52 @@
                                     </t>
                                     <div t-esc="block.pre_text or ''"/>
 
-                                    <table class="table table-condensed">
-                                        <thead>
-                                            <tr class="row"><th>DETTAGLIO</th><th>Q.</th><th>PREZZO</th><th>SCONTO</th><th>TOTALE</th></tr>
-                                        </thead>
-                                            <tr class="row"><td>RIGA1</td><td>Q.</td><td>PREZZO</td><td>SCONTO</td><td>TOTALE</td></tr>
-                                        <tbody>
-                                            <tr ><td>RIGA2</td><td>Q.</td><td>PREZZO</td><td>SCONTO</td><td>TOTALE</td></tr>
-                                        </tbody>
-                                    </table>
                                     <!--<t t-if="block.show_price">
                                     </t>-->
                                     <t t-if="block.show_detail">
-                                        <!-- Detail header -->
-                                        <div class="oe_structure"/>
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <b>DETTAGLIO</b>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <b>Q.</b>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <b>PREZZO</b>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <b>SCONTO</b>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <b>TOTALE</b>
-                                            </div>
-                                        </div>
+                                        <table class="table table-condensed">
+                                            <!-- Detail header -->
+                                            <thead>
+                                                <tr class="row">
+                                                    <th colspan="4">DETTAGLIO</th>
+                                                    <th colspan="1">Q.</th>
+                                                    <th colspan="1">PREZZO</th>
+                                                    <th colspan="1">SCONTO</th>
+                                                    <th colspan="1">TOTALE</th>
+                                                </tr>
+                                            </thead>
 
-                                        <!-- Detail data -->
-                                        <div class="oe_structure"/>
-                                        <t t-foreach="block.line_ids" t-as="l">
-                                            <!--<div class="oe_structure"/>-->
-                                            <div class="row">
-                                                <div class="col-xs-4">
-                                                    <span t-esc="clean_name(l)"/>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <span t-esc="l.product_uom_qty"/>
-                                                    <span t-esc="(l.product_uom and l.product_uom.name) or ''"/>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <span t-esc="l.price_unit"/>
+                                            <!-- Detail data -->
+                                            <tbody>
+                                                <tr t-foreach="block.line_ids" t-as="l" class="row">
+                                                    <td colspan="4"><span t-esc="clean_name(l)"/></td>
+                                                    <td colspan="1"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
+                                                    <td colspan="1"><span t-esc="l.price_unit"/></td>
                                                     <!--TODO format currency and symbol-->
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <span t-esc="l.discount"/>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <span t-esc="l.price_subtotal" />
+                                                    <td colspan="1"><span t-esc="l.discount"/></td>
+                                                    <td colspan="1"><span t-esc="l.price_subtotal" /></td>
                                                     <!--<t t-esc="tax_data['amount']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
-                                                </div>
-                                            </div>
-                                        </t>
 
-                                        <t t-if="block.show_total">
-                                            <div class="oe_structure"/>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <span t-esc="'TOTALE A CORPO' if block.total else 'TOTALE A SEZIONE'"/>
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <span t-esc="block.total or block.real_total"/>
-                                                </div>
-                                            </div>
-                                        </t>
-
-                                        <div t-esc="block.post_text or ''"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </t>
+                                    <div class="row" t-if="block.show_total">
+                                        <div class="col-xs-4">
+                                            <table>
+                                                <tr><td>PROVA TOTALE</td></tr>
+                                            </table>
+                                        </div>
+                                    </t>
+                                    <div class="row">
+                                            <div class="col-xs-3">
+                                                <span t-esc="'TOTALE A CORPO' if block.total else 'TOTALE A SEZIONE'"/>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <span t-esc="block.total or block.real_total"/>
+                                            </div>
+                                    </div>
+                                    <div t-esc="block.post_text or ''"/>
                                 </t>
                             </t>
                             <!--Master total:-->
