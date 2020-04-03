@@ -22,7 +22,11 @@ class SaleOrderBlockGroup(models.Model):
         """ Print sale order only with this block
         """
         order = self.order_id
-        return order.with_context(only_block=[self.id]).print_quotation()
+        self.env.context = dict(self.env.context)
+        self.env.context.update({
+            'only_block': self.id,
+        })
+        return order.print_quotation()
 
     @api.multi
     def _function_get_total_block(self):
@@ -167,9 +171,9 @@ class SaleOrder(models.Model):
         """ This function prints the sales order and mark it as sent
             so that we can see more easily the next step of the workflow
         """
-        self.printed = self.printed + 1
-
         self.ensure_one()
+
+        self.printed = self.printed + 1
         datas = {
             'model': 'sale.order',
             'ids': [item.id for item in self],
