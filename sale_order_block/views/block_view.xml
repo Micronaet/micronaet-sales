@@ -13,7 +13,7 @@
                  <xpath expr="//field[@name='order_line']" position="after">
                      <field name="block_order_line">
                          <tree string="Block order line" editable="bottom" context="{'default_block_order_id': active_id}">
-                             <field name="block_id" domain="[('block_order_id', '=', order_id)]" widget="selection"/>
+                             <field name="block_id" domain="[('order_id', '=', block_order_id)]" widget="selection"/>
                              <field name="block_order_id" invisible="1" />
                              <field name="hide_block" invisible="1" />
                              <field name="not_confirmed" invisible="1" />
