@@ -215,6 +215,9 @@ class SaleOrderLine(models.Model):
     order = 'block_id'
 
     # Columns:
+    block_order_id = fields.Many2one(
+        'sale.order', 'Block order', ondelete='set cascade')
+
     block_id = fields.Many2one(
         'sale.order.block.group', 'Block', ondelete='set null')
 
@@ -238,3 +241,15 @@ class SaleOrderBlockGroupRelation(models.Model):
     # Columns:
     line_ids = fields.One2many(
         'sale.order.line', 'block_id', 'Sale order line')
+
+
+class SaleOrderRelation(models.Model):
+    """ Model name: SaleOrder
+    """
+    _inherit = 'sale.order'
+
+    block_order_line = fields.One2many(
+        comodel_name='sale.order.line',
+        inverse_name='block_order_id',
+        string='Block order line',
+    )
