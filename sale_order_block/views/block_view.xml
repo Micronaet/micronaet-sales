@@ -24,7 +24,6 @@
                      <page string="Block">
                           <group colspan="4" col="4">
                               <field name="show_master_total" />
-                              <field name="show_master_total" />
                               <field name="real_total" />
                               <separator string="Blocks:" colspan="3"/><button name="dummy_action" string="Refresh" type="object" class="oe_highlight" colspan="1"/>
                               <field name="block_ids" nolabel="1" colspan="4">
