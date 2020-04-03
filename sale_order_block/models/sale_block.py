@@ -212,15 +212,13 @@ class SaleOrderLine(models.Model):
     """ Model name: Sale Order Lie
     """
     _inherit = 'sale.order.line'
-    _order = 'block_id, id'
+    _order = 'block_id'
 
     # Columns:
     block_id = fields.Many2one(
         'sale.order.block.group', 'Block', ondelete='set null')
 
     # Parameter for line:
-    sequence = fields.Integer(
-        string='Sequence')
     hide_block = fields.Boolean(
         'Hide block',
         #related='block_id.hide_block',
