@@ -225,7 +225,7 @@ class SaleOrderLine(models.Model):
 
     # Columns:
     block_id = fields.Many2one(
-        'sale.order.block.group', 'Block', ondelete='set null')
+        'sale.order.block.group', 'Block', ondelete='set null', required=True)
 
     # Parameter for line:
     hide_block = fields.Boolean(
