@@ -189,6 +189,8 @@ class SaleOrder(models.Model):
             'report_type': 'qweb-pdf',
             'datas': datas,
         }"""
+        self.env.context = dict(self.env.context)
+        self.env.context['nicola'] = True
         return self.env.ref(
             'sale_order_block.report_sale_block_lang').report_action(
                 self, datas=datas)
