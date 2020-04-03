@@ -14,9 +14,8 @@
                     <div t-call="web.external_layout">
                         <div class="page">
                             <!-- HEADER: -->
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col-xs-2">
-                                    <!--LOGO-->
                                     <div style="width: 100%;float: left;">
                                         <img src='/web/binary/company_logo' style="width: 100%"/>
                                     </div>
@@ -27,7 +26,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                 </div>
-                            </div>
+                            </div>-->
                             <hr />
 
                              <!-- DESTINATION BOX: -->
