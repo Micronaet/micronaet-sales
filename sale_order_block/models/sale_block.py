@@ -167,6 +167,8 @@ class SaleOrder(models.Model):
         """ This function prints the sales order and mark it as sent
             so that we can see more easily the next step of the workflow
         """
+        self.printed = self.printed + 1
+
         self.ensure_one()
         datas = {
             'model': 'sale.order',
@@ -197,6 +199,8 @@ class SaleOrder(models.Model):
             order.real_total = total
 
     # Columns:
+    printed = fields.Integer(
+        string='Printed', default=1, help='Printed version')
     show_master_total = fields.Boolean(
         'Show master total', default=True)
     block_ids = fields.One2many(
