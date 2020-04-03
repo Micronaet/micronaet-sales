@@ -113,7 +113,7 @@
                             <!-- END OF PAGE: -->
                             <div class="row">
                                 <div class="col-xs-12" >
-                                    <strong>N.B.: I prezzi si intendono esclusi di IVA (ove applicata).</strong><br/>
+                                    <u><strong>N.B.: I prezzi si intendono esclusi di IVA (ove applicata).</strong><br/></u>
                                     <strong t-if="o.payment_term_id">TERMINI DI PAGAMENTO:</strong> <span t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/>
                                 </div>
                             </div>
