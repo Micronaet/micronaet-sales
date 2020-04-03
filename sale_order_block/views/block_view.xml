@@ -7,6 +7,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                 <field name="partner_id" position="after">
+                     <field name="client_order_ref"/>
+                 </field>
                  <xpath expr="//field[@name='order_line']" position="attributes">
                       <attribute name="context">{'default_order_id': active_id}</attribute>
                  </xpath>
