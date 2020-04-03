@@ -90,7 +90,7 @@
                                             <tbody>
                                                 <tr t-foreach="block.line_ids" t-as="l" class="row">
                                                     <td colspan="4"><span t-esc="clean_name(l)"/></td>
-                                                    <td><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
+                                                    <td class="text-right"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
                                                     <td class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                     <!--TODO format currency and symbol-->
                                                     <td class="text-right"><span t-esc="l.discount" /></td>
