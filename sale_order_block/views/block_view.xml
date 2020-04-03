@@ -54,8 +54,8 @@
                                                 <separator string="Pre text:" colspan="2"/>
                                                 <separator string="Post text:" colspan="2"/>
 
-                                                <field name="pre_text" nolabel="1" colspan="2"/>
-                                                <field name="post_text" nolabel="1" colspan="2"/>
+                                                <field name="pre_text" nolabel="1" colspan="2" widget="html"/>
+                                                <field name="post_text" nolabel="1" colspan="2" widget="html"/>
 
                                                 <separator string="Show / Hide:" colspan="4"/>
                                                 <field name="show_header" />
