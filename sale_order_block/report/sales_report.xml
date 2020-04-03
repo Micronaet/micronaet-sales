@@ -13,6 +13,7 @@
                 <div t-foreach="docs" t-as="o">
                     <div t-call="web.external_layout">
                         <div class="page">
+                            <div class="oe_structure"/>
                             <!-- HEADER: -->
                             <!--<div class="row">
                                 <div class="col-xs-2">
