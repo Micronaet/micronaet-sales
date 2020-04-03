@@ -45,8 +45,8 @@ class SaleOrderBlockGroup(models.Model):
     # Columns:
     code = fields.Integer(
         'Code', required=True)
-    name = fields.Char(
-        'Name', size=64, required=True)
+    title = fields.Char(
+        'Title', size=64, required=True)
     block_margin = fields.Float(
         'Extra recharge %', digits=(16, 3),
         help='Add extra recharge to calculate real total')
