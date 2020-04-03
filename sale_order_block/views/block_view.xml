@@ -14,6 +14,11 @@
                               <field name="show_master_total" />
                               <field name="real_total" />
                               <separator string="Blocks:" colspan="3"/><button name="dummy_action" string="Refresh" type="object" class="oe_highlight" colspan="1"/>
+                              <field name="block_ids" nolabel="1" colspan="4">
+                                    <tree string="Block" decoration-danger="not_confirmed==True" decoration-muted="hide_block==True">
+                                        <field name="hide_block" invisible="1" />
+                                    </tree>
+                              </field>
                           </group>
                      </page>
                  </xpath>
@@ -34,9 +39,6 @@
                  </xpath>
 
 
-                              <field name="block_ids" nolabel="1" colspan="4">
-                                    <tree string="Block" decoration-danger="not_confirmed==True" decoration-muted="hide_block==True">
-                                        <field name="hide_block" invisible="1" />
                                         <field name="not_confirmed" invisible="1" />
                                         <field name="code" />
                                         <field name="name" />
