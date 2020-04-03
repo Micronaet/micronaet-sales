@@ -94,8 +94,7 @@
                                                     <td><span t-esc="l.price_unit"/></td>
                                                     <!--TODO format currency and symbol-->
                                                     <td><span t-esc="l.discount"/></td>
-                                                    <td><span t-esc="l.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
-
+                                                    <td class="text_right"><span t-esc="l.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                 </tr>
                                             </tbody>
                                         </table>
