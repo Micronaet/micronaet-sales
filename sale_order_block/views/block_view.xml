@@ -31,6 +31,14 @@
                                         <button name="duplicate_block_items" string="Duplicate block items" type="object" icon="fa-2x fa-copy" />
                                         <button name="print_only_this" string="Print only this" type="object" icon="fa-2x fa-print" />
                                     </tree>
+                                    <form string="Block" version="7.0">
+                                        <sheet>
+                                            <group col="4" colspan="4">
+                                                <field name="code" />
+                                                <field name="name" />
+                                            </group>
+                                        </sheet>
+                                    </form>
                               </field>
                           </group>
                      </page>
@@ -52,11 +60,6 @@
                  </xpath>
 
 
-                                    <form string="Block" version="7.0">
-                                        <sheet>
-                                            <group col="4" colspan="4">
-                                                <field name="code" />
-                                                <field name="name" />
 
                                                 <separator string="Pre text:" colspan="2"/>
                                                 <separator string="Post text:" colspan="2"/>
