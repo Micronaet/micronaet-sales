@@ -75,6 +75,9 @@
                  <field name="amount_untaxed" position="attributes">
                       <attribute name="invisible">1</attribute>
                  </field>
+                 <field name="amount_tax" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                 </field>
 
                  <field name="partner_id" position="after">
                      <field name="client_order_ref"/>
