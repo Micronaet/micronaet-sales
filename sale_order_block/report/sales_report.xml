@@ -104,9 +104,11 @@
                                         </table>
                                     </t>
                                     <div class="row" t-if="block.show_total">
-                                        <table class="col-xs-4">
-                                            <tr><td>PROVA TOTALE</td></tr>
-                                        </table>
+                                        <div class="col-xs-4">
+                                            <table>
+                                                <tr><td>PROVA TOTALE</td></tr>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="row">
                                             <div class="col-xs-3">
