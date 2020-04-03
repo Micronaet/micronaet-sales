@@ -36,7 +36,7 @@
                                 <div class="col-xs-7">
                                     <span class="company_address" t-field="o.partner_id"
                                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
-                                    <span t-if="o.client_order_ref"><strong>C/O:</strong> <span t-esc="o.client_order_ref" /></span>
+                                    <span t-if="o.client_order_ref">C/O: <span t-esc="o.client_order_ref" /></span>
                                 </div>
                             </div>
 
