@@ -103,23 +103,17 @@
                                             </tbody>
                                         </table>
                                     </t>
-                                    <div class="row" t-if="block.show_total">
-                                        <div class="col-xs-4">
+                                    <div class="row">
+                                        <div class="col-xs-8" >
+                                            <span t-esc="block.post_text or ''"/>
+                                        </div>
+                                        <div class="col-xs-4" t-if="block.show_total">
                                             <table>
-                                                <tr><td>PROVA TOTALE</td></tr>
-                                                <tr><td>1000.0</td></tr>
+                                                <tr><td><span t-esc="'TOTALE A CORPO' if block.total else 'TOTALE A SEZIONE'"/></td></tr>
+                                                <tr><td><span t-esc="block.total or block.real_total"/></td></tr>
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                            <div class="col-xs-3">
-                                                <span t-esc="'TOTALE A CORPO' if block.total else 'TOTALE A SEZIONE'"/>
-                                            </div>
-                                            <div class="col-xs-3">
-                                                <span t-esc="block.total or block.real_total"/>
-                                            </div>
-                                    </div>
-                                    <div t-esc="block.post_text or ''"/>
                                 </div>
                             </div>
                             <!--Master total:-->
