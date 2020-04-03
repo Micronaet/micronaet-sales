@@ -50,10 +50,10 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div>
-                                        <span t-esc="'PREVENTIVO' if o.state in ['draft','sent'] else 'ORDINE'"/>
+                                        <strong t-esc="'PREVENTIVO' if o.state in ['draft','sent'] else 'ORDINE'"/>
                                         <span t-esc="o.name"/>
                                     </div>
-                                    Referente: <div t-esc="'' and 'o.client_order_ref or '" />
+                                    <strong>Referente: </strong><span t-esc="'/' or 'o.client_order_ref or '" />
                                 </div>
                                 <div class="col-xs-6">
                                     <div t-esc="o.date_order or ''" t-options="{'widget': 'date'}"/>
