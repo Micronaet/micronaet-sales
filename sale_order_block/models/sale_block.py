@@ -173,30 +173,30 @@ class SaleOrder(models.Model):
         self.ensure_one()
 
         self.printed = self.printed + 1
-        data = {
+        datas = {
             'model': 'sale.order',
-            'ids': [item.id for item in self],
+            'ids': self, #[item.id for item in self],
             # TODO 'form': self.read(cr, uid, ids[0], context=context),
         }
         only_this_block = self.env.context.get('only_this_block')
         if only_this_block:
-            data['only_this_block'] = only_this_block
+            datas['only_this_block'] = only_this_block
 
         # self.env.context = dict(self.env.context)
         # self.env.context['nicola'] = True
         #import pdb; pdb.set_trace()
-        #return self.env.ref(
-        #    'sale_order_block.action_report_sale_block_lang').report_action(
-        #        docids=self, data=datas)
+        return self.env.ref(
+            'sale_order_block.action_report_sale_block_lang').report_action(
+                [self.id], data=datas)
         self.env.context = dict(self.env.context)
-        self.env.context['report_datas'] = data
+        self.env.context['report_datas'] = datas
         return {
             'type': 'ir.actions.report',
             'report_name': 'sale_order_block.report_sale_block_lang',
             'model': 'sale.order',
             'report_type': 'qweb-pdf',
-            'datas': data,
-            #'data': data,
+            'datas': datas,
+            #'data': datas,
         }
 
     # Fields function:

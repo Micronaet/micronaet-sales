@@ -20,9 +20,9 @@ class ReportSaleOrderBlock(models.AbstractModel):
         """ Render report invoice parser:
             Note: ex render_html(self, docids, data)
         """
-        print('DocIDS: %s' % (docids, ))
-        print(data)
-        import pdb; pdb.set_trace()
+        # Correct here not presence of docids:
+        if not docids:
+            docids = self.env.context.get('active_ids')
         model_name = 'sale.order'
         docs = self.env[model_name].browse(docids)
         return {
@@ -31,7 +31,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
             'docs': docs,
             'data': data,
 
-            # Parser function:
+            # Parser functions:
             'clean_name': self.clean_name,
             'show_the_block': self.show_the_block,
         }
