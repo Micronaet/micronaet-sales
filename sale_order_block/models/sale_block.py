@@ -193,7 +193,7 @@ class SaleOrder(models.Model):
             'report_name': 'sale_order_block.report_sale_block_lang',
             'model': 'sale.order',
             'report_type': 'qweb-pdf',
-            'datas': data,
+            #'datas': data,
             'data': data,
         }
 
