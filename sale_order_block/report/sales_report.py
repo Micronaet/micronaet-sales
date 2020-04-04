@@ -15,6 +15,21 @@ class ReportSaleOrderBlock(models.AbstractModel):
     _name = 'report.sale_order_block.report_sale_block_lang'
 
     # -------------------------------------------------------------------------
+    # Override
+    # -------------------------------------------------------------------------
+    @api.model
+    def render_html(self, docids, data=None):
+        """ Add datas dict to report
+        """
+        docargs = {
+            'doc_ids': self.ids,
+            'doc_model': self.model,
+            'data': data,
+        }
+        return self.env['report'].render(
+            'sale_order_block.report_sale_block_lang', docargs)
+
+    # -------------------------------------------------------------------------
     # Parser function:
     # -------------------------------------------------------------------------
     @api.model
