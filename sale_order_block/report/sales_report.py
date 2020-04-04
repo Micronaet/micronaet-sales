@@ -20,6 +20,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
         """ Render report invoice parser:
             Note: ex render_html(self, docids, data)
         """
+        print('DocIDS: %s' (docids, ))
         print(data)
         import pdb; pdb.set_trace()
         model_name = 'sale.order'
