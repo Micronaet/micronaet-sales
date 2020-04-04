@@ -173,14 +173,14 @@ class SaleOrder(models.Model):
         self.ensure_one()
 
         self.printed = self.printed + 1
-        datas = {
+        data = {
             'model': 'sale.order',
             'ids': [item.id for item in self],
             # TODO 'form': self.read(cr, uid, ids[0], context=context),
         }
         only_this_block = self.env.context.get('only_this_block')
         if only_this_block:
-            datas['only_this_block'] = only_this_block
+            data['only_this_block'] = only_this_block
 
         # self.env.context = dict(self.env.context)
         # self.env.context['nicola'] = True
@@ -193,8 +193,8 @@ class SaleOrder(models.Model):
             'report_name': 'sale_order_block.report_sale_block_lang',
             'model': 'sale.order',
             'report_type': 'qweb-pdf',
-            'datas': datas,
-            'data': datas,
+            'datas': data,
+            'data': data,
         }
 
     # Fields function:
