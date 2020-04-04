@@ -18,7 +18,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
     # Override
     # -------------------------------------------------------------------------
     @api.model
-    def render_html(self, docids, data=None):
+    def render_html(self, data=None):
         """ Add datas dict to report
         """
         import pdb; pdb.set_trace()
