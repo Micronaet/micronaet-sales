@@ -21,6 +21,7 @@ class ReportSaleOrderBlock(models.AbstractModel):
     def render_html(self, docids, data=None):
         """ Add datas dict to report
         """
+        import pdb; pdb.set_trace()
         docargs = {
             'doc_ids': self.ids,
             'doc_model': self.model,
