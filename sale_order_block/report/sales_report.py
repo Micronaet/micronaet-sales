@@ -3,7 +3,6 @@
 
 import logging
 from odoo import fields, api, models
-from odoo.tools import report
 
 _logger = logging.getLogger(__name__)
 
