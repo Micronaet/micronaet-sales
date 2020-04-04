@@ -3,8 +3,7 @@
 
 import logging
 from odoo import fields, api, models
-from odoo import tools
-from odoo.tools.translate import _
+from odoo.tools import report
 
 _logger = logging.getLogger(__name__)
 
@@ -18,17 +17,24 @@ class ReportSaleOrderBlock(models.AbstractModel):
     # Override
     # -------------------------------------------------------------------------
     @api.model
-    def render_html(self, data=None):
-        """ Add datas dict to report
+    def get_report_values(self, docids, data=None):
+        """ Render report invoice parser:
+            Note: ex render_html(self, docids, data)
         """
+        print(data)
         import pdb; pdb.set_trace()
-        docargs = {
-            'doc_ids': self.ids,
-            'doc_model': self.model,
+        model_name = 'sale.order'
+        docs = self.env[model_name].browse(docids)
+        return {
+            'doc_ids': docids,
+            'doc_model': model_name,
+            'docs': docs,
             'data': data,
+
+            # Parser function:
+            'clean_name': self.clean_name,
+            'show_the_block': self.show_the_block,
         }
-        return self.env['report'].render(
-            'sale_order_block.report_sale_block_lang', docargs)
 
     # -------------------------------------------------------------------------
     # Parser function:
@@ -56,19 +62,3 @@ class ReportSaleOrderBlock(models.AbstractModel):
         name = name.split('] ')[-1]
         return name
 
-    @api.model
-    def get_report_values(self, docids, data=None):
-        """ Render report invoice parser:
-        """
-        print(data)
-        #import pdb; pdb.set_trace()
-        return {
-            'doc_ids': docids,
-            'doc_model': 'sale.order',
-            'docs': self.env['sale.order'].search([('id', 'in', docids)]),
-            'data': data,
-
-            # Parser function:
-            'clean_name': self.clean_name,
-            'show_the_block': self.show_the_block,
-        }

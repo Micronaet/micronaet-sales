@@ -194,8 +194,8 @@ class SaleOrder(models.Model):
             'model': 'sale.order',
             'report_type': 'qweb-pdf',
             'datas': datas,
+            'data': datas,
         }
-
 
     # Fields function:
     @api.multi
