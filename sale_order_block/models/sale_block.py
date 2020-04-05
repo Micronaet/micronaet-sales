@@ -219,6 +219,10 @@ class SaleOrderLine(models.Model):
     _order = 'block_id, sequence, id'
 
     # Columns:
+    unused_order_id = fields.Many2one(
+        comodel_name='sale.order',
+        string='Unused order')
+
     block_id = fields.Many2one(
         'sale.order.block.group', 'Block', ondelete='set null', required=True)
 
@@ -242,3 +246,14 @@ class SaleOrderBlockGroupRelation(models.Model):
     # Columns:
     line_ids = fields.One2many(
         'sale.order.line', 'block_id', 'Sale order line')
+
+
+class SaleOrderRelation(models.Model):
+    """ Model name: Sale Order
+    """
+    _inherit = 'sale.order'
+
+    unused_order_line_ids = fields.One2many(
+        comodel_name='sale.order.line',
+        inverse_name='unused_order_id',
+        string='Unused order line')
