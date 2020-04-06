@@ -9,7 +9,7 @@
         </template>
         <!--                         Report template:                                -->
         <template id="report_sale_block_lang">
-            <t t-call="web.html_container">
+            <div t-call="web.html_container">
                 <div t-foreach="docs" t-as="o">
                     <div t-call="web.external_layout">
                         <div class="page">
@@ -117,10 +117,16 @@
                                     <strong t-if="o.payment_term_id">TERMINI DI PAGAMENTO:</strong> <span t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/>
                                 </div>
                             </div>
+
+                            <!--EXTRA STATICS BLOCKS:-->
+                            <div t-foreach="o.report_text_ids" t-as="static">
+                                <p t-if="static.pagebreak_before" style="page-break-before:always;" />
+                                <p t-raw="static.text_id.text" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </t>
+            </div>
         </template>
         <!--<template id="report_sale_block_lang_temp">
             <t t-call="web.html_container">

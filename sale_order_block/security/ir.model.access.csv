@@ -1,3 +1,4 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 access_sale_order_block_group_user,sale.order.block.group,model_sale_order_block_group,base.group_user,1,1,1,1
-
+access_sale_order_text_user,sale.order.text,model_sale_order_text,base.group_user,1,1,1,1
+access_sale_order_text_rel_user,sale.order.text.rel,model_sale_order_text_rel,base.group_user,1,1,1,1

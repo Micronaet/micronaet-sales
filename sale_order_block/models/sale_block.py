@@ -7,6 +7,43 @@ from odoo import models, fields, api
 _logger = logging.getLogger(__name__)
 
 
+class SaleOrderText(models.Model):
+    """ Model name: Sale Order Text
+    """
+
+    _name = 'sale.order.text'
+    _description = 'Sale order text'
+    _order = 'name'
+
+    name = fields.Char(
+        string='Name',
+        required=True)
+    text = fields.Text(
+        string='Text',
+        required=True,
+    )
+
+
+class SaleOrderTextRel(models.Model):
+    """ Model name: Sale Order Text Rel
+    """
+
+    _name = 'sale.order.text.rel'
+    _description = 'Sale order text rel'
+    _order = 'text_id'
+
+    sequence = fields.Integer(string='Sequence')
+    pagebreak_before = fields.Boolean(string='Pagebreak before')
+    text_id = fields.Many2one(
+        comodel_name='sale.order.text',
+        string='Text',
+        required=True)
+    order_id = fields.Many2one(
+        comodel_name='sale.order',
+        string='Sale order',
+    )
+
+
 class SaleOrderBlockGroup(models.Model):
     """ Model name: SaleOrderBlockGroup
     """
@@ -210,6 +247,12 @@ class SaleOrder(models.Model):
         'Real total', store=False,
         compute='_function_get_total_block',
         help='Total sum of sale line in this block')
+    report_text_ids = fields.One2many(
+        comodel_name='sale.order.text.rel',
+        inverse_name='order_id',
+        string='Report text',
+        help='Extra document add after report text',
+    )
 
 
 class SaleOrderLine(models.Model):
