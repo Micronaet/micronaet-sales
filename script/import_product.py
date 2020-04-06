@@ -40,7 +40,7 @@ server = config.get('dbaccess', 'server')
 port = config.get('dbaccess', 'port')   # verify if it's necessary: getint
 
 file_in = './data/artioerp.txt'
-force_start = 10792
+force_start = 32845
 
 # -----------------------------------------------------------------------------
 # Utility:
