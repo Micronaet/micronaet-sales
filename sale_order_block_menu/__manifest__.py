@@ -16,6 +16,8 @@
         'sale',
         'sale_management',
         'sale_order_block',
+        'sales_team',
+        'product',
         'web',
     ],
     'data': [

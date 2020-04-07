@@ -23,7 +23,7 @@
              />
              <menuitem
                  parent="menu_master_sales_sales"
-                 id="menu_master_sales_management_quotation"
+                 id="menu_master_sales_management_my_quotation"
                  name="My quotation"
                  sequence="10"
                  action="action_quotations"
@@ -34,7 +34,7 @@
              id="menu_master_sales_management"
              name="Management"
              sequence="20"
-             groups="counseling.group_admin,counseling.group_manager"
+             groups="sale_order_block.group_block_admin,sale_order_block.group_block_manager"
              />
              <menuitem
                  parent="menu_master_sales_management"
@@ -43,20 +43,43 @@
                  sequence="10"
                  action="sale.action_quotations"
                  />
-
+             <menuitem
+                 parent="menu_master_sales_management"
+                 id="menu_master_sales_management_partner"
+                 name="Partner"
+                 sequence="20"
+                 action="base.action_partner_form"
+                 />
+             <menuitem
+                 parent="menu_master_sales_management"
+                 id="menu_master_sales_management_product"
+                 name="Product"
+                 sequence="30"
+                 action="product.product_template_action"
+                 />
 
          <menuitem
              parent="menu_master_sales_root"
              id="menu_master_sales_configuration"
              name="Configuration"
              sequence="99"
-             groups="counseling.group_admin"
+             groups="sale_order_block.group_block_admin"
              />
              <menuitem
                  id="menu_sale_order_text_action"
                  parent="menu_master_sales_configuration"
                  sequence="10"
                  action="sale_order_block.sale_order_text_action"/>
+             <menuitem
+                 id="menu_master_sales_configuration_team"
+                 parent="menu_master_sales_configuration"
+                 sequence="20"
+                 action="sales_team.sales_team_config_action"/>
+             <menuitem
+                 id="menu_master_sales_configuration_product"
+                 parent="menu_master_sales_configuration"
+                 sequence="30"
+                 action="product.product_category_action_form"/>
 
 
     </data>
