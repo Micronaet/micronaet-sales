@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+     <record id="action_quotations" model="ir.actions.act_window">
+         <field name="name">My quotation</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">sale.order</field>
+         <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
+         <field name="domain">[('user_id', '=', uid)]</field>
+     </record>
+     <menuitem
+         name="SALES"
+         id="menu_master_sales_root"
+         sequence="0"
+         groups="sale_order_block.group_block_salesman,sale_order_block.group_block_admin,sale_order_block.group_block_manager"
+         />
+         <menuitem
+             parent="menu_master_sales_root"
+             id="menu_master_sales_sales"
+             name="Sales"
+             sequence="10"
+             groups="sale_order_block.group_block_salesman"
+             />
+             <menuitem
+                 parent="menu_master_sales_sales"
+                 id="menu_master_sales_management_quotation"
+                 name="My quotation"
+                 sequence="10"
+                 action="action_quotations"
+                 />
+
+         <menuitem
+             parent="menu_master_sales_root"
+             id="menu_master_sales_management"
+             name="Management"
+             sequence="20"
+             groups="counseling.group_admin,counseling.group_manager"
+             />
+             <menuitem
+                 parent="menu_master_sales_management"
+                 id="menu_master_sales_management_quotation"
+                 name="Quotation"
+                 sequence="10"
+                 action="sale.action_quotations"
+                 />
+
+
+         <menuitem
+             parent="menu_master_sales_root"
+             id="menu_master_sales_configuration"
+             name="Configuration"
+             sequence="99"
+             groups="counseling.group_admin"
+             />
+             <menuitem
+                 id="menu_sale_order_text_action"
+                 parent="menu_master_sales_configuration"
+                 sequence="10"
+                 action="sale_order_block.sale_order_text_action"/>
+
+
+    </data>
+</openerp>
+
