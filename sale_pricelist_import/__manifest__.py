@@ -19,9 +19,11 @@
     ],
     'data': [
         #'security/ir.model.access.csv',
-        #'views/block_view.xml',
+        'views/pricelist_view.xml',
     ],
-    'external_dependencies': {},
+    'external_dependencies': {
+
+    },
     'application': False,
     'installable': True,
     'auto_install': False,

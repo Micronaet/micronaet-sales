@@ -1,26 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <record id="excel_pricelist_item_form_view" model="ir.ui.view">
             <field name="name">excel.pricelist.item.form</field>
             <field name="model">excel.pricelist.item</field>
             <field name="arch" type="xml">
                 <form string="Pricelist">
+                    <header>
+                        <button name="upload_pricelist_from_file" type="object" string="Load file" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+
+                        <button name="available_pricelist_form_file" type="object" string="Set available" attrs="{'invisible': [('state', '!=', 'loaded')]}"/>
+
+                        <button name="hide_pricelist_form_file" type="object" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}"/>
+                        <button name="show_pricelist_form_file" type="object" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}"/>
+
+                        <button name="remove_pricelist_form_file" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}"/>
+
+                        <button name="new_pricelist_form_file" type="object" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <label for="supplier_id"/>
                             <h1>
-                                <field name="supplier_id" placeholder="Supplier"/>
+                                <field name="supplier_id" placeholder="Supplier selection..." />
                             </h1>
                         </div>
-                        <group>
-                            <group col="4">
-                                <field name="timestamp_update"/>
-                                <newline/>
-                                <field name="start"/>
-                                <field name="file_data"/>
-                            </group>
+                        <group col="4">
+                            <field name="timestamp_update"/>
+                            <field name="version"/>
+
+                            <field name="start"/>
+                            <field name="pricelist_prefix"/>
+
+                            <field name="file_data" attrs="{'required': [('state', '=', 'draft')], 'invisible': [('state', '!=', 'draft')]}"/>
+
+                            <separator string="Check file:" colspan="4" attrs="{'invisible': ['|',('first_row', '=', False),('check_data', '=', False)]}"/>
+                            <field name="first_row" colspan="4" attrs="{'invisible': [('first_row', '=', False)]}" readonly="1"/>
+                            <field name="check_data" colspan="4" nolabel="1" attrs="{'invisible': [('check_data', '=', False)]}" readonly="1"/>
+
+                            <separator string="Product linked" colspan="4" />
+                            <field name="product_ids" colspan="4" nolabel="1" readonly="1">
+                                <tree string="Products linked:" editable="bottom" decoration-muted="active==False">
+                                    <field name="active" />
+                                    <field name="name"/>
+                                    <field name="uom_id" />
+                                    <field name="real_code"/>
+                                    <field name="default_code" />
+                                    <field name="lst_price" />
+                                    <field name="pricelist_version"/>
+                                </tree>
+                            </field>
+
                         </group>
                     </sheet>
                 </form>
@@ -34,6 +66,7 @@
                     <field name="timestamp_update"/>
                     <field name="start"/>
                     <field name="supplier_id" placeholder="Supplier"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -41,9 +74,10 @@
             <field name="name">excel.pricelist.item.calendar</field>
             <field name="model">excel.pricelist.item</field>
             <field name="arch" type="xml">
-                <calendar string="Pricelist" date_start="timestamp_update" color="supplier_id">
+                <calendar string="Pricelist" date_start="timestamp_update" color="state">
                     <field name="supplier_id" />
                     <field name="start"/>
+                    <field name="state"/>
                 </calendar>
             </field>
         </record>
@@ -52,8 +86,11 @@
             <field name="model">excel.pricelist.item</field>
             <field name="arch" type="xml">
                 <search string="Pricelist">
+                    <field name="supplier_id" />
+                    <field name="state"/>
                     <group expand="1" string="Group By">
                         <filter string="Date" name="timestamp_update" domain="[]" context="{'group_by':'timestamp_update'}"/>
+                        <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
@@ -73,6 +110,5 @@
         </record>
 
         <menuitem name="Pricelist manage" id="excel_pricelist_item_menu" parent="sale.menu_sale_config" action="excel_pricelist_item_act_window" sequence="40"/>
-
     </data>
 </odoo>
