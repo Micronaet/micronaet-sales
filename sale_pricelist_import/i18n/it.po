@@ -237,7 +237,7 @@ msgstr "Rendi attivo"
 #. module: sale_pricelist_import
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
 msgid "Show product"
-msgstr "Mostra prodotto"
+msgstr "Mostra prodotti"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_start
