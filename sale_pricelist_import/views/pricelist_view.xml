@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="excel_pricelist_item_form_view" model="ir.ui.view">
+            <field name="name">excel.pricelist.item.form</field>
+            <field name="model">excel.pricelist.item</field>
+            <field name="arch" type="xml">
+                <form string="Pricelist">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="supplier_id"/>
+                            <h1>
+                                <field name="supplier_id" placeholder="Supplier"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group col="4">
+                                <field name="timestamp_update"/>
+                                <newline/>
+                                <field name="start"/>
+                                <field name="file_data"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="excel_pricelist_item_tree_view" model="ir.ui.view">
+            <field name="name">excel.pricelist.item.tree</field>
+            <field name="model">excel.pricelist.item</field>
+            <field name="arch" type="xml">
+                <tree string="Pricelist">
+                    <field name="timestamp_update"/>
+                    <field name="start"/>
+                    <field name="supplier_id" placeholder="Supplier"/>
+                </tree>
+            </field>
+        </record>
+        <record id="excel_pricelist_item_calendar_view" model="ir.ui.view">
+            <field name="name">excel.pricelist.item.calendar</field>
+            <field name="model">excel.pricelist.item</field>
+            <field name="arch" type="xml">
+                <calendar string="Pricelist" date_start="timestamp_update" color="supplier_id">
+                    <field name="supplier_id" />
+                    <field name="start"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="excel_pricelist_item_search_view" model="ir.ui.view">
+            <field name="name">excel.pricelist.item.search</field>
+            <field name="model">excel.pricelist.item</field>
+            <field name="arch" type="xml">
+                <search string="Pricelist">
+                    <group expand="1" string="Group By">
+                        <filter string="Date" name="timestamp_update" domain="[]" context="{'group_by':'timestamp_update'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="excel_pricelist_item_act_window" model="ir.actions.act_window">
+            <field name="name">Pricelist</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">excel.pricelist.item</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Pricelist management
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Pricelist manage" id="excel_pricelist_item_menu" parent="sale.menu_sale_config" action="excel_pricelist_item_act_window" sequence="40"/>
+
+    </data>
+</odoo>

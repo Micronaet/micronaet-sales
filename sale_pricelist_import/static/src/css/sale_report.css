@@ -1,0 +1,28 @@
+.right {
+    'text-align': 'right',
+}
+.left {
+    'text-align': 'left',
+}
+.center {
+    'text-align': 'center',
+}
+
+.font_red {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight:100;
+    color:red;
+}
+
+.font_title {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 100;
+    color: blue;
+    background-color: #ffa700;
+}
+
+.invoice_general_information {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight:100;
+    color:green;
+}
