@@ -16,6 +16,7 @@
         'sale',
         'sale_management',
         'web',
+        'mail',
     ],
     'data': [
         #'security/ir.model.access.csv',

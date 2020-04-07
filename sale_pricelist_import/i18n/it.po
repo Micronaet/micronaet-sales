@@ -1,0 +1,279 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_pricelist_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-07 17:19+0000\n"
+"PO-Revision-Date: 2020-04-07 17:19+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_pricelist_import
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:124
+#, python-format
+msgid "%s. Product code not found!<br/>"
+msgstr "%s. Codice prodotto non trovato!<br/>"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Available"
+msgstr "Attivato"
+
+#. module: sale_pricelist_import
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:103
+#, python-format
+msgid "Cannot read XLS file: %s"
+msgstr "Impossibile leggere il file XLS: %s"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_check_data
+msgid "Check data"
+msgstr "Controllo dati"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_check_data
+msgid "Check error in data file"
+msgstr "Controllo errori nel file passato"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Check file:"
+msgstr "Controllo file:"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_first_row
+msgid "Check first row to be imported on file"
+msgstr "Controllo prima riga importata del file"
+
+#. module: sale_pricelist_import
+#: model:ir.model,name:sale_pricelist_import.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_search_view
+msgid "Date"
+msgstr "Data"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_display_name
+msgid "Display Name"
+msgstr "Nome Completo"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_file_data
+msgid "Excel file"
+msgstr "File Excel"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_product_product_excel_pricelist_id
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_product_template_excel_pricelist_id
+msgid "Excel pricelist"
+msgstr "Listini Excel"
+
+#. module: sale_pricelist_import
+#: model:ir.model,name:sale_pricelist_import.model_excel_pricelist_item
+msgid "Excel pricelist item"
+msgstr "Listini di Excel"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_first_row
+msgid "First row"
+msgstr "Prima riga"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_search_view
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Hide"
+msgstr "Nascosto"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Hide product"
+msgstr "Nascondi prodotti"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Import detail"
+msgstr "Dettaglio importazione"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item___last_update
+msgid "Last Modified on"
+msgstr "Data di ultima modifica"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_write_uid
+msgid "Last Updated by"
+msgstr "Ultima modifica di"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_write_date
+msgid "Last Updated on"
+msgstr "Ultima modifica il"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Load file"
+msgstr "Salva in ODOO"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "New version"
+msgstr "Nuova versione"
+
+#. module: sale_pricelist_import
+#: model:ir.actions.act_window,name:sale_pricelist_import.excel_pricelist_item_act_window
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_calendar_view
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_search_view
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_tree_view
+msgid "Pricelist"
+msgstr "Listino"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.menu,name:sale_pricelist_import.excel_pricelist_item_menu
+msgid "Pricelist manage"
+msgstr "Gestione listini"
+
+#. module: sale_pricelist_import
+#: model:ir.actions.act_window,help:sale_pricelist_import.excel_pricelist_item_act_window
+msgid "Pricelist management"
+msgstr "Gestione listini"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_pricelist_prefix
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_res_partner_pricelist_prefix
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_res_users_pricelist_prefix
+msgid "Pricelist prefix"
+msgstr "Prefisso codice"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_pricelist_prefix
+#: model:ir.model.fields,help:sale_pricelist_import.field_res_partner_pricelist_prefix
+#: model:ir.model.fields,help:sale_pricelist_import.field_res_users_pricelist_prefix
+msgid "Pricelist prefix, used for add extra chars before product code"
+msgstr "Prefisso codice, utilizzato per aggiungere un codice extra a sinistra di quello originale"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_product_product_pricelist_version
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_product_template_pricelist_version
+msgid "Pricelist version"
+msgstr "Versione listino"
+
+#. module: sale_pricelist_import
+#: model:ir.model,name:sale_pricelist_import.model_product_template
+msgid "Product Template"
+msgstr "Modello prodotto"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_product_ids
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Product linked"
+msgstr "Prodotti collegati"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Products linked:"
+msgstr "Prodotti collegati:"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_product_product_real_code
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_product_template_real_code
+msgid "Real code"
+msgstr "Codice originale"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Remove product"
+msgstr "Rimuovi prodotti"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Removed"
+msgstr "Rimosso"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Saved"
+msgstr "Salvato"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Set available"
+msgstr "Rendi attivo"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Show product"
+msgstr "Mostra prodotto"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_start
+msgid "Start row"
+msgstr "Riga di partenza"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_state
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_search_view
+msgid "State"
+msgstr "Stato"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_supplier_id
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_tree_view
+msgid "Supplier"
+msgstr "Fornitore"
+
+#. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Supplier selection..."
+msgstr "Seleziona il fornitore..."
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_timestamp_update
+msgid "Timestamp_update"
+msgstr "Timestamp"
+
+#. module: sale_pricelist_import
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:165
+#, python-format
+msgid "Totale righe <b>%s</b>, importate: <b>%s</b>"
+msgstr "Totale righe <b>%s</b>, importate: <b>%s</b>"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_version
+msgid "Version"
+msgstr "Versione"
+

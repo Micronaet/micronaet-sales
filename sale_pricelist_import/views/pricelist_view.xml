@@ -35,26 +35,38 @@
                             <field name="pricelist_prefix"/>
 
                             <field name="file_data" attrs="{'required': [('state', '=', 'draft')], 'invisible': [('state', '!=', 'draft')]}"/>
-
-                            <separator string="Check file:" colspan="4" attrs="{'invisible': ['|',('first_row', '=', False),('check_data', '=', False)]}"/>
-                            <field name="first_row" colspan="4" attrs="{'invisible': [('first_row', '=', False)]}" readonly="1"/>
-                            <field name="check_data" colspan="4" nolabel="1" attrs="{'invisible': [('check_data', '=', False)]}" readonly="1"/>
-
-                            <separator string="Product linked" colspan="4" />
-                            <field name="product_ids" colspan="4" nolabel="1" readonly="1">
-                                <tree string="Products linked:" editable="bottom" decoration-muted="active==False">
-                                    <field name="active" />
-                                    <field name="name"/>
-                                    <field name="uom_id" />
-                                    <field name="real_code"/>
-                                    <field name="default_code" />
-                                    <field name="lst_price" />
-                                    <field name="pricelist_version"/>
-                                </tree>
-                            </field>
+                            <notebook colspan="4">
+                                <page name="product_linked" string="Product linked">
+                                    <group col="4">
+                                        <separator string="Product linked" colspan="4" />
+                                        <field name="product_ids" colspan="4" nolabel="1" readonly="1">
+                                            <tree string="Products linked:" editable="bottom" decoration-muted="active==False">
+                                                <field name="active" />
+                                                <field name="name"/>
+                                                <field name="uom_id" />
+                                                <field name="real_code"/>
+                                                <field name="default_code" />
+                                                <field name="lst_price" />
+                                                <field name="pricelist_version"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page name="import_detail" string="Import detail" attrs="{'invisible': [('first_row', '=', False),('check_data', '=', False)]}">
+                                    <group col="4">
+                                        <field name="first_row" colspan="4" readonly="1" widget="html"/>
+                                        <separator string="Check file:" colspan="4" />
+                                        <field name="check_data" colspan="4" nolabel="1" readonly="1" widget="html"/>
+                                    </group>
+                                </page>
+                            </notebook>
 
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                         <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -62,7 +74,7 @@
             <field name="name">excel.pricelist.item.tree</field>
             <field name="model">excel.pricelist.item</field>
             <field name="arch" type="xml">
-                <tree string="Pricelist">
+                <tree string="Pricelist" decoration-it="state=='draft'" decoration-info="state=='loaded'" decoration-danger="state=='removed'" decoration-success="state=='available'" decoration-muted="state=='hide'">
                     <field name="timestamp_update"/>
                     <field name="start"/>
                     <field name="supplier_id" placeholder="Supplier"/>

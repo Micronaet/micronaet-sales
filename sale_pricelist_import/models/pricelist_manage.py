@@ -28,6 +28,26 @@ class ExcelPricelistItem(models.Model):
     _rec_name = 'supplier_id'
     _order = 'supplier_id'
     _root_filestore = r'~/.local/share/Odoo/filestore'
+    _inherit = ['mail.thread']
+
+    # -------------------------------------------------------------------------
+    # Utility
+    # -------------------------------------------------------------------------
+    @api.model
+    def log_message(self, subject, body, message_type='notification'):
+        """ Write log message
+        """
+        body = ("""
+            <div class="o_mail_notification">
+                %s
+            </div>
+            """) % body
+
+        return self.sudo().message_post(
+            body=body,
+            message_type=message_type,
+            subject=subject,
+            )
 
     # -------------------------------------------------------------------------
     # Wkf Button operation:
@@ -92,6 +112,7 @@ class ExcelPricelistItem(models.Model):
         total = 0
         ws = wb.sheet_by_index(0)
         for row in range(start, ws.nrows):
+            log_row = row + 1
             if not (row % 50):
                 _logger.info('%s: Row imported %s / %s' % (
                     fullname,
@@ -100,14 +121,16 @@ class ExcelPricelistItem(models.Model):
                 ))
             real_code = ws.cell(row, 0).value
             if not real_code:
-                check_data += _('%s. Product code not found!<br/>')
+                check_data += _('%s. Product code not found!<br/>') % log_row
                 continue
             name = ws.cell(row, 1).value
             price = ws.cell(row, 2).value or 0.0
             default_code = '%s%s' % (pricelist_prefix, real_code)
             if not first_row:
-                first_row = 'Codice: %s | Descrizione: %s | Prezzo: %s' % (
-                    default_code, name, price)
+                first_row = '''
+                    <b>Codice:</b> %s | <b>Descrizione:</b> %s | 
+                    <b>Prezzo:</b> %s''' % (
+                        default_code, name, price)
 
             # Update product:
             # TODO hide previous product if present?
@@ -131,7 +154,7 @@ class ExcelPricelistItem(models.Model):
                 product_pool.create(data)
 
         # Hide previous version:
-        _logger.warning('Hide previous versione still remained')
+        _logger.warning('Hide previous version still remained')
         hide_previous = product_pool.search([
             ('pricelist_version', '<', self.version),
         ])
@@ -140,10 +163,10 @@ class ExcelPricelistItem(models.Model):
         })
 
         check_data += _('Totale righe <b>%s</b>, importate: <b>%s</b>') % (
-            total, ws.nrows)
+            ws.nrows, total)
         return self.write({
             'first_row': first_row,
-            'check_date': check_data,
+            'check_data': check_data,
             'state': 'available',
         })
 
@@ -156,6 +179,7 @@ class ExcelPricelistItem(models.Model):
         _logger.warning('Restart from draft')
         return self.write({
             'state': 'draft',
+            'first_line': False,
         })
 
     # Available to Hide
@@ -250,6 +274,7 @@ class ExcelPricelistItem(models.Model):
     )
     pricelist_prefix = fields.Char(
         'Pricelist prefix', size=4,
+        track_visibility=True,
         related='supplier_id.pricelist_prefix',
     )
     start = fields.Integer(
@@ -260,6 +285,7 @@ class ExcelPricelistItem(models.Model):
     version = fields.Integer(
         string='Version',
         readonly=True,
+        track_visibility=True,
     )
     file_data = fields.Binary(
         string='Excel file',
@@ -276,9 +302,10 @@ class ExcelPricelistItem(models.Model):
     )
     state = fields.Selection(
         string='State',
+        track_visibility=True,
         selection=[
             ('draft', 'Draft'),
-            ('loaded', 'Loaded'),
+            ('loaded', 'Saved'),
             ('available', 'Available'),
             ('hide', 'Hide'),
             ('removed', 'Removed'),  # Return to draft?
