@@ -129,6 +129,31 @@ class SaleOrder(models.Model):
     # Button events:
     # -------------------------------------------------------------------------
     @api.multi
+    def action_confirm(self):
+        """ Confirm block marked and move extra line in unused list
+        """
+        import pdb; pdb.set_trace()
+        order_id = self.id
+        for line in self.order_line:
+            if line.block_id.not_confirmed:
+                # Move unused block line in unused list
+                line.write({
+                    'order_id': False,
+                    'unused_order_id': order_id
+                })
+            else:
+                # TODO Export for accounting
+                pass
+        self.write({
+            'account_state': 'confirmed',
+        })
+
+    @api.multi
+    def action_cancel(self):
+        """ Confirm overrided """
+        return True
+
+    @api.multi
     def dummy_action(self):
         """ Dummy button to refresh data
         """
@@ -143,6 +168,7 @@ class SaleOrder(models.Model):
         # Pool used:
         block_pool = self.env['sale.order.block.group']
         sol_pool = self.env['sale.order.line']
+        text_pool = self.env['sale.order.text']
 
         new_order = super(SaleOrder, self).copy(default)
         new_id = new_order.id
@@ -181,10 +207,28 @@ class SaleOrder(models.Model):
                 # 'show_subtotal': fields.boolean('Show Subtotal'),
                 'show_total': block.show_total,
 
-                'hide_block': block.hide_block,
-                'not_confirmed': False,
+                'hide_block': False,  # Forced!
+                'not_confirmed': False,  # Forced!
             }
             convert_db.append((block.id, block_pool.create(data).id))
+
+        # ---------------------------------------------------------------------
+        # Fixed block:
+        # ---------------------------------------------------------------------
+        for text_block in self.report_text_ids:
+            text_pool.create({
+                'order_id': new_id,
+                'text_id:': text_block.id,
+                'pagebreak_before': text_block.pagebreak_before,
+            })
+
+        # ---------------------------------------------------------------------
+        # Restore unused lines:
+        # ---------------------------------------------------------------------
+        self.unused_order_line_ids.write({
+            'order_id': new_id,
+            'unused_order_id': False,
+        })
 
         # ---------------------------------------------------------------------
         # Change reference for block in detail list:
@@ -210,6 +254,9 @@ class SaleOrder(models.Model):
         self.ensure_one()
 
         self.printed = self.printed + 1
+        self.write({
+            'account_state': 'sent',  # Mark as sent or printed
+        })
         datas = {
             'model': 'sale.order',
             'ids': self,
@@ -261,7 +308,16 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     _order = 'block_id, sequence, id'
 
+    # -------------------------------------------------------------------------
     # Columns:
+    # -------------------------------------------------------------------------
+    # Override:
+    order_id = fields.Many2one(
+        comodel_name='sale.order',
+        string='Sale order',
+        required=False,  # Not mandatory (for moved lines)
+    )
+
     unused_order_id = fields.Many2one(
         comodel_name='sale.order',
         string='Unused order')
@@ -300,3 +356,13 @@ class SaleOrderRelation(models.Model):
         comodel_name='sale.order.line',
         inverse_name='unused_order_id',
         string='Unused order line')
+
+    account_state = fields.Selection(
+        string='Account state',
+        selection=[
+            ('draft', 'Quotation'),
+            ('sent', 'Sent (or printed)'),
+            ('confirmed', 'Confirmed'),
+            ('imported', 'Imported'),
+            ('cancel', 'Cancel'),
+            ], required=True, default='draft')
