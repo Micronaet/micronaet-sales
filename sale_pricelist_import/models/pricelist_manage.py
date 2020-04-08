@@ -25,8 +25,8 @@ class ResPartner(models.Model):
 class ExcelPricelistItem(models.Model):
     _name = 'excel.pricelist.item'
     _description = 'Excel pricelist item'
-    _rec_name = 'supplier_id'
-    _order = 'supplier_id'
+    _rec_name = 'name'
+    _order = 'supplier_id,name'
     _root_filestore = r'~/.local/share/Odoo/filestore'
     _inherit = ['mail.thread']
 
@@ -260,6 +260,7 @@ class ExcelPricelistItem(models.Model):
             'state': 'removed',
         })
 
+    name = fields.Char('Name', required=True)
     timestamp_update = fields.Datetime(
         string='Timestamp_update',
         required=True,
@@ -314,6 +315,7 @@ class ExcelPricelistItem(models.Model):
         default='draft',
     )
     '''
+    # No need!!
     sql_constraints = [
         ('supplier_id_uniq', 'UNIQUE (supplier_id)',
          'You can not have two pricelist with same supplier, update original!')

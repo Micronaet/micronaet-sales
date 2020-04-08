@@ -28,6 +28,8 @@
                             </h1>
                         </div>
                         <group col="4">
+                            <field name="name" colspan="4"/>
+
                             <field name="timestamp_update"/>
                             <field name="version"/>
 
@@ -76,8 +78,9 @@
             <field name="arch" type="xml">
                 <tree string="Pricelist" decoration-it="state=='draft'" decoration-info="state=='loaded'" decoration-danger="state=='removed'" decoration-success="state=='available'" decoration-muted="state=='hide'">
                     <field name="timestamp_update"/>
-                    <field name="start"/>
                     <field name="supplier_id" placeholder="Supplier"/>
+                    <field name="name"/>
+                    <field name="start"/>
                     <field name="state"/>
                 </tree>
             </field>
@@ -88,6 +91,7 @@
             <field name="arch" type="xml">
                 <calendar string="Pricelist" date_start="timestamp_update" color="state">
                     <field name="supplier_id" />
+                    <field name="name"/>
                     <field name="start"/>
                     <field name="state"/>
                 </calendar>
@@ -99,6 +103,7 @@
             <field name="arch" type="xml">
                 <search string="Pricelist">
                     <field name="supplier_id" />
+                    <field name="name"/>
                     <field name="state"/>
                     <group expand="1" string="Group By">
                         <filter string="Date" name="timestamp_update" domain="[]" context="{'group_by':'timestamp_update'}"/>
