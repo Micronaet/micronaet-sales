@@ -132,7 +132,6 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         """ Confirm block marked and move extra line in unused list
         """
-        import pdb; pdb.set_trace()
         order_id = self.id
         for line in self.order_line:
             if line.block_id.not_confirmed:
@@ -144,14 +143,17 @@ class SaleOrder(models.Model):
             else:
                 # TODO Export for accounting
                 pass
-        self.write({
+        return self.write({
             'account_state': 'confirmed',
         })
 
     @api.multi
     def action_cancel(self):
-        """ Confirm overrided """
-        return True
+        """ Confirm overrided
+        """
+        return self.write({
+            'account_state': 'cancel',
+        })
 
     @api.multi
     def dummy_action(self):
@@ -168,7 +170,7 @@ class SaleOrder(models.Model):
         # Pool used:
         block_pool = self.env['sale.order.block.group']
         sol_pool = self.env['sale.order.line']
-        text_pool = self.env['sale.order.text']
+        text_rel_pool = self.env['sale.order.text.rel']
 
         new_order = super(SaleOrder, self).copy(default)
         new_id = new_order.id
@@ -215,11 +217,12 @@ class SaleOrder(models.Model):
         # ---------------------------------------------------------------------
         # Fixed block:
         # ---------------------------------------------------------------------
-        for text_block in self.report_text_ids:
-            text_pool.create({
+        for block in self.report_text_ids:
+            text_rel_pool.create({
+                'sequence': block.sequence,
                 'order_id': new_id,
-                'text_id:': text_block.id,
-                'pagebreak_before': text_block.pagebreak_before,
+                'text_id': block.text_id.id,
+                'pagebreak_before': block.pagebreak_before,
             })
 
         # ---------------------------------------------------------------------
@@ -244,6 +247,14 @@ class SaleOrder(models.Model):
             lines.write({
                 'block_id': new,
             })
+
+        # ---------------------------------------------------------------------
+        # Extra fields in order:
+        # ---------------------------------------------------------------------
+        new_order.write({
+            'client_order_ref': self.client_order_ref,
+            'account_state': 'draft',
+        })
         return new_order
 
     @api.multi
@@ -254,9 +265,10 @@ class SaleOrder(models.Model):
         self.ensure_one()
 
         self.printed = self.printed + 1
-        self.write({
-            'account_state': 'sent',  # Mark as sent or printed
-        })
+        if self.account_state in ('draft',):
+            self.write({
+                'account_state': 'sent',  # Mark as sent or printed
+            })
         datas = {
             'model': 'sale.order',
             'ids': self,
