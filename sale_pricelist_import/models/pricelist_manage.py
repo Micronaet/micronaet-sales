@@ -14,14 +14,6 @@ from odoo.exceptions import (
 _logger = logging.getLogger(__name__)
 
 
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
-
-    pricelist_prefix = fields.Char(
-        'Pricelist prefix', size=4,
-        help='Pricelist prefix, used for add extra chars before product code')
-
-
 class ExcelPricelistItem(models.Model):
     _name = 'excel.pricelist.item'
     _description = 'Excel pricelist item'
@@ -276,7 +268,6 @@ class ExcelPricelistItem(models.Model):
     pricelist_prefix = fields.Char(
         'Pricelist prefix', size=4,
         track_visibility=True,
-        related='supplier_id.pricelist_prefix',
     )
     start = fields.Integer(
         string='Start row',
@@ -314,13 +305,10 @@ class ExcelPricelistItem(models.Model):
         required=True,
         default='draft',
     )
-    '''
-    # No need!!
     sql_constraints = [
-        ('supplier_id_uniq', 'UNIQUE (supplier_id)',
-         'You can not have two pricelist with same supplier, update original!')
+        ('name_supplier_id_uniq', 'UNIQUE (supplier_id,name)',
+         'You can not have two pricelist same supplier-name!')
     ]
-    '''
 
 
 class ProductTemplate(models.Model):
