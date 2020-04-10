@@ -26,8 +26,6 @@ import ConfigParser
 # -----------------------------------------------------------------------------
 # Read configuration parameter:
 # -----------------------------------------------------------------------------
-import pdb  ; pdb.set_trace()
-
 # From config file:
 cfg_file = os.path.expanduser('./local.cfg')
 
@@ -52,5 +50,5 @@ odoo = erppeek.Client(
 # Pool used:
 pricelist = odoo.model('excel.pricelist.item')
 
-pricelist.available_pricelist_form_file()
+pricelist.etl_available_pricelist_form_file()
 
