@@ -91,6 +91,18 @@
                     <field name="start"/>
                     <field name="import_rate" widget="progressbar"/>
                     <field name="product_total"/>
+                    <button name="upload_pricelist_from_file" type="object" icon="fa-sign-in fa-2x" string="Load file" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+
+                    <button name="schedule_available_pricelist_form_file" icon="fa-gears fa-2x" type="object" string="Schedule available" attrs="{'invisible': [('state', '!=', 'loaded')]}" class="btn-primary"/>
+
+                    <button name="hide_pricelist_form_file" type="object" icon="fa-star-o fa-2x" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}"/>
+                    <button name="show_pricelist_form_file" type="object" icon="fa-star fa-2x" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}"/>
+
+                    <!--<button name="remove_pricelist_form_file" icon="fa-bitucket fa-2x" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}"/>-->
+
+                    <button name="new_pricelist_form_file" type="object" icon="fa-plus-square fa-2x" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}"/>
+
+                    <button name="return_original_pricelist" type="object" icon="fa-cloud-download fa-2x" string="Download stored" colspan="1" attrs="{'invisible': [('state', '=', 'draft')]}" class="oe_highlight"/>
                     <field name="state"/>
                 </tree>
             </field>
