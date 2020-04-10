@@ -59,8 +59,8 @@ try:
         password=pwd,
     )
 
-    import pdb; pdb.set_trace()
 
+    import pdb; pdb.set_trace()
     # Pool used:
     pricelist_pool = odoo.model('excel.pricelist.item')
     import_block = 50
