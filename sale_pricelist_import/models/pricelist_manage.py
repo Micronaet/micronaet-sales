@@ -154,8 +154,8 @@ class ExcelPricelistItem(models.Model):
                 'state': 'loaded',  # Go back in status
             })
             return True  # Done with error!
-        first_row = pricelist.check_data or ''
-        check_data = pricelist.first_row or ''
+        first_row = pricelist.first_row or ''
+        check_data = pricelist.check_data or ''
         total = 0
         current = pricelist.import_current
         ws = wb.sheet_by_index(0)
@@ -237,6 +237,9 @@ class ExcelPricelistItem(models.Model):
             'first_row': first_row,
             'check_data': check_data,
             'state': 'available',
+            # For 100.0% rate:
+            'import_current': ws.nrows,
+            'import_total': ws.nrows,
         })
         return True
 
