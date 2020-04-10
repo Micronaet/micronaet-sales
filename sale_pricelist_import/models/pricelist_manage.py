@@ -219,7 +219,9 @@ class ExcelPricelistItem(models.Model):
         if end < ws.nrows:
             pricelist.write({
                 'import_current': end,
-                'import_total': ws.nrows
+                'import_total': ws.nrows,
+                'check_data': check_data,
+                'first_row': first_row,
             })
             return False  # Done this block
 
