@@ -184,7 +184,9 @@ class ExcelPricelistItem(models.Model):
                     '%s. Missed some value %s!<br/>') % (
                         log_row, (real_code, name, price))
                 continue
-            if type(price) != float:
+            try:
+                price = float(price)
+            except:
                 check_data += _(
                     '%s. Jump, No float data: %s!<br/>') % (log_row, price)
                 continue
