@@ -165,22 +165,18 @@ class ExcelPricelistItem(models.Model):
                         ws.nrows
                     ))
                 real_code = ws.cell(row, 0).value
-                if not real_code:
-                    check_data += _('%s. Product code not found!<br/>') % \
-                                  log_row
-                    continue
                 name = ws.cell(row, 1).value
                 price = ws.cell(row, 2).value or 0.0
 
-                # Check if line is corect:
-                if type(price) != float:
-                    check_data += _(
-                        '%s. Jump, No float data: %s!<br/>') % (log_row, price)
-                    continue
-                if not all(real_code, name, price):
+                # Check if line is correct:
+                if not all((real_code, name, price)):
                     check_data += _(
                         '%s. Missed some value %s!<br/>') % (
                             log_row, (real_code, name, price))
+                    continue
+                if type(price) != float:
+                    check_data += _(
+                        '%s. Jump, No float data: %s!<br/>') % (log_row, price)
                     continue
 
                 default_code = '%s%s' % (pricelist_prefix, real_code)

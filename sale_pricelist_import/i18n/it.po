@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-07 17:19+0000\n"
-"PO-Revision-Date: 2020-04-07 17:19+0000\n"
+"POT-Creation-Date: 2020-04-10 11:44+0000\n"
+"PO-Revision-Date: 2020-04-10 11:44+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,10 +16,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:124
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:178
 #, python-format
-msgid "%s. Product code not found!<br/>"
-msgstr "%s. Codice prodotto non trovato!<br/>"
+msgid "%s. Jump, No float data: %s!<br/>"
+msgstr "%s. Riga saltata, non contiene prezzi numerici: %s!<br/>"
+
+#. module: sale_pricelist_import
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:173
+#, python-format
+msgid "%s. Missed some value %s!<br/>"
+msgstr "%s. Mancano alcuni valori: %s!<br/>"
 
 #. module: sale_pricelist_import
 #: selection:excel.pricelist.item,state:0
@@ -27,7 +33,7 @@ msgid "Available"
 msgstr "Attivato"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:103
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:144
 #, python-format
 msgid "Cannot read XLS file: %s"
 msgstr "Impossibile leggere il file XLS: %s"
@@ -78,9 +84,19 @@ msgid "Display Name"
 msgstr "Nome Completo"
 
 #. module: sale_pricelist_import
+#: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
+msgid "Download stored"
+msgstr "Scarica listino archiviato"
+
+#. module: sale_pricelist_import
 #: selection:excel.pricelist.item,state:0
 msgid "Draft"
 msgstr "Bozza"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Error"
+msgstr "Errore"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_file_data
@@ -149,6 +165,11 @@ msgid "Load file"
 msgstr "Salva in ODOO"
 
 #. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_name
+msgid "Name"
+msgstr "Nome"
+
+#. module: sale_pricelist_import
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
 msgid "New version"
 msgstr "Nuova versione"
@@ -174,17 +195,8 @@ msgstr "Gestione listini"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_pricelist_prefix
-#: model:ir.model.fields,field_description:sale_pricelist_import.field_res_partner_pricelist_prefix
-#: model:ir.model.fields,field_description:sale_pricelist_import.field_res_users_pricelist_prefix
 msgid "Pricelist prefix"
 msgstr "Prefisso codice"
-
-#. module: sale_pricelist_import
-#: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_pricelist_prefix
-#: model:ir.model.fields,help:sale_pricelist_import.field_res_partner_pricelist_prefix
-#: model:ir.model.fields,help:sale_pricelist_import.field_res_users_pricelist_prefix
-msgid "Pricelist prefix, used for add extra chars before product code"
-msgstr "Prefisso codice, utilizzato per aggiungere un codice extra a sinistra di quello originale"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_product_product_pricelist_version
@@ -231,13 +243,25 @@ msgstr "Salvato"
 
 #. module: sale_pricelist_import
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
-msgid "Set available"
-msgstr "Rendi attivo"
+msgid "Schedule available"
+msgstr "Schedula attivazione"
+
+#. module: sale_pricelist_import
+#: model:ir.actions.server,name:sale_pricelist_import.ir_cron_available_pricelist_form_file_0_ir_actions_server
+#: model:ir.cron,cron_name:sale_pricelist_import.ir_cron_available_pricelist_form_file_0
+#: model:ir.cron,name:sale_pricelist_import.ir_cron_available_pricelist_form_file_0
+msgid "Schedule: check pricelist scheduled"
+msgstr "Schedulazione: Importa listini pendenti"
+
+#. module: sale_pricelist_import
+#: selection:excel.pricelist.item,state:0
+msgid "Scheduled"
+msgstr "Schedulato"
 
 #. module: sale_pricelist_import
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
 msgid "Show product"
-msgstr "Mostra prodotti"
+msgstr "Mostra prodotto"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_start
@@ -249,6 +273,11 @@ msgstr "Riga di partenza"
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_search_view
 msgid "State"
 msgstr "Stato"
+
+#. module: sale_pricelist_import
+#: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_file_stored
+msgid "Stored"
+msgstr "Registrato nel database"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_supplier_id
@@ -267,7 +296,7 @@ msgid "Timestamp_update"
 msgstr "Timestamp"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:165
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:219
 #, python-format
 msgid "Totale righe <b>%s</b>, importate: <b>%s</b>"
 msgstr "Totale righe <b>%s</b>, importate: <b>%s</b>"
