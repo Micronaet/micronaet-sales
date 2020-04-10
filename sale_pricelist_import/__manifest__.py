@@ -19,7 +19,7 @@
         'mail',
     ],
     'data': [
-        #'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/pricelist_view.xml',
         'import_pricelist_scheduler.xml',
     ],
