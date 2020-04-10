@@ -171,6 +171,7 @@ class ExcelPricelistItem(models.Model):
         _logger.warning('Pricelist %s, block [%s:%s]' % (
             pricelist.name, start, end - 1
         ))
+        import pdb; pdb.set_trace()
         for row in range(start, end):  # Loop with block
             log_row = row + 1
             _logger.warning('Import line %s' % row)
