@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
-#
-# ODOO (ex OpenERP)
-# Open Source Management Solution
 # Copyright (C) 2001-2015 Micronaet S.r.l. (<http://www.micronaet.it>)
 # Developer: Nicola Riolini @thebrush (<https://it.linkedin.com/in/thebrush>)
 # This program is free software: you can redistribute it and/or modify
@@ -20,6 +17,7 @@
 #
 ###############################################################################
 import os
+import sys
 import erppeek
 import ConfigParser
 
@@ -28,27 +26,51 @@ import ConfigParser
 # -----------------------------------------------------------------------------
 # From config file:
 cfg_file = os.path.expanduser('./local.cfg')
+pid_file = '/tmp/import_pricelist.pid'
 
-config = ConfigParser.ConfigParser()
-config.read([cfg_file])
-dbname = config.get('dbaccess', 'dbname')
-user = config.get('dbaccess', 'user')
-pwd = config.get('dbaccess', 'pwd')
-server = config.get('dbaccess', 'server')
-port = config.get('dbaccess', 'port')   # verify if it's necessary: getint
+pid = str(os.getpid())
+if os.path.isfile(pid_file):
+    print("%s already exists, exiting" % pid_file)
+    sys.exit()
+
+# Write PID File:
+f_pid = open(pid_file, 'w')
+f_pid.write(pid)
+f_pid.close()
 
 # -----------------------------------------------------------------------------
-# Connect to ODOO:
-# -----------------------------------------------------------------------------
-odoo = erppeek.Client(
-    'http://%s:%s' % (server, port),
-    db=dbname,
-    user=user,
-    password=pwd,
+# PID Block:
+try:
+    config = ConfigParser.ConfigParser()
+    config.read([cfg_file])
+    dbname = config.get('dbaccess', 'dbname')
+    user = config.get('dbaccess', 'user')
+    pwd = config.get('dbaccess', 'pwd')
+    server = config.get('dbaccess', 'server')
+    port = config.get('dbaccess', 'port')  # verify if it's necessary: getint
+
+    # -------------------------------------------------------------------------
+    # Connect to ODOO:
+    # -------------------------------------------------------------------------
+    odoo = erppeek.Client(
+        'http://%s:%s' % (server, port),
+        db=dbname,
+        user=user,
+        password=pwd,
     )
 
-# Pool used:
-pricelist = odoo.model('excel.pricelist.item')
+    import pdb; pdb.set_trace()
 
-pricelist.etl_available_pricelist_form_file()
+    # Pool used:
+    pricelist_pool = odoo.model('excel.pricelist.item')
+    import_block = 50
 
+    pricelist_ids = pricelist_pool.search([('state', '=', 'scheduled')])
+    for pricelist in pricelist_pool.browse(pricelist_ids):
+        while not pricelist.etl_available_pricelist_form_file(import_block):
+            import pdb; pdb.set_trace()
+            pass
+# -----------------------------------------------------------------------------
+
+finally:
+    os.unlink(pid_file)

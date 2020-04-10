@@ -84,6 +84,7 @@
                     <field name="timestamp_update"/>
                     <field name="pricelist_prefix"/>
                     <field name="start"/>
+                    <field name="import_rate" widget="progressbar"/>
                     <field name="state"/>
                 </tree>
             </field>
