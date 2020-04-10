@@ -123,6 +123,11 @@ class ExcelPricelistItem(models.Model):
             'state': 'scheduled',
         })
 
+    @api.model
+    def etl_available_pricelist_form_file(self):
+        """ When launched by cron"""
+        return self.available_pricelist_form_file()
+
     @api.multi
     def available_pricelist_form_file(self):
         """ Scheduled import pricelist and store
