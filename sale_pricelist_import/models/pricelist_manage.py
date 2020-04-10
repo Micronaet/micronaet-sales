@@ -231,8 +231,7 @@ class ExcelPricelistItem(models.Model):
             'active': False,
         })
 
-        check_data += _('Totale righe <b>%s</b>, importate: <b>%s</b>') % (
-            ws.nrows, total)
+        check_data += _('Totale righe su file <b>%s</b>') % ws.nrows
         pricelist.write({
             'first_row': first_row,
             'check_data': check_data,
