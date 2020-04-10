@@ -61,10 +61,10 @@ try:
     pricelist_pool = odoo.env['excel.pricelist.item']
 
     pricelist_ids = pricelist_pool.search([('state', '=', 'scheduled')])
-    for pricelist in pricelist_pool.browse(pricelist_ids):
+    for pricelist_id in pricelist_ids:
         block = 0
         while not pricelist_pool.etl_available_pricelist_form_file(
-                pricelist.id, import_block):
+                pricelist_id, import_block):
             print('Blocco %s da %s' % (
                 block,
                 import_block,
