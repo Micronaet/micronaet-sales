@@ -26,6 +26,8 @@ import ConfigParser
 # -----------------------------------------------------------------------------
 # Read configuration parameter:
 # -----------------------------------------------------------------------------
+import pdb  ; pdb.set_trace()
+
 # From config file:
 cfg_file = os.path.expanduser('./local.cfg')
 
