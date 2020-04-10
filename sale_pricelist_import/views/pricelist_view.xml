@@ -9,7 +9,7 @@
                     <header>
                         <button name="upload_pricelist_from_file" type="object" string="Load file" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
 
-                        <button name="available_pricelist_form_file" type="object" string="Set available" attrs="{'invisible': [('state', '!=', 'loaded')]}"/>
+                        <button name="available_pricelist_form_file" type="object" string="Set available" attrs="{'invisible': [('state', '!=', 'loaded')]}" class="btn-primary"/>
 
                         <button name="hide_pricelist_form_file" type="object" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}"/>
                         <button name="show_pricelist_form_file" type="object" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}"/>
@@ -17,6 +17,8 @@
                         <button name="remove_pricelist_form_file" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}"/>
 
                         <button name="new_pricelist_form_file" type="object" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}"/>
+
+                        <button name="return_original_pricelist" type="object" string="Download stored" colspan="1" attrs="{'invisible': [('state', '=', 'draft')]}" class="oe_highlight"/>
 
                         <field name="state" widget="statusbar"/>
                     </header>

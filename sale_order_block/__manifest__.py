@@ -20,11 +20,13 @@
     'data': [
         'security/sales_group.xml',
         'security/ir.model.access.csv',
-        
+
         'views/block_view.xml',
         'report/sales_report.xml',
     ],
-    'external_dependencies': {},
+    'external_dependencies': {
+        # TODO python-slugify
+    },
     'application': False,
     'installable': True,
     'auto_install': False,

@@ -5,6 +5,7 @@ import os
 import base64
 import logging
 import xlrd
+#from slugify import slugify
 from odoo import fields, api, models
 from odoo.tools.translate import _
 from odoo.exceptions import (
@@ -25,6 +26,42 @@ class ExcelPricelistItem(models.Model):
     # -------------------------------------------------------------------------
     # Utility
     # -------------------------------------------------------------------------
+    @api.multi
+    def return_original_pricelist(self):
+        """ Return original file imported
+        """
+        def slugify(text, separator='-'):
+            """ Slug the text
+            """
+            res = ''
+            for c in text:
+                if c.isalpha() or c.isspace():
+                    res += c
+            res = res.lower().replace(' ', separator).replace('.', '')
+            return res
+
+        fullname = self._get_pricelist_fullname()
+        return_name = slugify(u'%s %s' % (
+            self.supplier_id.name,
+            self.name or '',
+        ))
+        return_name = '%s.xlsx' % return_name
+        _logger.info('Return %s file as %s' % (
+            fullname,
+            return_name,
+        ))
+
+        return {
+            'type': 'ir.actions.act_url',
+            'name': 'contract',
+            'url': '/web/content/%s/%s/%s/%s?download=true' % (
+                self._name,
+                self.id,
+                'file_stored',
+                return_name
+            ),
+        }
+
     @api.model
     def log_message(self, subject, body, message_type='notification'):
         """ Write log message
@@ -252,6 +289,15 @@ class ExcelPricelistItem(models.Model):
             'state': 'removed',
         })
 
+    # Fields function:
+    @api.one
+    def _get_stored_pricelist(self):
+        """ File saved as binary
+        """
+        fullname = self._get_pricelist_fullname()
+        self.file_stored = base64.b64encode(
+            open(fullname, 'rb').read())
+
     name = fields.Char('Name', required=True)
     timestamp_update = fields.Datetime(
         string='Timestamp_update',
@@ -282,6 +328,8 @@ class ExcelPricelistItem(models.Model):
     file_data = fields.Binary(
         string='Excel file',
     )
+    file_stored = fields.Binary(
+        'Stored', compute='_get_stored_pricelist')
     check_data = fields.Text(
         string='Check data',
         help='Check error in data file',
