@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data noupdate="1">
+		<record id="ir_cron_available_pricelist_form_file_0" model="ir.cron">
+            <field eval="&quot;&quot;&quot;minutes&quot;&quot;&quot;" name="interval_type"/>
+            <field name="user_id" ref="base.user_root"/>
+			<field eval="&quot;&quot;&quot;Schedule: check pricelist scheduled&quot;&quot;&quot;" name="name"/>
+            <field eval="-1" name="numbercall"/>
+			<field eval="&quot;&quot;&quot;Schedule: check pricelist scheduled&quot;&quot;&quot;" name="name"/>
+            <field eval="&quot;&quot;&quot;2015-05-05 11:15:00&quot;&quot;&quot;" name="nextcall"/>
+            <field eval="5" name="priority"/>
+            <field eval="0" name="doall"/>
+            <field eval="1" name="active"/>
+            <field eval="10" name="interval_number"/>
+            <field ref="model_excel_pricelist_item" name="model_id"/>
+            <field name="state">code</field>
+            <field eval="&quot;&quot;&quot;model.available_pricelist_form_file()&quot;&quot;&quot;" name="code"/>
+        </record>
+	</data>
+</openerp>

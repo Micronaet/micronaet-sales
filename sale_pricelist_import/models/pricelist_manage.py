@@ -5,7 +5,6 @@ import os
 import base64
 import logging
 import xlrd
-#from slugify import slugify
 from odoo import fields, api, models
 from odoo.tools.translate import _
 from odoo.exceptions import (
@@ -40,7 +39,7 @@ class ExcelPricelistItem(models.Model):
             res = res.lower().replace(' ', separator).replace('.', '')
             return res
 
-        fullname = self._get_pricelist_fullname()
+        fullname = self.get_pricelist_fullname()
         return_name = slugify(u'%s %s' % (
             self.supplier_id.name,
             self.name or '',
@@ -82,7 +81,7 @@ class ExcelPricelistItem(models.Model):
     # Wkf Button operation:
     # -------------------------------------------------------------------------
     @api.model
-    def _get_pricelist_fullname(self):
+    def get_pricelist_fullname(self):
         """ Pricelist path
         """
         root_pricelist = os.path.join(
@@ -101,8 +100,9 @@ class ExcelPricelistItem(models.Model):
         """
         version = self.version
         version += 1
+
         # Save binary data to file:
-        fullname = self._get_pricelist_fullname()
+        fullname = self.get_pricelist_fullname()
         b64_file = base64.decodebytes(self.file_data)
         f = open(fullname, 'wb')
         f.write(b64_file)
@@ -116,88 +116,117 @@ class ExcelPricelistItem(models.Model):
 
     # Loaded to Available
     @api.multi
+    def schedule_available_pricelist_form_file(self):
+        """ Schedule for load
+        """
+        return self.write({
+            'state': 'scheduled',
+        })
+
+    @api.multi
     def available_pricelist_form_file(self):
-        """ Import pricelist and store
+        """ Scheduled import pricelist and store
         """
         product_pool = self.env['product.template']
+        _logger.warning('Scheduler: Check pricelist for import')
+        for pricelist in self.search([('state', '=', 'scheduled')]):
+            _logger.warning('Start import pricelist: %s' % pricelist.name)
 
-        # Show all before update:
-        _logger.warning('Show all for update if present')
-        self.show_pricelist_form_file()
+            # Show all before update:
+            _logger.warning('Show all for update if present')
+            pricelist.show_pricelist_form_file()
 
-        fullname = self._get_pricelist_fullname()
-        try:
-            wb = xlrd.open_workbook(fullname)
-        except:
-            raise Warning(_('Cannot read XLS file: %s' % fullname))
-
-        start = self.start - 1
-        version = self.version
-        pricelist_prefix = self.pricelist_prefix or ''
-        excel_pricelist_id = self.id
-        uom_id = 1
-
-        first_row = check_data = ''
-        total = 0
-        ws = wb.sheet_by_index(0)
-        for row in range(start, ws.nrows):
-            log_row = row + 1
-            if not (row % 50):
-                _logger.info('%s: Row imported %s / %s' % (
-                    fullname,
-                    row,
-                    ws.nrows
-                ))
-            real_code = ws.cell(row, 0).value
-            if not real_code:
-                check_data += _('%s. Product code not found!<br/>') % log_row
+            fullname = pricelist.get_pricelist_fullname()
+            try:
+                wb = xlrd.open_workbook(fullname)
+            except:
+                pricelist.write({
+                    'check_data': _('Cannot read XLS file: %s' % fullname),
+                    'state': 'error',
+                })
                 continue
-            name = ws.cell(row, 1).value
-            price = ws.cell(row, 2).value or 0.0
-            default_code = '%s%s' % (pricelist_prefix, real_code)
-            if not first_row:
-                first_row = '''
-                    <b>Codice:</b> %s | <b>Descrizione:</b> %s | 
-                    <b>Prezzo:</b> %s''' % (
-                        default_code, name, price)
 
-            # Update product:
-            # TODO hide previous product if present?
-            total += 1
-            products = product_pool.search([
-                ('real_code', '=', real_code),
-                ('excel_pricelist_id', '=', excel_pricelist_id),
+            first_row = check_data = ''
+            total = 0
+
+            start = pricelist.start - 1
+            version = pricelist.version
+            pricelist_prefix = pricelist.pricelist_prefix or ''
+            excel_pricelist_id = pricelist.id
+            uom_id = 1
+
+            ws = wb.sheet_by_index(0)
+            for row in range(start, ws.nrows):
+                log_row = row + 1
+                if not (row % 50):
+                    _logger.info('%s: Row imported %s / %s' % (
+                        fullname,
+                        row,
+                        ws.nrows
+                    ))
+                real_code = ws.cell(row, 0).value
+                if not real_code:
+                    check_data += _('%s. Product code not found!<br/>') % \
+                                  log_row
+                    continue
+                name = ws.cell(row, 1).value
+                price = ws.cell(row, 2).value or 0.0
+
+                # Check if line is corect:
+                if type(price) != float:
+                    check_data += _(
+                        '%s. Jump, No float data: %s!<br/>') % (log_row, price)
+                    continue
+                if not all(real_code, name, price):
+                    check_data += _(
+                        '%s. Missed some value %s!<br/>') % (
+                            log_row, (real_code, name, price))
+                    continue
+
+                default_code = '%s%s' % (pricelist_prefix, real_code)
+                if not first_row:
+                    first_row = '''
+                        <b>Codice:</b> %s | <b>Descrizione:</b> %s | 
+                        <b>Prezzo:</b> %s''' % (
+                            default_code, name, price)
+
+                # Update product:
+                # TODO hide previous product if present?
+                total += 1
+                products = product_pool.search([
+                    ('real_code', '=', real_code),
+                    ('excel_pricelist_id', '=', excel_pricelist_id),
+                ])
+                data = {
+                    'excel_pricelist_id': excel_pricelist_id,
+                    'real_code': real_code,
+                    'name': name,
+                    'default_code': default_code,
+                    'lst_price': price,
+                    'uom_id': uom_id,
+                    'pricelist_version': version,
+                }
+                if products:
+                    products.write(data)
+                else:
+                    product_pool.create(data)
+
+            # Hide previous version:
+            _logger.warning('Hide previous version still remained')
+            hide_previous = product_pool.search([
+                ('pricelist_version', '<', pricelist.version),
             ])
-            data = {
-                'excel_pricelist_id': excel_pricelist_id,
-                'real_code': real_code,
-                'name': name,
-                'default_code': default_code,
-                'lst_price': price,
-                'uom_id': uom_id,
-                'pricelist_version': version,
-            }
-            if products:
-                products.write(data)
-            else:
-                product_pool.create(data)
+            hide_previous.write({
+                'active': False,
+            })
 
-        # Hide previous version:
-        _logger.warning('Hide previous version still remained')
-        hide_previous = product_pool.search([
-            ('pricelist_version', '<', self.version),
-        ])
-        hide_previous.write({
-            'active': False,
-        })
-
-        check_data += _('Totale righe <b>%s</b>, importate: <b>%s</b>') % (
-            ws.nrows, total)
-        return self.write({
-            'first_row': first_row,
-            'check_data': check_data,
-            'state': 'available',
-        })
+            check_data += _('Totale righe <b>%s</b>, importate: <b>%s</b>') % (
+                ws.nrows, total)
+            pricelist.write({
+                'first_row': first_row,
+                'check_data': check_data,
+                'state': 'available',
+            })
 
     # All to Draft
     @api.multi
@@ -294,7 +323,7 @@ class ExcelPricelistItem(models.Model):
     def _get_stored_pricelist(self):
         """ File saved as binary
         """
-        fullname = self._get_pricelist_fullname()
+        fullname = self.get_pricelist_fullname()
         self.file_stored = base64.b64encode(
             open(fullname, 'rb').read())
 
@@ -346,9 +375,11 @@ class ExcelPricelistItem(models.Model):
         selection=[
             ('draft', 'Draft'),
             ('loaded', 'Saved'),
+            ('scheduled', 'Scheduled'),
             ('available', 'Available'),
             ('hide', 'Hide'),
             ('removed', 'Removed'),  # Return to draft?
+            ('error', 'Error'),
         ],
         required=True,
         default='draft',

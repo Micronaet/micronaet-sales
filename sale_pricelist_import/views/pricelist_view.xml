@@ -9,7 +9,7 @@
                     <header>
                         <button name="upload_pricelist_from_file" type="object" string="Load file" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
 
-                        <button name="available_pricelist_form_file" type="object" string="Set available" attrs="{'invisible': [('state', '!=', 'loaded')]}" class="btn-primary"/>
+                        <button name="schedule_available_pricelist_form_file" type="object" string="Schedule available" attrs="{'invisible': [('state', '!=', 'loaded')]}" class="btn-primary"/>
 
                         <button name="hide_pricelist_form_file" type="object" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}"/>
                         <button name="show_pricelist_form_file" type="object" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}"/>
