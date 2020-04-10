@@ -143,7 +143,7 @@ class ExcelPricelistItem(models.Model):
             )
         )
         # Show all before update:
-        pricelist.show_pricelist_form_file()
+        pricelist.show_pricelist_form_file_query()
 
         fullname = pricelist.get_pricelist_fullname()
         try:
@@ -271,10 +271,9 @@ class ExcelPricelistItem(models.Model):
         })
 
     # Hide to Available
+
     @api.multi
-    def show_pricelist_form_file(self):
-        """ Show product items
-        """
+    def show_pricelist_form_file_query(self):
         _logger.warning('Show all product items present')
         cr = self._cr
         cr.execute("""
@@ -283,6 +282,11 @@ class ExcelPricelistItem(models.Model):
             WHERE excel_pricelist_id=%s
             """ % self.id)
 
+    @api.multi
+    def show_pricelist_form_file(self):
+        """ Show product items
+        """
+        self.show_pricelist_form_file_query()
         return self.write({
             'state': 'available',
         })
