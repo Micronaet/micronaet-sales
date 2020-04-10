@@ -25,6 +25,21 @@ class ExcelPricelistItem(models.Model):
     # -------------------------------------------------------------------------
     # Utility
     # -------------------------------------------------------------------------
+    @api.model
+    def execute_query(self, query, parameters, log=True):
+        """ Execute and log query
+        """
+        if log:
+            query_file = os.path.expanduser('~/log')
+            os.system('mkdir -p %s' % query_file)
+            query_file = os.path.join(
+                query_file, 'query.%s.log' % self._cr.dbname)
+            query_f = open(query_file, 'a')
+            line = '%s\n' % (query.replace('\n', ' ').replace('    ', ''))
+            query_f.write(line % parameters)
+            query_f.close()
+        self._cr.execute(query, parameters)
+
     @api.multi
     def return_original_pricelist(self):
         """ Return original file imported
@@ -264,29 +279,29 @@ class ExcelPricelistItem(models.Model):
         """ Hide product items
         """
         _logger.warning('Hide all product items present')
-        cr = self._cr
-        cr.execute("""
+        query = """
             UPDATE product_template 
             SET active = 'f', sale_ok = 'f', purchase_ok = 'f'
-           
             WHERE excel_pricelist_id=%s
-            """ % self.id)
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
 
         return self.write({
             'state': 'hide',
         })
 
     # Hide to Available
-
     @api.multi
     def show_pricelist_form_file_query(self):
         _logger.warning('Show all product items present')
-        cr = self._cr
-        cr.execute("""
+        query = """
             UPDATE product_template 
             SET active = 't', sale_ok = 't', purchase_ok = 't'
             WHERE excel_pricelist_id=%s
-            """ % self.id)
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
 
     @api.multi
     def show_pricelist_form_file(self):
@@ -303,10 +318,8 @@ class ExcelPricelistItem(models.Model):
         """ Hide product items
         """
         _logger.warning('Remove all product items present')
-        cr = self._cr
-
-        # Remove product same pricelist, not in sale order
-        cr.execute("""
+        # 1. Remove product same pricelist, not in sale order
+        query = """
             DELETE FROM product_product 
             WHERE 
                 product_tmpl_id IN (
@@ -316,10 +329,12 @@ class ExcelPricelistItem(models.Model):
                 AND id NOT IN (
                     SELECT product_id 
                     FROM sale_order_line);
-            """, (self.id, ))
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
 
-        # Remove template not in product remained
-        cr.execute("""
+        # 2. Remove template not in product remained
+        query = """
             DELETE FROM product_template 
             WHERE 
                 excel_pricelist_id=%s
@@ -327,14 +342,18 @@ class ExcelPricelistItem(models.Model):
                     SELECT product_tmpl_id 
                     FROM product_product 
                     WHERE excel_pricelist_id=%s);
-            """, (self.id, self.id))
+            """
+        parameters = (self.id, self.id)
+        self.execute_query(query, parameters)
 
-        # Hide remain template product:
-        cr.execute("""
+        # 3. Hide remain template product:
+        query = """
             UPDATE product_template 
             SET active = 'f', sale_ok = 'f', purchase_ok = 'f'
             WHERE excel_pricelist_id=%s
-            """ % self.id)
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
 
         return self.write({
             'state': 'removed',
@@ -461,7 +480,7 @@ class ExcelPricelistItemRelation(models.Model):
 
     @api.model
     def get_total_product_pricelist(self):
-        """ Total produt found
+        """ Total product found
         """
         for pricelist in self:
             pricelist.product_total = len(pricelist.product_ids)
