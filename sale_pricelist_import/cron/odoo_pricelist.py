@@ -18,7 +18,7 @@
 ###############################################################################
 import os
 import sys
-import erppeek
+import odoorpc
 import ConfigParser
 
 # -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ import ConfigParser
 # -----------------------------------------------------------------------------
 # From config file:
 cfg_file = os.path.expanduser('./local.cfg')
-pid_file = '/tmp/import_pricelist.pid'
+pid_file = '/tmp/odoo_pricelist.pid'
 
 pid = str(os.getpid())
 if os.path.isfile(pid_file):
@@ -41,6 +41,8 @@ f_pid.close()
 # -----------------------------------------------------------------------------
 # PID Block:
 try:
+    import_block = 50
+
     config = ConfigParser.ConfigParser()
     config.read([cfg_file])
     dbname = config.get('dbaccess', 'dbname')
@@ -52,25 +54,20 @@ try:
     # -------------------------------------------------------------------------
     # Connect to ODOO:
     # -------------------------------------------------------------------------
-    odoo = erppeek.Client(
-        'http://%s:%s' % (server, port),
-        db=dbname,
-        user=user,
-        password=pwd,
-    )
+    odoo = odoorpc.ODOO(server, port=port)
+    odoo.login(dbname, user, pwd)
 
     # Pool used:
-    pricelist_pool = odoo.model('excel.pricelist.item')
-    import_block = 50
+    pricelist_pool = odoo.env['excel.pricelist.item']
 
     pricelist_ids = pricelist_pool.search([('state', '=', 'scheduled')])
     for pricelist in pricelist_pool.browse(pricelist_ids):
         block = 0
-        while not pricelist.etl_available_pricelist_form_file(import_block):
-            print('Blocco %s [%s:%s]' % (
+        while not pricelist_pool.etl_available_pricelist_form_file(
+                pricelist.id, import_block):
+            print('Blocco %s da %s' % (
                 block,
-                block * import_block,
-                (block + 1) * import_block
+                import_block,
             ))
             block += 1
 

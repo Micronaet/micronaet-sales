@@ -114,7 +114,8 @@ class ExcelPricelistItem(models.Model):
             'version': version,
 
             # For reimport process status:
-            'check_data': False,
+            'check_data': '',
+            'first_row': '',
             'import_current': 0,
             'import_total': 0,
         })
@@ -129,12 +130,12 @@ class ExcelPricelistItem(models.Model):
         })
 
     @api.model
-    def etl_available_pricelist_form_file(self, import_block=50):
+    def etl_available_pricelist_form_file(self, pricelist_id, import_block=50):
         """ Scheduled import pricelist and store (single)
             @return True if end import (also error), else False
         """
         product_pool = self.env['product.template']
-        pricelist = self
+        pricelist = self.browse(pricelist_id)
 
         _logger.warning(
             'Start import pricelist (Show all for update if present): %s' % (
@@ -148,30 +149,31 @@ class ExcelPricelistItem(models.Model):
         try:
             wb = xlrd.open_workbook(fullname)
         except:
-            self.write({
+            pricelist.write({
                 'error_comment': _('Cannot read XLS file: %s' % fullname),
                 'state': 'loaded',  # Go back in status
             })
             return True  # Done with error!
-
-        first_row = check_data = ''
+        first_row = pricelist.check_data or ''
+        check_data = pricelist.first_row or ''
         total = 0
+        current = pricelist.import_current
+        ws = wb.sheet_by_index(0)
 
-        current = self.import_current
-        start = max(pricelist.start - 1, current)
-
-        end = start + import_block
         version = pricelist.version
         pricelist_prefix = pricelist.pricelist_prefix or ''
         excel_pricelist_id = pricelist.id
         uom_id = 1
 
-        ws = wb.sheet_by_index(0)
+        start = max(pricelist.start - 1, current)
+        end = min(ws.nrows, start + import_block)
+
         _logger.warning('Pricelist %s, block [%s:%s]' % (
-            self.name, start, end
+            pricelist.name, start, end - 1
         ))
-        for row in range(start, min(ws.nrows, end)):  # Loop with block
+        for row in range(start, end):  # Loop with block
             log_row = row + 1
+            _logger.warning('Import line %s' % row)
             real_code = ws.cell(row, 0).value
             name = ws.cell(row, 1).value
             price = ws.cell(row, 2).value or 0.0
@@ -214,6 +216,10 @@ class ExcelPricelistItem(models.Model):
             else:
                 product_pool.create(data)
         if end < ws.nrows:
+            pricelist.write({
+                'import_current': end,
+                'import_total': ws.nrows
+            })
             return False  # Done this block
 
         # Hide previous version:
@@ -339,12 +345,12 @@ class ExcelPricelistItem(models.Model):
         for pricelist in self:
             if pricelist.import_total:
                 pricelist.import_rate = \
-                    pricelist.import_current / pricelist.import_total / 100.0
+                    100.0 * pricelist.import_current / pricelist.import_total
             else:
                 if pricelist.state in ('draft', 'loaded'):
                     pricelist.import_total = 0.0
                 else:
-                    pricelist.import_total = 1.0
+                    pricelist.import_total = 100.0
 
     name = fields.Char('Name', required=True)
     timestamp_update = fields.Datetime(
