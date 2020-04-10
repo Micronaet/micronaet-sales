@@ -1,0 +1,530 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_order_block
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-10 11:59+0000\n"
+"PO-Revision-Date: 2020-04-10 11:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "<u><strong>N.B.: I prezzi si intendono esclusi di IVA (ove applicata).</strong><br/></u>"
+msgstr "<u><strong>N.B.: I prezzi si intendono esclusi di IVA (ove applicata).</strong><br/></u>"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_account_state
+msgid "Account state"
+msgstr "Stato contabile"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_block_margin
+msgid "Add extra recharge to calculate real total"
+msgstr "Aggiungi extra ricarico sul totale calcolato"
+
+#. module: sale_order_block
+#: model:res.groups,name:sale_order_block.group_block_admin
+msgid "Admin"
+msgstr "Amministratore"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_ids
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_block_id
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Block"
+msgstr "Blocco"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Blocks:"
+msgstr "Blocchi:"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "C/O:"
+msgstr "C/O:"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Calculated total"
+msgstr "Totale calcolato"
+
+#. module: sale_order_block
+#: selection:sale.order,account_state:0
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_name
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Code"
+msgstr "Codice"
+
+#. module: sale_order_block
+#: selection:sale.order,account_state:0
+msgid "Confirmed"
+msgstr "Confermato"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_create_uid
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_create_uid
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_create_date
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_create_date
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "DETTAGLIO"
+msgstr "DETTAGLIO"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Detail"
+msgstr "Dettagli"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_report_sale_order_block_report_sale_block_lang_display_name
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_display_name
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_display_name
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_display_name
+msgid "Display Name"
+msgstr "Nome Completo"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Duplicate block items"
+msgstr "Duplica articoli blocco"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Extra block:"
+msgstr "Blocchi extra:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_report_text_ids
+msgid "Extra document add after report text"
+msgstr "Documenti extra aggiunti in coda all'ordine"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_block_margin
+msgid "Extra recharge %"
+msgstr "% Ricarico extra"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_total
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Forced total"
+msgstr "Forza totale"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Header"
+msgstr "Testata"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_hide_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_hide_block
+msgid "Hide block"
+msgstr "Nascondi blocco"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_hide_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_line_hide_block
+msgid "Hide in report for simulation"
+msgstr "Nasconde il blocco nella stampa per simulazioni"
+
+#. module: sale_order_block
+#: model:res.groups,name:sale_order_block.group_block_hide
+msgid "Hide unused menu"
+msgstr "Nascondi menu non usati"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_report_sale_order_block_report_sale_block_lang_id
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_id
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_id
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_order_block
+#: selection:sale.order,account_state:0
+msgid "Imported"
+msgstr "Importato"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_report_sale_order_block_report_sale_block_lang___last_update
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group___last_update
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text___last_update
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel___last_update
+msgid "Last Modified on"
+msgstr "Data di ultima modifica"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_write_uid
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_write_uid
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_write_uid
+msgid "Last Updated by"
+msgstr "Ultima modifica di"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_write_date
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_write_date
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_write_date
+msgid "Last Updated on"
+msgstr "Ultima modifica il"
+
+#. module: sale_order_block
+#: model:res.groups,name:sale_order_block.group_block_manager
+msgid "Manager"
+msgstr "Gestore"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_name
+msgid "Name"
+msgstr "Nome"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_not_confirmed
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_not_confirmed
+msgid "Not confirmed"
+msgstr "Non confermato"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_order_id
+msgid "Order"
+msgstr "Ordine"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
+msgid "Order:"
+msgstr "Ordine:"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "PREZZO"
+msgstr "PREZZO"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_pagebreak_before
+msgid "Pagebreak before"
+msgstr "Anteponi salto pagina"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_post_text
+msgid "Post text"
+msgstr "Testo post"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
+msgid "Post text:"
+msgstr "Testo pre:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_pre_text
+msgid "Pre text"
+msgstr "Testo pre"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
+msgid "Pre text:"
+msgstr "Testo pre:"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Price"
+msgstr "Prezzo"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Print only this"
+msgstr "Stampa solo questo"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_printed
+msgid "Printed"
+msgstr "Stampato"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_printed
+msgid "Printed version"
+msgstr "Versione stampata"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_sale_order
+#: selection:sale.order,account_state:0
+msgid "Quotation"
+msgstr "Preventivo"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_real_total
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_real_total
+msgid "Real total"
+msgstr "Totale reale"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Recharge"
+msgstr "Ricarico"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Refresh"
+msgstr "Aggiorna"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_not_confirmed
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_line_not_confirmed
+msgid "Removed from order"
+msgstr "Rimuovi da ordine"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_report_text_ids
+msgid "Report text"
+msgstr "Testi stampa"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "SCONTO"
+msgstr "SCONTO"
+
+#. module: sale_order_block
+#: model:ir.actions.report,name:sale_order_block.action_report_sale_block_lang
+msgid "Sale Block report"
+msgstr "Blocco di vendita"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_order_id
+msgid "Sale order"
+msgstr "Ordine di vendita"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_sale_order_block_group
+msgid "Sale order block"
+msgstr "Blocco di vendita"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_line_ids
+msgid "Sale order line"
+msgstr "Righe ordine"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_sale_order_text
+msgid "Sale order text"
+msgstr "Testo ordine"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_sale_order_text_rel
+msgid "Sale order text rel"
+msgstr "Relazione con i testi"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_text_view_form
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_text_view_tree
+msgid "Sale text"
+msgstr "Testi vendita"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Riga ordine di vendita"
+
+#. module: sale_order_block
+#: model:ir.module.category,name:sale_order_block.group_category_block_sales
+msgid "Sales block groups"
+msgstr "Gruppo blocchi di vendita"
+
+#. module: sale_order_block
+#: model:res.groups,name:sale_order_block.group_block_salesman
+msgid "Salesman"
+msgstr "Commerciale"
+
+#. module: sale_order_block
+#: selection:sale.order,account_state:0
+msgid "Sent (or printed)"
+msgstr "Inviato (o stampato)"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
+msgid "Show / Hide:"
+msgstr "Mostra / Nascondi:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_show_code
+msgid "Show code"
+msgstr "Mostra codice"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_show_code
+msgid "Show code in line details"
+msgstr "Mostra codice nelle righe del dettaglio"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_show_detail
+msgid "Show details"
+msgstr "Mostra dettagli"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_show_header
+msgid "Show header"
+msgstr "Mostra intestazione"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_show_master_total
+msgid "Show master total"
+msgstr "Mostra totale complessivo"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_show_price
+msgid "Show price"
+msgstr "Mostra prezzi"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_show_total
+msgid "Show total"
+msgstr "Mostra totale blocco"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_show_price
+msgid "Show unit price and subtotal"
+msgstr "Mostra prezzi unitari e subtotali"
+
+#. module: sale_order_block
+#: model:ir.actions.act_window,name:sale_order_block.sale_order_text_action
+#: model:ir.ui.menu,name:sale_order_block.menu_sale_order_text_action
+msgid "Static order text"
+msgstr "Testo statico"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Static text:"
+msgstr "Testo statico:"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "TERMINI DI PAGAMENTO:"
+msgstr "TERMINI DI PAGAMENTO:"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "TOTALE"
+msgstr "TOTALE"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
+msgid "TOTALE OFFERTA"
+msgstr "TOTALE OFFERTA"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_text_id
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_text
+msgid "Text"
+msgstr "Testo"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_text_view_form
+msgid "Text:"
+msgstr "Testo:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_title
+msgid "Title"
+msgstr "Titolo"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Total"
+msgstr "Totale"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_real_total
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_real_total
+msgid "Total sum of sale line in this block"
+msgstr "Somma totale delle righe di questo blocco"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_total
+msgid "Total written in offer block"
+msgstr "Totale scritto nel blocco offerta"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Unused"
+msgstr "Non usato"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Unused lines"
+msgstr "Righe non usate"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Unused lines:"
+msgstr "Righe non usate:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_unused_order_id
+msgid "Unused order"
+msgstr "Ordine non usato"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_unused_order_line_ids
+msgid "Unused order line"
+msgstr "Righe non usate"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "real_sum"
+msgstr "Somma reale"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_report_logistic_account_report_report_ddt_lang
+msgid "report.logistic_account_report.report_ddt_lang"
+msgstr "report.logistic_account_report.report_ddt_lang"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_report_logistic_account_report_report_invoice_lang
+msgid "report.logistic_account_report.report_invoice_lang"
+msgstr "report.logistic_account_report.report_invoice_lang"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_report_sale_order_block_report_sale_block_lang
+msgid "report.sale_order_block.report_sale_block_lang"
+msgstr "report.sale_order_block.report_sale_block_lang"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "total_sum"
+msgstr "Somma totale"
+
