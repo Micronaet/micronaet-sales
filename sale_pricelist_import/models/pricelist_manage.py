@@ -289,6 +289,17 @@ class ExcelPricelistItem(models.Model):
         parameters = (self.id, )
         self.execute_query(query, parameters)
 
+        query = """
+            UPDATE product_product 
+            SET active = 'f'
+            WHERE product_tmpl_id in (
+                SELECT id 
+                FROM product_template 
+                WHERE excel_pricelist_id=%s);
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
+
         return self.write({
             'state': 'hide',
         })
@@ -301,6 +312,17 @@ class ExcelPricelistItem(models.Model):
             UPDATE product_template 
             SET active = 't', sale_ok = 't', purchase_ok = 't'
             WHERE excel_pricelist_id=%s
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
+
+        query = """
+            UPDATE product_product 
+            SET active = 't'
+            WHERE product_tmpl_id in (
+                SELECT id 
+                FROM product_template 
+                WHERE excel_pricelist_id=%s);
             """
         parameters = (self.id, )
         self.execute_query(query, parameters)
