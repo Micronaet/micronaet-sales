@@ -38,6 +38,7 @@ class ExcelPricelistItem(models.Model):
             line = '%s\n' % (query.replace('\n', ' ').replace('    ', ''))
             query_f.write(line % parameters)
             query_f.close()
+            _logger.warning(line % parameters)
         self._cr.execute(query, parameters)
 
     @api.multi
