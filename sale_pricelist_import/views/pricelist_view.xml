@@ -40,9 +40,9 @@
 
                             <field name="file_data" attrs="{'required': [('state', '=', 'draft')], 'invisible': [('state', '!=', 'draft')]}"/>
 
-                            <field name="import_current"/>
+                            <!--<field name="import_current"/>
                             <field name="import_total"/>
-                            <field name="import_rate"/>
+                            <field name="import_rate"/>-->
 
                             <notebook colspan="4">
                                 <page name="product_linked" string="Product linked">
