@@ -459,9 +459,18 @@ class ProductTemplate(models.Model):
 class ExcelPricelistItemRelation(models.Model):
     _inherit = 'excel.pricelist.item'
 
+    @api.model
+    def get_total_product_pricelist(self):
+        """ Total produt found
+        """
+        for pricelist in self:
+            pricelist.product_total = len(pricelist.product_ids)
+
     product_ids = fields.One2many(
         comodel_name='product.template',
         inverse_name='excel_pricelist_id',
         string='Product linked',
     )
+    product_total = fields.Integer(
+        string='Total product', compute='get_total_product_pricelist')
 
