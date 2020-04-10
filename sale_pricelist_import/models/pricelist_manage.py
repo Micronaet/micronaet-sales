@@ -245,6 +245,7 @@ class ExcelPricelistItem(models.Model):
         # Hide previous version:
         _logger.warning('Hide previous version still remained')
         hide_previous = product_pool.search([
+            ('excel_pricelist_id', '=', excel_pricelist_id),
             ('pricelist_version', '<', pricelist.version),
         ])
         hide_previous.write({
