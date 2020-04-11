@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record model="ir.ui.view" id="product_product_editable_view_search">
+            <field name="name">product.product.search</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Product pricelist">
+                    <field name="real_code" />
+                    <field name="default_code"/>
+                    <field name="name" />
+                    <field name="uom_id" />
+
+                    <field name="excel_pricelist_id" filter_domain="[('excel_pricelist_id.name','ilike',self)]"/>
+                    <filter name="no_pricelist" string="Manual product" domain="[('excel_pricelist_id','=',False)]"/>
+                    <group expand="0" string="Group By...">
+                        <filter name="group_excel_pricelist_id" string="Pricelist" context="{'group_by': 'excel_pricelist_id'}"/>
+                        <filter name="group_uom_id" string="UOM" context="{'group_by': 'uom_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="product_product_editable_view_tree" model="ir.ui.view">
+            <field name="name">product_template_editable_view_tree</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="40" />
+            <field name="arch" type="xml">
+                <tree string="Product pricelist" editable="bottom"  decoration-info="excel_pricelist_id==False" >
+                    <field name="real_code" />
+                    <field name="default_code"/>
+                    <field name="name" />
+                    <field name="uom_id" />
+                    <field name="lst_price" />
+                    <field name="excel_pricelist_id" />
+                    <field name="pricelist_version" readonly="1" />
+                </tree>
+            </field>
+        </record>
+        <record id="product_product_editable_action" model="ir.actions.act_window">
+            <field name="name">Product pricelist</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="product_product_editable_view_tree" />
+            <field name="search_view_id" ref="product_product_editable_view_search" />
+        </record>
+
         <record id="excel_pricelist_item_form_view" model="ir.ui.view">
             <field name="name">excel.pricelist.item.form</field>
             <field name="model">excel.pricelist.item</field>
@@ -150,5 +194,6 @@
         </record>
 
         <menuitem name="Pricelist manage" id="excel_pricelist_item_menu" parent="sale.menu_sale_config" action="excel_pricelist_item_act_window" sequence="40"/>
+            <menuitem name="Product management" id="product_product_editable_menu" parent="excel_pricelist_item_menu" action="product_product_editable_action" sequence="10"/>
     </data>
 </odoo>
