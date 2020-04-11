@@ -485,6 +485,24 @@ class ExcelPricelistItem(models.Model):
     ]
 
 
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    @api.multi
+    def hide_product_pricelist(self):
+        """ Hide product
+        """
+        return self.env['dialog.box.wizard'].open_dialog(
+            message='The product will be hided, <b>you cannot use again</b> '
+                    'but remain in sale order where yet present, <br/>'
+                    'confirm?',
+            action='self.env["product.product"].browse(%s).write('
+                   '{"active": False})' % self.id,
+            title='Confirm request:',
+            mode='cancel_confirm',
+        )
+
+
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 

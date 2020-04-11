@@ -17,6 +17,7 @@
         'sale_management',
         'web',
         'mail',
+        'confirm_dialog_wizard',
     ],
     'data': [
         'security/ir.model.access.csv',

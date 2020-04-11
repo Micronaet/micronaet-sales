@@ -26,13 +26,16 @@
             <field name="priority" eval="40" />
             <field name="arch" type="xml">
                 <tree string="Product pricelist" editable="bottom"  decoration-info="excel_pricelist_id==False" >
-                    <field name="real_code" />
+                    <field name="real_code" attrs="{'required': [('excel_pricelist_id', '!=', False)]}"/>
                     <field name="default_code"/>
                     <field name="name" />
                     <field name="uom_id" />
                     <field name="lst_price" />
                     <field name="excel_pricelist_id" />
                     <field name="pricelist_version" readonly="1" />
+                    <field name="active" invisible="1"/>
+                    <button name="hide_product_pricelist" type="object" string="Hide" icon="fa-power-off fa-x2"
+                            attrs="{'invisible': ['|', ('excel_pricelist_id', '!=', False), ('active', '=', False)]}"/>
                 </tree>
             </field>
         </record>
