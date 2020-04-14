@@ -34,7 +34,7 @@ class SaleOrderLine(models.Model):
                 _logger.error('Cannot found rate for %s' % rate)
                 i = 0.00
             base_discount -= base_discount * i / 100.0
-        self.discount_multi_rate = '% + '.join(discount_block) + '%'
+        self.discount_multi_rate = ' + '.join(discount_block)
         self.discount = 100.0 - base_discount
 
     # Columns:

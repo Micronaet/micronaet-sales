@@ -52,6 +52,12 @@ class SaleOrderBlockGroup(models.Model):
     _description = 'Sale order block'
     _order = 'name'
 
+    @api.one
+    def has_discount(self):
+        """ Check if there's one line with discount
+        """
+        return any([line.discount_multi_rate for line in self.line_ids])
+
     # Button events:
     @api.multi
     def print_only_this(self):

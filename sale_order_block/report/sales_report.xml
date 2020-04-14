@@ -52,6 +52,7 @@
                             <!--                          DETAIL:                         -->
                             <!-- BLOCK LOOP: -->
                             <div t-foreach="o.block_ids" t-as="block">
+                                <t t-set="show_discount" t-value="block.has_discount()[0]"/>
                                 <div t-if="show_the_block(block, data)">
                                     <t t-if="block.show_header">
                                         <h3 t-esc="(block.title or '/').upper()" />
@@ -68,7 +69,7 @@
                                                     <th colspan="4">DETTAGLIO</th>
                                                     <th colspan="1" class="text-right">Q.</th>
                                                     <th t-if="block.show_price" colspan="1" class="text-right">PREZZO</th>
-                                                    <th t-if="block.show_price" colspan="1" class="text-right">SCONTO</th>
+                                                    <th t-if="block.show_price and show_discount" colspan="1" class="text-right">SCONTO</th>
                                                     <th t-if="block.show_price" colspan="1" class="text-right">TOTALE</th>
                                                 </tr>
                                             </thead>
@@ -80,7 +81,7 @@
                                                     <td class="text-right"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
                                                     <td t-if="block.show_price" class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                     <!--TODO format currency and symbol-->
-                                                    <td t-if="block.show_price" class="text-right"><span t-esc="l.discount_multi_rate" /></td>
+                                                    <td t-if="block.show_price and show_discount" class="text-right"><span t-esc="l.discount_multi_rate" /></td>
                                                     <td t-if="block.show_price" class="text-right"><span t-esc="l.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                 </tr>
                                             </tbody>

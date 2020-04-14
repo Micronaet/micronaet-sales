@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-10 11:59+0000\n"
-"PO-Revision-Date: 2020-04-10 11:59+0000\n"
+"POT-Creation-Date: 2020-04-14 13:36+0000\n"
+"PO-Revision-Date: 2020-04-14 13:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -100,9 +100,19 @@ msgid "DETTAGLIO"
 msgstr "DETTAGLIO"
 
 #. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_discount_multi_rate
+msgid "Default multi rates"
+msgstr "Sconto predefinito"
+
+#. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
 msgid "Detail"
 msgstr "Dettagli"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_discount_multi_rate
+msgid "Discount multi rates"
+msgstr "Multi sconto"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_report_sale_order_block_report_sale_block_lang_display_name
@@ -232,6 +242,11 @@ msgid "Pagebreak before"
 msgstr "Anteponi salto pagina"
 
 #. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_account_payment_term
+msgid "Payment Terms"
+msgstr "Termini di pagamento"
+
+#. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_post_text
 msgid "Post text"
 msgstr "Testo post"
@@ -272,6 +287,11 @@ msgid "Printed version"
 msgstr "Versione stampata"
 
 #. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_product_uom
+msgid "Product Unit of Measure"
+msgstr "Unità di misura del prodotto"
+
+#. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_sale_order
 #: selection:sale.order,account_state:0
 msgid "Quotation"
@@ -303,6 +323,13 @@ msgstr "Rimuovi da ordine"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_report_text_ids
 msgid "Report text"
 msgstr "Testi stampa"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_account_payment_term_account_ref
+#: model:ir.model.fields,field_description:sale_order_block.field_product_uom_account_ref
+#: model:ir.model.fields,field_description:sale_order_block.field_res_users_account_ref
+msgid "Rif. contabile"
+msgstr "Rif. contabile"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
@@ -502,6 +529,11 @@ msgstr "Ordine non usato"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_unused_order_line_ids
 msgid "Unused order line"
 msgstr "Righe non usate"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_res_users
+msgid "Users"
+msgstr "Utenti"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
