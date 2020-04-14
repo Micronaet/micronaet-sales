@@ -266,6 +266,7 @@
                      <field name="not_confirmed" invisible="1" />
                      <field name="order_id" invisible="1" />
                      <field name="block_id" domain="[('order_id', '=', order_id)]" context="{'default_order_id': order_id}" />
+                     <field name="map_code"/>
                  </xpath>
                  <xpath expr="//page[1]" position="after">
                      <page string="Block">
@@ -291,6 +292,7 @@
                               <field name="unused_order_line_ids" readonly="1" nolabel="1" colspan="4">
                                   <tree string="Unused lines" editable="bottom">
                                       <field name="block_id"/>
+                                      <field name="map_code"/>
                                       <field name="product_id"/>
                                       <field name="name"/>
                                       <!--<field name="product_uom_id"/>-->
