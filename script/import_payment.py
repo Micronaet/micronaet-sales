@@ -87,6 +87,7 @@ data = {
 # -----------------------------------------------------------------------------
 # Load origin name from XLS
 # -----------------------------------------------------------------------------
+import pdb; pdb.set_trace()
 i = 0
 for account_ref in data:
     i += 1
@@ -97,10 +98,10 @@ for account_ref in data:
         'name': name,
         }
     
-    payment_ids = product_pool.search([
+    payment_ids = payment_pool.search([
         ('account_ref', '=', account_ref)])
     if payment_ids:
-        product_pool.write(product_ids, data)
+        payment_pool.write(payment_ids, data)
     else:
-        product_pool.create(data)    
+        payment_pool.create(data)    
 
