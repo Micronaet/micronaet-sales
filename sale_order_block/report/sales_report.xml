@@ -78,7 +78,7 @@
                                             <tbody>
                                                 <tr t-foreach="block.line_ids" t-as="l" class="row">
                                                     <td colspan="4">
-                                                        <a t-if="l.product_id.product_link" t-att-href="l.product_id.product_link">
+                                                        <a t-if="l.product_id.product_link" t-att-href="l.product_id.product_link" t-att-target="_blank">
                                                             <span t-esc="clean_name(l)"/>
                                                         </a>
                                                     </td>
