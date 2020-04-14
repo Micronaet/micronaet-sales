@@ -14,7 +14,7 @@
         </record>
 
         <!--product.uom-->
-        <record id="view_payment_term_account_ref_form" model="ir.ui.view">
+        <record id="view_product_uom_account_ref_form" model="ir.ui.view">
             <field name="name">Product UOM account ref</field>
             <field name="model">product.uom</field>
             <field name="inherit_id" ref="product.product_uom_form_view"/>
@@ -24,7 +24,7 @@
                 </xpath>
             </field>
         </record>
-        <record id="view_payment_term_account_ref_tree" model="ir.ui.view">
+        <record id="view_product_uom_account_ref_tree" model="ir.ui.view">
             <field name="name">Product UOM account ref</field>
             <field name="model">product.uom</field>
             <field name="inherit_id" ref="product.product_uom_tree_view"/>
