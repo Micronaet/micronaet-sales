@@ -20,6 +20,7 @@
 #
 ###############################################################################
 
+import os
 import erppeek
 import ConfigParser
 import sys
@@ -77,15 +78,25 @@ odoo = erppeek.Client(
 
 # Pool used:
 order_pool = odoo.model('sale.order')
+partner_pool = odoo.model('res.partner')
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
 print('Sale order confirmed, total %s' % len(order_ids))
 
 for order in order_pool.browse(order_ids):
-    account_file = open(file_in, 'w')
     partner = order.partner_id
 
+    # Write file
+    account_file = open(file_in, 'w')
+
+    # -------------------------------------------------------------------------
     # Header: Partner
+    # -------------------------------------------------------------------------
+    if partner.ref:
+        update_id = False
+    else:
+        update_id = partner.id
+
     header = '%-9s|%-40s|%1s|%-40s|%-40s|%-5s|%-40s|%-20s|%-60s|%-60s|' \
              '%-15s' % (
                  partner.ref,
@@ -100,9 +111,11 @@ for order in order_pool.browse(order_ids):
                  trim_text(partner.email, 60),
                  trim_text(partner.website, 60),
                  partner.vat,
-    )
+             )
 
+    # -------------------------------------------------------------------------
     # Header Order:
+    # -------------------------------------------------------------------------
     header += '|%-15s|%-8s|%-8s|%-9s|%-9s' % (
         # Order:
         order.name,
@@ -112,7 +125,9 @@ for order in order_pool.browse(order_ids):
         order.user_id.account_ref or '',
     )
 
+    # -------------------------------------------------------------------------
     # Export line:
+    # -------------------------------------------------------------------------
     for line in order.order_line:
         product = line.product_id
         detail = '%s|%18s|%40s|%3s|%40s|%15.2f|%15.2f|%30s\r\n' % (
@@ -125,4 +140,26 @@ for order in order_pool.browse(order_ids):
             line.price_unit,
             line.discount,  # Scale!!
         )
+    account_file.close()
+
+    # -------------------------------------------------------------------------
+    # Launch Account import:
+    # -------------------------------------------------------------------------
+    os.system(command)
+
+    # -------------------------------------------------------------------------
+    # Read esit and udpate partner:
+    # -------------------------------------------------------------------------
+    account_file = open(file_in, 'w')
+    esit = account_file.readline()
+    if esit.startswith('OK'):
+        if update_id:
+            account_code = esit.split(';')[-1].strip()
+            partner_pool.write([update_id], {
+                'ref': account_code,
+            })
+
+    print('Imported %s order' % order.name)
+
+
 
