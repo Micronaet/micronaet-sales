@@ -150,6 +150,13 @@ class ProductUom(models.Model):
     account_ref = fields.Char('Rif. contabile', size=9)
 
 
+class ProductTemplateUom(models.Model):
+    """ Model name: Product template
+    """
+    _inherit = 'product.template'
+
+    product_link = fields.Char('Product link', size=120)
+
 class SaleOrder(models.Model):
     """ Model name: SaleOrder
     """
@@ -353,6 +360,8 @@ class SaleOrderLine(models.Model):
     # -------------------------------------------------------------------------
     # Columns:
     # -------------------------------------------------------------------------
+    map_code = fields.Char('Map code', size=15)
+
     # Override:
     order_id = fields.Many2one(
         comodel_name='sale.order',
