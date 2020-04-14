@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_order_discount_multi_rate_form" model="ir.ui.view">
+            <field name="name">Sale order multi discount</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="discount_multi_rate" groups="sale.group_discount_per_so_line"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']" position="attributes">
+                    <attribute name="context">{'default_order_id': active_id, 'default_discount_multi_rate': discount_multi_rate}</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='discount']" position="before">
+                    <field name="discount_multi_rate" groups="sale.group_discount_per_so_line"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='discount']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

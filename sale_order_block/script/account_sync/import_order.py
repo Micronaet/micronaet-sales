@@ -21,7 +21,7 @@
 ###############################################################################
 
 import os
-import erppeek
+import odoorpc
 import ConfigParser
 import sys
 
@@ -57,32 +57,28 @@ def trim_text(value, limit):
 def account_date(value):
     """ Format date for account program
     """
+    date = ('%s' % value)[:10].strip()
     if not date:
-        ''
+        return ''
     return '%s%s%s' % (
-        value[:4],
-        value[5:7],
-        value[8:10],
+        date[:4],
+        date[5:7],
+        date[8:10],
     )
 
 
 # -----------------------------------------------------------------------------
 #                               Start procedure:
 # -----------------------------------------------------------------------------
-odoo = erppeek.Client(
-    'http://%s:%s' % (server, port),
-    db=database,
-    user=user,
-    password=password
-    )
+odoo = odoorpc.ODOO(server, port=port)
+odoo.login(database, user, password)
 
 # Pool used:
-order_pool = odoo.model('sale.order')
-partner_pool = odoo.model('res.partner')
+order_pool = odoo.env['sale.order']
+partner_pool = odoo.env['res.partner']
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
 print('Sale order confirmed, total %s' % len(order_ids))
-
 for order in order_pool.browse(order_ids):
     partner = order.partner_id
 
@@ -99,18 +95,20 @@ for order in order_pool.browse(order_ids):
 
     header = '%-9s|%-40s|%1s|%-40s|%-40s|%-5s|%-40s|%-20s|%-60s|%-60s|' \
              '%-15s' % (
-                 partner.ref,
+                 partner.ref or '',
                  trim_text(partner.name, 40),
                  'C' if partner.is_company else 'P',
-                 trim_text('%s %s' % (partner.street, partner.street2), 40),
+                 trim_text(
+                     '%s %s' % (
+                         partner.street or '', partner.street2 or ''), 40),
                  trim_text(partner.city, 40),
                  partner.zip or '',
                  trim_text(
-                    partner.country_id.name if partner.country_id else ''),
+                    partner.country_id.name if partner.country_id else '', 40),
                  trim_text(partner.phone, 20),
                  trim_text(partner.email, 60),
                  trim_text(partner.website, 60),
-                 partner.vat,
+                 partner.vat or '',
              )
 
     # -------------------------------------------------------------------------
@@ -118,7 +116,7 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     header += '|%-15s|%-8s|%-8s|%-9s|%-9s' % (
         # Order:
-        order.name,
+        order.name or '',
         account_date(order.date_order),
         account_date(order.validity_date),
         order.payment_term_id.account_ref or '',
@@ -130,17 +128,21 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     for line in order.order_line:
         product = line.product_id
-        detail = '%s|%18s|%40s|%3s|%40s|%15.2f|%15.2f|%30s\r\n' % (
+        detail = '%s|%-24s|%-40s|%-3s|%-40s|%15.2f|%15.2f|%-30s|%-4s\r\n' % (
             header,
-            trim_text(product.default_code, 18),
+            trim_text(product.default_code, 24),
             trim_text(product.name, 40),
             '',  # UOM product.uom_id.account_ref,
             trim_text(line.name, 40),
             line.product_uom_qty,
             line.price_unit,
             line.discount,  # Scale!!
+            '',  # VAT
         )
+        account_file.write(detail)
+    import pdb; pdb.set_trace()
     account_file.close()
+    sys.exit()
 
     # -------------------------------------------------------------------------
     # Launch Account import:
@@ -160,6 +162,4 @@ for order in order_pool.browse(order_ids):
             })
 
     print('Imported %s order' % order.name)
-
-
 

@@ -15,6 +15,7 @@
     'depends': [
         'sale',
         'account',
+        'product',
         'sale_management',
         'web',
     ],
@@ -23,6 +24,7 @@
         'security/ir.model.access.csv',
 
         'views/block_view.xml',
+        'views/discount_view.xml',
         'report/sales_report.xml',
     ],
     'external_dependencies': {

@@ -136,6 +136,14 @@ class ResUsers(models.Model):
     account_ref = fields.Char('Rif. contabile', size=9)
 
 
+class ProductUom(models.Model):
+    """ Model name: Product uom
+    """
+    _inherit = 'product.uom'
+
+    account_ref = fields.Char('Rif. contabile', size=9)
+
+
 class SaleOrder(models.Model):
     """ Model name: SaleOrder
     """
