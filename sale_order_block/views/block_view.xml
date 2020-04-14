@@ -156,6 +156,47 @@
         </record>
 
         <!--sale.order-->
+        <record model="ir.ui.view" id="view_sale_order_quotation_block_tree">
+            <field name="name">Block list</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_status']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="account_state" invisible="1"/>
+                </xpath>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-info">account_state == 'draft'</attribute>
+                    <attribute name="decoration-bf">account_state == 'confirmed'</attribute>
+                    <attribute name="decoration-success">account_state == 'imported'</attribute>
+                    <attribute name="decoration-danger">account_state == 'cancel'</attribute>
+                    <!--Sent = normal-->
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sale_order_block_tree">
+            <field name="name">Block list</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="account_state" />
+                </xpath>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-info">account_state == 'draft'</attribute>
+                    <attribute name="decoration-bf">account_state == 'confirmed'</attribute>
+                    <attribute name="decoration-success">account_state == 'imported'</attribute>
+                    <attribute name="decoration-danger">account_state == 'cancel'</attribute>
+                    <!--Sent = normal-->
+                </xpath>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="view_sale_order_block_group_page_form">
             <field name="name">Block page</field>
             <field name="model">sale.order</field>
@@ -222,7 +263,6 @@
                      </page>
                      <page string="Unused" attrs="{'invisible': [('unused_order_line_ids', '=', [])]}">
                           <group colspan="4" col="4">
-
                               <separator string="Unused lines:" colspan="4"/>
                               <!--<button name="button_restore_unused_lines" type="object" string="Restore lines" attrs="{'invisible': [('account_state', '!=', 'draft')]}" colspan="1"/>-->
                               <field name="unused_order_line_ids" readonly="1" nolabel="1" colspan="4">
@@ -233,7 +273,8 @@
                                       <!--<field name="product_uom_id"/>-->
                                       <field name="price_unit"/>
                                       <!--<field name="account_tax" widget="many2many_tags"/>-->
-                                      <field name="discount"/>
+                                      <field name="discount" invisible="1"/>
+                                      <field name="discount_multi_rate"/>
                                       <field name="price_subtotal"/>
                                   </tree>
                               </field>

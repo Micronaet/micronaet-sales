@@ -1,0 +1,98 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_order_block_menu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-14 14:20+0000\n"
+"PO-Revision-Date: 2020-04-14 14:20+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management
+msgid "Management"
+msgstr "Gestione"
+
+#. module: sale_order_block_menu
+#: model:ir.actions.act_window,name:sale_order_block_menu.action_orders
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_my_order
+msgid "My order"
+msgstr "Miei ordini"
+
+#. module: sale_order_block_menu
+#: model:ir.actions.act_window,name:sale_order_block_menu.action_cancels
+msgid "My order removed"
+msgstr "Miei ordini rimossi"
+
+#. module: sale_order_block_menu
+#: model:ir.actions.act_window,name:sale_order_block_menu.action_quotations
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_my_quotation
+msgid "My quotation"
+msgstr "Mie offerte"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration_payment
+msgid "Payment Terms"
+msgstr "Termini di pagamento"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_product
+msgid "Product"
+msgstr "Prodotti"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration_product
+msgid "Product Categories"
+msgstr "Categorie prodotto"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_quotation
+msgid "Quotation / Order"
+msgstr "Offerte / Ordini"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_my_cancel
+msgid "Removed"
+msgstr "Rimossi"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_root
+msgid "SALES"
+msgstr "VENDITE"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_sales
+msgid "Sales"
+msgstr "Vendite"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration_team
+msgid "Sales Channels"
+msgstr "Canali di vendita"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_sale_order_text_action
+msgid "Static order text"
+msgstr "Testo statico"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration_product_uom
+msgid "Units of Measure"
+msgstr "Unità di misura"

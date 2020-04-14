@@ -6,7 +6,21 @@
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">sale.order</field>
          <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
-         <field name="domain">[('user_id', '=', uid)]</field>
+         <field name="domain">[('user_id', '=', uid), ('account_state', 'in', ('sent', 'draft'))]</field>
+     </record>
+     <record id="action_orders" model="ir.actions.act_window">
+         <field name="name">My order</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">sale.order</field>
+         <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
+         <field name="domain">[('user_id', '=', uid), ('account_state', 'in', ('confirmed', 'imported'))]</field>
+     </record>
+     <record id="action_cancels" model="ir.actions.act_window">
+         <field name="name">My order removed</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">sale.order</field>
+         <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
+         <field name="domain">[('user_id', '=', uid), ('account_state', '=', 'cancel')]</field>
      </record>
      <menuitem
          name="SALES"
@@ -28,6 +42,20 @@
                  sequence="10"
                  action="action_quotations"
                  />
+             <menuitem
+                 parent="menu_master_sales_sales"
+                 id="menu_master_sales_management_my_order"
+                 name="My order"
+                 sequence="20"
+                 action="action_orders"
+                 />
+             <menuitem
+                 parent="menu_master_sales_sales"
+                 id="menu_master_sales_management_my_cancel"
+                 name="Removed"
+                 sequence="30"
+                 action="action_cancels"
+                 />
 
          <menuitem
              parent="menu_master_sales_root"
@@ -39,7 +67,7 @@
              <menuitem
                  parent="menu_master_sales_management"
                  id="menu_master_sales_management_quotation"
-                 name="Quotation"
+                 name="Quotation / Order"
                  sequence="10"
                  action="sale.action_quotations"
                  />
@@ -80,10 +108,16 @@
                  parent="menu_master_sales_configuration"
                  sequence="30"
                  action="product.product_category_action_form"/>
-
-            <!--	account.action_payment_term_form
-                    product.product_uom_form_action
-            -->
+             <menuitem
+                 id="menu_master_sales_configuration_payment"
+                 parent="menu_master_sales_configuration"
+                 sequence="40"
+                 action="account.action_payment_term_form"/>
+             <menuitem
+                 id="menu_master_sales_configuration_product_uom"
+                 parent="menu_master_sales_configuration"
+                 sequence="50"
+                 action="product.product_uom_form_action"/>
     </data>
 </openerp>
 
