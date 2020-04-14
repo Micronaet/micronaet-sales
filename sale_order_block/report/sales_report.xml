@@ -78,9 +78,14 @@
                                             <tbody>
                                                 <tr t-foreach="block.line_ids" t-as="l" class="row">
                                                     <td colspan="4">
-                                                        <a t-if="l.product_id.product_link" t-att-href="l.product_id.product_link" t-att-target="_blank">
+                                                        <t t-if="l.product_id.product_link">
+                                                            <a t-att-href="l.product_id.product_link" t-att-target="_blank">
+                                                                <span t-if="l.map_code" t-esc="'[%s]' % l.map_code" /> <span t-esc="clean_name(l)"/>
+                                                            </a>
+                                                        </t>
+                                                        <t t-if="not l.product_id.product_link">
                                                             <span t-if="l.map_code" t-esc="'[%s]' % l.map_code" /> <span t-esc="clean_name(l)"/>
-                                                        </a>
+                                                        </t>
                                                     </td>
                                                     <td class="text-right"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
                                                     <td t-if="block.show_price" class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
