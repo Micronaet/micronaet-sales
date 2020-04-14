@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+    <!--HIDE MENU:-->
+    <record model="ir.ui.menu" id="sale.sale_menu_root">
+        <field name="groups_id" eval="[(6,0, [ref('sale_order_block.group_block_hide')])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance">
+        <field name="groups_id" eval="[(6,0, [ref('sale_order_block.group_block_hide')])]"/>
+    </record>
+
      <record id="action_quotations" model="ir.actions.act_window">
          <field name="name">My quotation</field>
          <field name="type">ir.actions.act_window</field>
