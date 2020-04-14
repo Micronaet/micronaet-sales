@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 14:40+0000\n"
-"PO-Revision-Date: 2020-04-14 14:40+0000\n"
+"POT-Creation-Date: 2020-04-14 14:49+0000\n"
+"PO-Revision-Date: 2020-04-14 14:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -57,6 +57,12 @@ msgstr "Controllo file:"
 #: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_first_row
 msgid "Check first row to be imported on file"
 msgstr "Controllo prima riga importata del file"
+
+#. module: sale_pricelist_import
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:501
+#, python-format
+msgid "Confirm request:"
+msgstr "Conferma richiesta:"
 
 #. module: sale_pricelist_import
 #: model:ir.model,name:sale_pricelist_import.model_res_partner
@@ -266,7 +272,7 @@ msgstr "Prodotti collegati:"
 #. module: sale_pricelist_import
 #: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_error_comment
 msgid "Raise error during importation"
-msgstr "Errore durante l'operazione di importazione"
+msgstr "Errore durante importazione"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_product_product_real_code
@@ -339,6 +345,12 @@ msgstr "Fornitore"
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
 msgid "Supplier selection..."
 msgstr "Seleziona il fornitore..."
+
+#. module: sale_pricelist_import
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:496
+#, python-format
+msgid "The product will be hided, <b>you cannot use again</b> but remain in sale order where yet present, <br/>confirm?"
+msgstr "Il prodotto verrà nascosto, <b>non potrete utilizzarlo ancora</b> anche se rimarrà negli ordini dove presente e nel database, <br/>confermi?"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_timestamp_update
