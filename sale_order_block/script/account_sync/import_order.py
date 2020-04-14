@@ -155,11 +155,12 @@ for order in order_pool.browse(order_ids):
     account_file = open(file_in, 'w')
     esit = account_file.readline()
     if esit.startswith('OK'):
+        update_data = {
+            'account_state': 'imported',
+        }
         if update_id:
-            account_code = esit.split(';')[-1].strip()
-            partner_pool.write([update_id], {
-                'ref': account_code,
-            })
+            update_date['ref'] = esit.split(';')[-1].strip()
+        partner_pool.write([update_id], update_data)
 
     print('Imported %s order' % order.name)
 
