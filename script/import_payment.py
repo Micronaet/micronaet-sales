@@ -50,7 +50,7 @@ odoo = erppeek.Client(
 # Pool used:
 payment_pool = odoo.model('account.payment.term') 
 
-data = {
+payment_db = {
     '2': 'RIMESSA DIRETTA',
     '3': 'RIMESSA DIRETTA 30 GGDFFM+15 GG',
     '4': 'bb: 20% all\'ordine, saldo a merce pronta',
@@ -89,9 +89,9 @@ data = {
 # -----------------------------------------------------------------------------
 import pdb; pdb.set_trace()
 i = 0
-for account_ref in data:
+for account_ref in payment_db:
     i += 1
-    name = data[account_ref]
+    name = payment_db[account_ref]
     
     data = {
         'account_ref': account_ref,
