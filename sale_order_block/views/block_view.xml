@@ -1,6 +1,40 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+        <!--res.users-->
+        <record id="view_res_users_account_ref_form" model="ir.ui.view">
+            <field name="name">Salesman account ref</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tz']" position="after">
+                    <field name="account_ref" />
+                </xpath>
+            </field>
+        </record>
+
+        <!--account.payment.term-->
+        <record id="view_payment_term_account_ref_tree" model="ir.ui.view">
+            <field name="name">Payment term account ref</field>
+            <field name="model">account.payment.term</field>
+            <field name="inherit_id" ref="account.view_payment_term_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="account_ref" />
+                </xpath>
+            </field>
+        </record>
+        <record id="view_payment_term_account_ref_form" model="ir.ui.view">
+            <field name="name">Payment term account ref</field>
+            <field name="model">account.payment.term</field>
+            <field name="inherit_id" ref="account.view_payment_term_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="account_ref" />
+                </xpath>
+            </field>
+        </record>
+
         <!--sale.order.text-->
         <record id="sale_order_text_view_tree" model="ir.ui.view">
             <field name="name">Sale order text</field>

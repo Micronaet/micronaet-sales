@@ -14,6 +14,7 @@
     'license': 'AGPL-3',
     'depends': [
         'sale',
+        'account',
         'sale_management',
         'web',
     ],

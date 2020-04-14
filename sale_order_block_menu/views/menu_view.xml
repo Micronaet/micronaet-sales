@@ -81,7 +81,7 @@
                  sequence="30"
                  action="product.product_category_action_form"/>
 
-
+            <!--	account.action_payment_term_form-->
     </data>
 </openerp>
 

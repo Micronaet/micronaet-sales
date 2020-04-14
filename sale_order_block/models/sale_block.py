@@ -120,6 +120,22 @@ class SaleOrderBlockGroup(models.Model):
     show_total = fields.Boolean('Show total', default=True)
 
 
+class AccountPaymentTerm(models.Model):
+    """ Model name: Account payment term
+    """
+    _inherit = 'account.payment.term'
+
+    account_ref = fields.Char('Rif. contabile', size=9)
+
+
+class ResUsers(models.Model):
+    """ Model name: Res users
+    """
+    _inherit = 'res.users'
+
+    account_ref = fields.Char('Rif. contabile', size=9)
+
+
 class SaleOrder(models.Model):
     """ Model name: SaleOrder
     """
