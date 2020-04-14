@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 14:20+0000\n"
-"PO-Revision-Date: 2020-04-14 14:20+0000\n"
+"POT-Creation-Date: 2020-04-14 14:37+0000\n"
+"PO-Revision-Date: 2020-04-14 14:37+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -53,6 +53,11 @@ msgid "Payment Terms"
 msgstr "Termini di pagamento"
 
 #. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_product_pricelist_import
+msgid "Pricelist"
+msgstr "Listini"
+
+#. module: sale_order_block_menu
 #: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_product
 msgid "Product"
 msgstr "Prodotti"
@@ -61,6 +66,11 @@ msgstr "Prodotti"
 #: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration_product
 msgid "Product Categories"
 msgstr "Categorie prodotto"
+
+#. module: sale_order_block_menu
+#: model:ir.ui.menu,name:sale_order_block_menu.menu_product_pricelist_imported_product
+msgid "Product pricelist"
+msgstr "Prodotti listino"
 
 #. module: sale_order_block_menu
 #: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_management_quotation
@@ -96,3 +106,4 @@ msgstr "Testo statico"
 #: model:ir.ui.menu,name:sale_order_block_menu.menu_master_sales_configuration_product_uom
 msgid "Units of Measure"
 msgstr "Unità di misura"
+

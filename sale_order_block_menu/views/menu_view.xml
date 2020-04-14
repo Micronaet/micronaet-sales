@@ -94,6 +94,17 @@
              groups="sale_order_block.group_block_admin"
              />
              <menuitem
+                 id="menu_product_pricelist_import"
+                 parent="menu_master_sales_configuration"
+                 sequence="5"
+                 action="sale_pricelist_import.excel_pricelist_item_act_window"/>
+                 <menuitem
+                     id="menu_product_pricelist_imported_product"
+                     parent="menu_product_pricelist_import"
+                     sequence="10"
+                     action="sale_pricelist_import.product_product_editable_action"/>
+
+             <menuitem
                  id="menu_sale_order_text_action"
                  parent="menu_master_sales_configuration"
                  sequence="10"

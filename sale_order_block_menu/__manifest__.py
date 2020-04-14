@@ -18,6 +18,7 @@
         'sale_order_block',
         'sales_team',
         'product',
+        'sale_pricelist_import',
         'web',
     ],
     'data': [

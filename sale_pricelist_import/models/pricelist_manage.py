@@ -493,12 +493,12 @@ class ProductProduct(models.Model):
         """ Hide product
         """
         return self.env['dialog.box.wizard'].open_dialog(
-            message='The product will be hided, <b>you cannot use again</b> '
+            message=_('The product will be hided, <b>you cannot use again</b> '
                     'but remain in sale order where yet present, <br/>'
-                    'confirm?',
+                    'confirm?'),
             action='self.env["product.product"].browse(%s).write('
                    '{"active": False})' % self.id,
-            title='Confirm request:',
+            title=_('Confirm request:'),
             mode='cancel_confirm',
         )
 
