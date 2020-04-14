@@ -77,10 +77,12 @@
                                             <!-- Detail data -->
                                             <tbody>
                                                 <tr t-foreach="block.line_ids" t-as="l" class="row">
-                                                    <td colspan="4"><span t-esc="clean_name(l)"/></td>
-                                                    <td class="text-right">
-                                                        <a t-if="l.product_id.product_link" t-att-href="l.product_id.product_link"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></a>
+                                                    <td colspan="4">
+                                                        <a t-if="l.product_id.product_link" t-att-href="l.product_id.product_link">
+                                                            <span t-esc="clean_name(l)"/>
+                                                        </a>
                                                     </td>
+                                                    <td class="text-right"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
                                                     <td t-if="block.show_price" class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                     <!--TODO format currency and symbol-->
                                                     <td t-if="block.show_price and show_discount" class="text-right"><span t-esc="l.discount_multi_rate" /></td>
