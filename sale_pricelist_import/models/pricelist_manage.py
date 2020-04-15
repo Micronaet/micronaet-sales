@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import os
+import sys
 import base64
 import logging
 import xlrd
@@ -150,7 +151,6 @@ class ExcelPricelistItem(models.Model):
         """ Scheduled import pricelist and store (single)
             @return True if end import (also error), else False
         """
-        import pdb; pdb.set_trace()
         product_pool = self.env['product.template']
         pricelist = self.browse(pricelist_id)
 
@@ -170,6 +170,7 @@ class ExcelPricelistItem(models.Model):
                 'error_comment': _('Cannot read XLS file: %s' % fullname),
                 'state': 'loaded',  # Go back in status
             })
+            pricelist.log_message('File error', '%s' % (sys.exc_info()))
             return True  # Done with error!
         first_row = pricelist.first_row or ''
         check_data = pricelist.check_data or ''
@@ -201,6 +202,10 @@ class ExcelPricelistItem(models.Model):
                     '%s. Missed some value %s!<br/>') % (
                         log_row, (real_code, name, price))
                 continue
+
+            if type(real_code) == float:
+                real_code = str(int(real_code))
+                
             try:
                 price = float(price)
             except:
