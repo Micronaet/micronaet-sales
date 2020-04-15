@@ -150,6 +150,7 @@ class ExcelPricelistItem(models.Model):
         """ Scheduled import pricelist and store (single)
             @return True if end import (also error), else False
         """
+        import pdb; pdb.set_trace()
         product_pool = self.env['product.template']
         pricelist = self.browse(pricelist_id)
 
