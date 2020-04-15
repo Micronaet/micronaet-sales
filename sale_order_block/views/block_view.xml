@@ -34,6 +34,16 @@
                 </xpath>
             </field>
         </record>
+        <record id="view_res_users_account_ref_tree" model="ir.ui.view">
+            <field name="name">Salesman account ref</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="account_ref" />
+                </xpath>
+            </field>
+        </record>
 
         <!--account.tax-->
         <record id="view_account_tax_account_ref_form" model="ir.ui.view">
