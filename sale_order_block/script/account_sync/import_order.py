@@ -50,7 +50,7 @@ command = config.get('account', 'command')
 def trim_text(value, limit):
     """ Trim text for max value passes
     """
-    value = value.strip()
+    value = (value or '').strip()
     return value[:limit]
 
 
@@ -93,30 +93,29 @@ for order in order_pool.browse(order_ids):
     else:
         update_id = partner.id
 
-    header = '%-9s|%-40s|%1s|%-40s|%-40s|%-5s|%-40s|%-20s|%-60s|%-60s|' \
-             '%-15s' % (
-                 partner.ref or '',
-                 trim_text(partner.name, 40),
-                 'C' if partner.is_company else 'P',
-                 trim_text(
-                     '%s %s' % (
-                         partner.street or '', partner.street2 or ''), 40),
-                 trim_text(partner.city, 40),
-                 partner.zip or '',
-                 trim_text(
-                    partner.country_id.name if partner.country_id else '', 40),
-                 trim_text(partner.phone, 20),
-                 trim_text(partner.email, 60),
-                 trim_text(partner.website, 60),
-                 partner.vat or '',
-             )
+    header = '%-9s%-40s%1s%-40s%-40s%-5s%-40s%-20s%-60s%-60s%-15s' % (
+         partner.ref or '',
+         trim_text(partner.name, 40),
+         'C' if partner.is_company else 'P',
+         trim_text(
+             '%s %s' % (
+                 partner.street or '', partner.street2 or ''), 40),
+         trim_text(partner.city, 40),
+         partner.zip or '',
+         trim_text(
+            partner.country_id.name if partner.country_id else '', 40),
+         trim_text(partner.phone, 20),
+         trim_text(partner.email, 60),
+         trim_text(partner.website, 60),
+         partner.vat or '',
+         )
 
     # -------------------------------------------------------------------------
     # Header Order:
     # -------------------------------------------------------------------------
-    header += '|%-15s|%-8s|%-8s|%-9s|%-9s' % (
+    header += '%-15s%-8s%-8s%-9s%-9s' % (
         # Order:
-        order.name or '',
+        trim_text(order.name or '', 15),
         account_date(order.date_order),
         account_date(order.validity_date),
         order.payment_term_id.account_ref or '',
@@ -128,21 +127,23 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     for line in order.order_line:
         product = line.product_id
-        detail = '%s|%-24s|%-40s|%-3s|%-40s|%15.2f|%15.2f|%-30s|%-4s\r\n' % (
+        try:
+            vat_code = line.tax_id[0].account_ref or ''
+        except:
+            vat_code = False
+        detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r\n' % (
             header,
             trim_text(product.default_code, 24),
             trim_text(product.name, 40),
-            '',  # UOM product.uom_id.account_ref,
+            product.uom_id.account_ref or '',
             trim_text(line.name, 40),
             line.product_uom_qty,
             line.price_unit,
             line.discount,  # Scale!!
-            '',  # VAT
+            vat_code,
         )
         account_file.write(detail)
-    import pdb; pdb.set_trace()
     account_file.close()
-    sys.exit()
 
     # -------------------------------------------------------------------------
     # Launch Account import:
@@ -150,17 +151,24 @@ for order in order_pool.browse(order_ids):
     os.system(command)
 
     # -------------------------------------------------------------------------
-    # Read esit and udpate partner:
+    # Read result and udpate partner:
     # -------------------------------------------------------------------------
-    account_file = open(file_in, 'w')
-    esit = account_file.readline()
-    if esit.startswith('OK'):
-        update_data = {
+    account_file = open(file_out, 'r')
+    result = account_file.readline()
+    if result.startswith('OK'):
+        if not update_id:
+            partner_pool.write([update_id], {
+                'ref': result.split(';')[-1].strip(),
+            })
+
+        # Update order if OK
+        order_pool.write([order.id], {
             'account_state': 'imported',
-        }
-        if update_id:
-            update_date['ref'] = esit.split(';')[-1].strip()
-        partner_pool.write([update_id], update_data)
+            })
+        print('Imported %s order' % order.name)
+        # TODO os.remove(file_in)
+        # TODO os.remove(file_out)
+    else:
+        print('Not imported %s order' % order.name)
 
-    print('Imported %s order' % order.name)
-
+    import pdb; pdb.set_trace()

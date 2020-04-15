@@ -150,6 +150,14 @@ class ProductUom(models.Model):
     account_ref = fields.Char('Rif. contabile', size=9)
 
 
+class AccountTax(models.Model):
+    """ Model name: Account tax
+    """
+    _inherit = 'account.tax'
+
+    account_ref = fields.Char('Rif. contabile', size=9)
+
+
 class ProductTemplateUom(models.Model):
     """ Model name: Product template
     """
