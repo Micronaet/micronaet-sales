@@ -170,7 +170,7 @@ class ExcelPricelistItem(models.Model):
                 'error_comment': _('Cannot read XLS file: %s' % fullname),
                 'state': 'loaded',  # Go back in status
             })
-            pricelist.log_message('File error', '%s' % (sys.exc_info()))
+            pricelist.log_message('File error', '%s' % (sys.exc_info(), ))
             return True  # Done with error!
         first_row = pricelist.first_row or ''
         check_data = pricelist.check_data or ''
@@ -205,7 +205,7 @@ class ExcelPricelistItem(models.Model):
 
             if type(real_code) == float:
                 real_code = str(int(real_code))
-                
+
             try:
                 price = float(price)
             except:
