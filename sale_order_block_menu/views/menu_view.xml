@@ -138,7 +138,7 @@
                  sequence="50"
                  action="product.product_uom_form_action"/>
              <menuitem
-                 id="menu_master_sales_configuration_product_uom"
+                 id="menu_master_sales_configuration_account_tax"
                  parent="menu_master_sales_configuration"
                  sequence="60"
                  action="account.action_tax_form"/>
