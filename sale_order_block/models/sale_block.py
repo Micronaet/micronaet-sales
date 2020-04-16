@@ -104,7 +104,8 @@ class SaleOrderBlockGroup(models.Model):
         'Forced total', digits=(16, 2),
         help='Total written in offer block')
     real_total = fields.Float(
-        string='Real total', store=False,
+        string='Real total',
+        store=False,
         compute='_function_get_total_block',
         help='Total sum of sale line in this block')
     order_id = fields.Many2one(
@@ -367,7 +368,8 @@ class SaleOrder(models.Model):
         'sale.order.block.group', 'order_id', 'Block')
 
     real_total = fields.Float(
-        'Real total', store=False,
+        'Real total',
+        store=False,
         compute='_function_get_total_block',
         help='Total sum of sale line in this block')
     report_text_ids = fields.One2many(
