@@ -37,10 +37,13 @@ class SaleOrderTextRel(models.Model):
     text_id = fields.Many2one(
         comodel_name='sale.order.text',
         string='Text',
-        required=True)
+        required=True,
+        ondelete='cascade',
+    )
     order_id = fields.Many2one(
         comodel_name='sale.order',
         string='Sale order',
+        ondelete='cascade',
     )
 
 
@@ -104,7 +107,10 @@ class SaleOrderBlockGroup(models.Model):
         compute='_function_get_total_block',
         help='Total sum of sale line in this block')
     order_id = fields.Many2one(
-        'sale.order', 'Order', ondelete='cascade')
+        'sale.order',
+        'Order',
+        ondelete='cascade',
+    )
 
     # Parameter for line:
     hide_block = fields.Boolean(
@@ -375,14 +381,19 @@ class SaleOrderLine(models.Model):
         comodel_name='sale.order',
         string='Sale order',
         required=False,  # Not mandatory (for moved lines)
+        ondelete='cascade',
     )
-
     unused_order_id = fields.Many2one(
         comodel_name='sale.order',
-        string='Unused order')
-
+        string='Unused order',
+        ondelete='cascade',
+    )
     block_id = fields.Many2one(
-        'sale.order.block.group', 'Block', ondelete='set null', required=True)
+        'sale.order.block.group',
+        'Block',
+        ondelete='set null',
+        required=True,
+    )
 
     # Parameter for line:
     hide_block = fields.Boolean(
@@ -418,6 +429,7 @@ class SaleOrderRelation(models.Model):
 
     account_state = fields.Selection(
         string='Account state',
+        track_visibility=True,
         selection=[
             ('draft', 'Quotation'),
             ('sent', 'Sent (or printed)'),
