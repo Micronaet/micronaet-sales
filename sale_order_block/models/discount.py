@@ -22,7 +22,8 @@ class SaleOrderLine(models.Model):
     def onchange_discount_multi_rate(self):
         """ Calc correct discount and clean text insert
         """
-        discount_block = self.discount_multi_rate.replace(
+        discount_multi_rate = self.discount_multi_rate or ''
+        discount_block = discount_multi_rate.replace(
             ' ', '').replace(
             ',', '.').replace(
             '%', '').strip('+').split('+')
