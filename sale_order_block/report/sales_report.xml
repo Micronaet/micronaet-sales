@@ -170,11 +170,16 @@
             report_type="qweb-pdf"
             name="sale_order_block.report_sale_block_lang"
             file="sale_order_block.report_sale_block_lang"
-            attachment_use="True"
-            attachment="'%s.%s' % ((object.name or 'draft').replace('/', '_'), object.printed)"
-            print_report_name="'%s.%s' % ((object.name or 'draft').replace('/', '_'), object.printed)"
+            attachment_use="False"
+            attachment="object.name + '.pdf'"
+            print_report_name="'%s.v%s' % (object.name, object.printed)"
             paperformat="paperformat_accounting"
         />
+        <!--
+        print_report_name="'%s.%s' % ((object.name or 'draft').replace('/', '_'), object.printed)"
+        "(object._get_printed_report_name())"
+        "'%s.%s' % ((object.name or 'draft').replace('/', '_'), object.printed)"
+        -->
 
    </data>
 </openerp>

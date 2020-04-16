@@ -199,6 +199,17 @@ class SaleOrder(models.Model):
     """
     _inherit = 'sale.order'
 
+    """
+    @api.multi
+    def _get_printed_report_name(self):
+        import pdb; pdb.set_trace()
+        self.ensure_one()
+        return '%s.%s' % (
+            (object.name or 'draft').replace('/', '_'),
+            object.printed
+            )
+    """
+
     # -------------------------------------------------------------------------
     # Button events:
     # -------------------------------------------------------------------------
@@ -339,7 +350,7 @@ class SaleOrder(models.Model):
         self.ensure_one()
 
         self.printed = self.printed + 1
-        if self.account_state in ('draft',):
+        if self.account_state in ('draft', ):
             self.write({
                 'account_state': 'sent',  # Mark as sent or printed
             })
