@@ -82,7 +82,8 @@ class SaleOrderBlockGroup(models.Model):
         for block in self:
             total = 0.0
             for sol in block.line_ids:
-               total += sol.price_subtotal
+                total += sol.price_subtotal
+
             if block.block_margin:
                 total *= 100.0 + block.block_margin
                 total /= 100.0
@@ -166,12 +167,31 @@ class AccountTax(models.Model):
     account_ref = fields.Char('Rif. contabile', size=9)
 
 
-class ProductTemplateUom(models.Model):
+class ProductTemplateExtraFields(models.Model):
     """ Model name: Product template
     """
     _inherit = 'product.template'
 
+    # Onchange method:
+    @api.onchange('default_code')
+    def onchange_default_code_upper(self):
+        """ Always upper
+        """
+        self.default_code = (self.default_code or '').upper()
+
     product_link = fields.Char('Product link', size=120)
+
+class ProductProductExtraFields(models.Model):
+    """ Model name: Product product
+    """
+    _inherit = 'product.product'
+
+    # Onchange method:
+    @api.onchange('default_code')
+    def onchange_default_code_upper(self):
+        """ Always upper
+        """
+        self.default_code = (self.default_code or '').upper()
 
 
 class SaleOrder(models.Model):
@@ -346,17 +366,24 @@ class SaleOrder(models.Model):
                 total += block.total or block.real_total  # price_subtotal
             order.real_total = total
 
+    # Onchange method:
+    @api.onchange('this_map_code')
+    def onchange_this_map_code(self):
+        """ Always upper
+        """
+        self.this_map_code = (self.this_map_code or '').upper()
+
     # Columns:
-    """
     this_block_id = fields.Many2one(
         comodel_name='sale.order.block.group',
         string='This block',
         help='Used as default for lines',
+        domain="[('order_id', '=', active_id)]",
     )
     this_map_code = fields.Char(
         string='This map code',
         help='Used as default for line',
-    )"""
+    )
 
     client_order_ref = fields.Char(
         string='Client order ref')
@@ -381,10 +408,17 @@ class SaleOrder(models.Model):
 
 
 class SaleOrderLine(models.Model):
-    """ Model name: Sale Order Lie
+    """ Model name: Sale Order Line
     """
     _inherit = 'sale.order.line'
-    _order = 'block_id, sequence, id'
+    _order = 'block_id, map_code, id'  # sequence,
+
+    # Onchange method:
+    @api.onchange('map_code')
+    def onchange_line_this_map_code(self):
+        """ Always upper
+        """
+        self.map_code = (self.map_code or '').upper()
 
     # -------------------------------------------------------------------------
     # Columns:

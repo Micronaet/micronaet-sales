@@ -256,6 +256,18 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <!--Discount block-->
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <button name="update_all_multi_discount" type="object" string="Default multi discount" colspan="1" groups="sale.group_discount_per_so_line" help="Setup all line with this discount rate!" confirm="Set all lines with this discount value (no undo operation), confirm?"/>
+                    <field name="discount_multi_rate" groups="sale.group_discount_per_so_line" nolabel="1" colspan="1"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='discount']" position="before">
+                    <field name="discount_multi_rate" groups="sale.group_discount_per_so_line"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='discount']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
                 <field name="state" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
@@ -285,12 +297,24 @@
                  <xpath expr="//notebook/page[1]" position="attributes">
                       <attribute name="attrs">{'invisible': [('block_ids', '=', [])]}</attribute>
                  </xpath>
+                 <xpath expr="//field[@name='order_line']" position="before">
+                     <group col="4">
+                         <field name="this_block_id"/>
+                         <field name="this_map_code"/>
+                     </group>
+                 </xpath>
                  <xpath expr="//field[@name='order_line']" position="attributes">
-                      <attribute name="context">{'default_order_id': active_id}</attribute>
+                      <attribute name="context">{'default_order_id': active_id, 'default_discount_multi_rate': discount_multi_rate, 'default_block_id': this_block_id, 'default_map_code': this_map_code}</attribute>
                  </xpath>
                  <xpath expr="//field[@name='order_line']/tree" position="attributes">
                       <attribute name="decoration-danger">not_confirmed==True</attribute>
                       <attribute name="decoration-muted">hide_block==True and not_confirmed==False</attribute>
+                 </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='sequence']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                 </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                      <attribute name="default_focus">1</attribute>
                  </xpath>
                  <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
                      <field name="hide_block" invisible="1" />
