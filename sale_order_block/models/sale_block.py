@@ -76,12 +76,13 @@ class SaleOrderBlockGroup(models.Model):
     @api.multi
     def _function_get_total_block(self):
         """ Fields function for calculate
+            # for sol in block.order_id.order_line:
+            #     if sol.block_id.id == block.id:
         """
         for block in self:
             total = 0.0
-            for sol in block.order_id.order_line:
-                if sol.block_id.id == block.id:
-                    total += sol.price_subtotal
+            for sol in block.line_ids:
+               total += sol.price_subtotal
             if block.block_margin:
                 total *= 100.0 + block.block_margin
                 total /= 100.0
@@ -170,6 +171,7 @@ class ProductTemplateUom(models.Model):
     _inherit = 'product.template'
 
     product_link = fields.Char('Product link', size=120)
+
 
 class SaleOrder(models.Model):
     """ Model name: SaleOrder
@@ -344,6 +346,17 @@ class SaleOrder(models.Model):
             order.real_total = total
 
     # Columns:
+    """
+    this_block_id = fields.Many2one(
+        comodel_name='sale.order.block.group',
+        string='This block',
+        help='Used as default for lines',
+    )
+    this_map_code = fields.Char(
+        string='This map code',
+        help='Used as default for line',
+    )"""
+
     client_order_ref = fields.Char(
         string='Client order ref')
     printed = fields.Integer(
