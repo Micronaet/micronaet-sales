@@ -170,5 +170,3 @@ for order in order_pool.browse(order_ids):
         # TODO os.remove(file_out)
     else:
         print('Not imported %s order' % order.name)
-
-    import pdb; pdb.set_trace()
