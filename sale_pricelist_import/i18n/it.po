@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 14:49+0000\n"
-"PO-Revision-Date: 2020-04-14 14:49+0000\n"
+"POT-Creation-Date: 2020-04-24 07:48+0000\n"
+"PO-Revision-Date: 2020-04-24 07:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:206
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:212
 #, python-format
 msgid "%s. Jump, No float data: %s!<br/>"
 msgstr "%s. Riga saltata, non contiene prezzi numerici: %s!<br/>"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:199
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:201
 #, python-format
 msgid "%s. Missed some value %s!<br/>"
 msgstr "%s. Mancano alcuni valori: %s!<br/>"
@@ -33,7 +33,7 @@ msgid "Available"
 msgstr "Attivato"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:169
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:170
 #, python-format
 msgid "Cannot read XLS file: %s"
 msgstr "Impossibile leggere il file XLS: %s"
@@ -59,15 +59,10 @@ msgid "Check first row to be imported on file"
 msgstr "Controllo prima riga importata del file"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:501
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:507
 #, python-format
 msgid "Confirm request:"
 msgstr "Conferma richiesta:"
-
-#. module: sale_pricelist_import
-#: model:ir.model,name:sale_pricelist_import.model_res_partner
-msgid "Contact"
-msgstr "Contatto"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_create_uid
@@ -92,7 +87,7 @@ msgstr "Data"
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_excel_pricelist_item_display_name
 msgid "Display Name"
-msgstr "Nome Completo"
+msgstr "Nome visualizzato"
 
 #. module: sale_pricelist_import
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
@@ -206,6 +201,7 @@ msgid "New version"
 msgstr "Nuova versione"
 
 #. module: sale_pricelist_import
+#: model:ir.actions.act_window,name:sale_pricelist_import.excel_my_pricelist_item_act_window
 #: model:ir.actions.act_window,name:sale_pricelist_import.excel_pricelist_item_act_window
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_calendar_view
 #: model:ir.ui.view,arch_db:sale_pricelist_import.excel_pricelist_item_form_view
@@ -214,6 +210,11 @@ msgstr "Nuova versione"
 #: model:ir.ui.view,arch_db:sale_pricelist_import.product_product_editable_view_search
 msgid "Pricelist"
 msgstr "Listino"
+
+#. module: sale_pricelist_import
+#: model:ir.actions.act_window,help:sale_pricelist_import.excel_my_pricelist_item_act_window
+msgid "Pricelist detail"
+msgstr "Dettagli listino"
 
 #. module: sale_pricelist_import
 #: model:ir.ui.menu,name:sale_pricelist_import.excel_pricelist_item_menu
@@ -272,7 +273,7 @@ msgstr "Prodotti collegati:"
 #. module: sale_pricelist_import
 #: model:ir.model.fields,help:sale_pricelist_import.field_excel_pricelist_item_error_comment
 msgid "Raise error during importation"
-msgstr "Errore durante importazione"
+msgstr "Trovato errori durante importazione"
 
 #. module: sale_pricelist_import
 #: model:ir.model.fields,field_description:sale_pricelist_import.field_product_product_real_code
@@ -347,7 +348,7 @@ msgid "Supplier selection..."
 msgstr "Seleziona il fornitore..."
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:496
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:502
 #, python-format
 msgid "The product will be hided, <b>you cannot use again</b> but remain in sale order where yet present, <br/>confirm?"
 msgstr "Il prodotto verrà nascosto, <b>non potrete utilizzarlo ancora</b> anche se rimarrà negli ordini dove presente e nel database, <br/>confermi?"
@@ -368,7 +369,7 @@ msgid "Total to import"
 msgstr "Totale da importare"
 
 #. module: sale_pricelist_import
-#: code:addons/sale_pricelist_import/models/pricelist_manage.py:255
+#: code:addons/sale_pricelist_import/models/pricelist_manage.py:261
 #, python-format
 msgid "Totale righe su file <b>%s</b>"
 msgstr "Totale righe su file <b>%s</b>"

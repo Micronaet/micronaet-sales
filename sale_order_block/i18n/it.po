@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 16:24+0000\n"
-"PO-Revision-Date: 2020-04-14 16:24+0000\n"
+"POT-Creation-Date: 2020-04-24 07:44+0000\n"
+"PO-Revision-Date: 2020-04-24 07:44+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -76,11 +76,6 @@ msgid "Confirmed"
 msgstr "Confermato"
 
 #. module: sale_order_block
-#: model:ir.model,name:sale_order_block.model_res_partner
-msgid "Contact"
-msgstr "Contatto"
-
-#. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_create_uid
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_create_uid
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_create_uid
@@ -98,6 +93,11 @@ msgstr "Creato il"
 #: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
 msgid "DETTAGLIO"
 msgstr "DETTAGLIO"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Default multi discount"
+msgstr "Multi sconto predefinito"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_discount_multi_rate
@@ -120,7 +120,7 @@ msgstr "Multi sconto"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_display_name
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_display_name
 msgid "Display Name"
-msgstr "Nome Completo"
+msgstr "Nome visualizzato"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
@@ -166,6 +166,16 @@ msgid "Hide in report for simulation"
 msgstr "Nasconde il blocco nella stampa per simulazioni"
 
 #. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_hide_link
+msgid "Hide link"
+msgstr "Nascondi link prodotto"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_hide_link
+msgid "Hide product link in report"
+msgstr "Nascondi i link prodotti"
+
+#. module: sale_order_block
 #: model:res.groups,name:sale_order_block.group_block_hide
 msgid "Hide unused menu"
 msgstr "Nascondi menu non usati"
@@ -208,7 +218,7 @@ msgstr "Ultima modifica il"
 #. module: sale_order_block
 #: model:res.groups,name:sale_order_block.group_block_manager
 msgid "Manager"
-msgstr "Manager"
+msgstr "Gestore"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_map_code
@@ -292,6 +302,11 @@ msgid "Printed version"
 msgstr "Versione stampata"
 
 #. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_product_product
+msgid "Product"
+msgstr "Prodotto"
+
+#. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_product_template
 msgid "Product Template"
 msgstr "Modello prodotto"
@@ -299,7 +314,7 @@ msgstr "Modello prodotto"
 #. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_product_uom
 msgid "Product Unit of Measure"
-msgstr "UM prodotto"
+msgstr "Unità di misura del prodotto"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_product_product_product_link
@@ -342,6 +357,7 @@ msgstr "Testi stampa"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_account_payment_term_account_ref
+#: model:ir.model.fields,field_description:sale_order_block.field_account_tax_account_ref
 #: model:ir.model.fields,field_description:sale_order_block.field_product_uom_account_ref
 #: model:ir.model.fields,field_description:sale_order_block.field_res_users_account_ref
 msgid "Rif. contabile"
@@ -412,6 +428,16 @@ msgstr "Inviato (o stampato)"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_sequence
 msgid "Sequence"
 msgstr "Sequenza"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Set all lines with this discount value (no undo operation), confirm?"
+msgstr "Imposta tutte le righe con questo sconto (undo non permesso), confermi?"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Setup all line with this discount rate!"
+msgstr "Imposta tutte le righe con questo sconto!"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
@@ -485,6 +511,11 @@ msgid "TOTALE OFFERTA"
 msgstr "TOTALE OFFERTA"
 
 #. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_account_tax
+msgid "Tax"
+msgstr "IVA"
+
+#. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_text_id
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_text
 msgid "Text"
@@ -494,6 +525,16 @@ msgstr "Testo"
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_text_view_form
 msgid "Text:"
 msgstr "Testo:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_this_block_id
+msgid "This block"
+msgstr "Questo blocco"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_this_map_code
+msgid "This map code"
+msgstr "Questo codice mappale"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_title
@@ -515,11 +556,6 @@ msgstr "Somma totale delle righe di questo blocco"
 #: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_total
 msgid "Total written in offer block"
 msgstr "Totale scritto nel blocco offerta"
-
-#. module: sale_order_block
-#: model:ir.model,name:sale_order_block.model_stock_picking
-msgid "Transfer"
-msgstr "Trasferimento"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
@@ -547,6 +583,16 @@ msgid "Unused order line"
 msgstr "Righe non usate"
 
 #. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_this_map_code
+msgid "Used as default for line"
+msgstr "Utilizzato come predefinito sulle nuove righe"
+
+#. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_this_block_id
+msgid "Used as default for lines"
+msgstr "Utilizzato come predefinito sulle nuove righe"
+
+#. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_res_users
 msgid "Users"
 msgstr "Utenti"
@@ -555,16 +601,6 @@ msgstr "Utenti"
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
 msgid "real_sum"
 msgstr "Somma reale"
-
-#. module: sale_order_block
-#: model:ir.model,name:sale_order_block.model_report_logistic_account_report_report_ddt_lang
-msgid "report.logistic_account_report.report_ddt_lang"
-msgstr "report.logistic_account_report.report_ddt_lang"
-
-#. module: sale_order_block
-#: model:ir.model,name:sale_order_block.model_report_logistic_account_report_report_invoice_lang
-msgid "report.logistic_account_report.report_invoice_lang"
-msgstr "report.logistic_account_report.report_invoice_lang"
 
 #. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_report_sale_order_block_report_sale_block_lang
