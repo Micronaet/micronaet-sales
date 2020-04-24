@@ -63,6 +63,23 @@ class SaleOrderBlockGroup(models.Model):
 
     # Button events:
     @api.multi
+    def duplicate_block_items(self):
+        """ Duplicate this block
+        """
+        # Duplicate block:
+        new_block = self.copy(default={'title': '%s bis' % self.title})
+
+        # Duplicate sale.order.line
+        line_pool = self.env['sale.order.line']
+        lines = line_pool.search([('block_id', '=', self.id)])
+        for line in lines:
+            line.copy(default={
+                'block_id': new_block.id,
+                'order_id': self.order_id.id,
+            })
+        return True
+
+    @api.multi
     def print_only_this(self):
         """ Print sale order only with this block
         """
@@ -385,6 +402,10 @@ class SaleOrder(models.Model):
         self.this_map_code = (self.this_map_code or '').upper()
 
     # Columns:
+    hide_link = fields.Boolean(
+        string='Hide link',
+        help='Hide product link in report'
+    )
     this_block_id = fields.Many2one(
         comodel_name='sale.order.block.group',
         string='This block',

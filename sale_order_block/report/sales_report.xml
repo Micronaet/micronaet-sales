@@ -78,7 +78,7 @@
                                             <tbody>
                                                 <tr t-foreach="block.line_ids" t-as="l" class="row">
                                                     <td colspan="4">
-                                                        <t t-if="l.product_id.product_link">
+                                                        <t t-if="not o.hide_link and l.product_id.product_link">
                                                             <a t-att-href="l.product_id.product_link" t-att-target="_blank">
                                                                 <span t-if="l.map_code" t-esc="'[%s]' % l.map_code" /> <span t-esc="clean_name(l)"/>
                                                             </a>

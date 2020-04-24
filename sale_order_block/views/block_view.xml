@@ -163,7 +163,7 @@
                     <field name="block_margin" string="Recharge"/>
                     <field name="real_total" sum="real_sum" string="Calculated total"/>
                     <field name="total" sum="total_sum" string="Forced total"/>
-                    <!--<button name="duplicate_block_items" string="Duplicate block items" type="object" icon="fa-2x fa-copy" />-->
+                    <button name="duplicate_block_items" string="Duplicate block items" type="object" icon="fa-2x fa-copy" />
                     <button name="print_only_this" string="Print only this" type="object" icon="fa-2x fa-print" />
                 </tree>
             </field>
@@ -328,6 +328,8 @@
                           <group colspan="4" col="4">
                               <field name="show_master_total" />
                               <field name="real_total" />
+                              <field name="hide_link" />
+
                               <separator string="Blocks:" colspan="3"/><button name="dummy_action" string="Refresh" type="object" class="oe_highlight" colspan="1"/>
                               <field name="block_ids" nolabel="1" colspan="4"/>
                               <separator string="Extra block:" colspan="4"/>

@@ -64,6 +64,11 @@
                  sequence="30"
                  action="action_cancels"
                  />
+             <menuitem
+                 id="menu_product_pricelist_import_my"
+                 parent="menu_master_sales_sales"
+                 sequence="40"
+                 action="sale_pricelist_import.excel_my_pricelist_item_act_window"/>
 
          <menuitem
              parent="menu_master_sales_root"
