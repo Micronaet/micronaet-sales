@@ -78,7 +78,7 @@ order_pool = odoo.env['sale.order']
 partner_pool = odoo.env['res.partner']
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
-print('Sale order confirmed, total %s' % len(order_ids))
+print('Trovati %s ordini confermati in importazione...' % len(order_ids))
 for order in order_pool.browse(order_ids):
     partner = order.partner_id
 
@@ -151,8 +151,11 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     # Launch Account import:
     # -------------------------------------------------------------------------
-    import pdb; pdb.set_trace()
-    os.system(command)
+    #os.system(command)
+    wait = input('''
+        'Preparato ordine: %s, lanciare l'importazione da Mexal... 
+        (premere INVIO quando finito)
+        ''' % order.name)
 
     # -------------------------------------------------------------------------
     # Read result and udpate partner:
@@ -169,8 +172,10 @@ for order in order_pool.browse(order_ids):
         order_pool.write([order.id], {
             'account_state': 'imported',
             })
-        print('Imported %s order' % order.name)
+        print('Importazione %s confermata!' % order.name)
         # TODO os.remove(file_in)
         # TODO os.remove(file_out)
     else:
-        print('Not imported %s order' % order.name)
+        print('Importazione %s non confermata!' % order.name)
+
+wait = input('Procedura terminata, premere INVIO per chiudere.')
