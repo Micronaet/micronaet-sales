@@ -1,5 +1,5 @@
 31/12/2019
-[SPA] sim pan chem
+[PAN] panchemicals no lotti
 STAMPA INVENTARIO a P.zzo medio ponderato
 Pag.
 1
@@ -266,7 +266,7 @@ KG
 3,12u
 374,4
 A0228
-CARBOX SECCO MICRONIZATO IN SACCHI
+CALCIO CARBONATO SACCHI BCM50-CARBOX
 KG
 30.020,8
 228.755,0
@@ -1035,6 +1035,16 @@ KG
 517,0
 2,19051
 1.132,49
+A2016
+SOISUL S/45/SIN
+SOISUL 45
+KG
+0,0
+0,0
+-398,0
+398,0
+3,1u
+1.233,8
 A2023
 PICCO A-100
 KG
@@ -1268,6 +1278,15 @@ KG
 200,0
 3,4098
 681,96
+A2415
+AT LENOL 10
+KG
+0,0
+0,0
+-288,0
+288,0
+1,81u
+521,28
 A2416
 AT LENOL 200/22
 MILSOL 22
@@ -1284,20 +1303,20 @@ BR1000
 KG
 361,0
 1.012,0
-885,72
-487,28
+800,72
+572,28
 1,54197
-751,37
+882,44
 A2418
 ATLABASE 32 R / MILPAR 32
 MILPAR 32
 KG
 276,0
 3.457,0
-3.069,56
-663,44
+3.139,56
+593,44
 1,20008
-796,18
+712,18
 A2420
 GENAPOL EP 2552
 GENAPOL EP 2552 KG
@@ -1791,6 +1810,27 @@ KG
 420,0
 1,32755
 557,57
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Totali inventario
+473.916,8 carico
+6.375.469,73 scarico
+6.381.848,81 esistenza
+467.537,72
+Valore
+449.453,26
+Continua...31/12/2019
+[PAN] panchemicals no lotti
+STAMPA INVENTARIO a P.zzo medio ponderato
+Pag.
+2
+Totale Magazzini.
+Codice e descrizione articolo
+Cod. secondario UM inventario
+carico
+scarico esistenza
+prezzo
+valore
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 A3704
 DIETANOLAMMINA (in fusti)
 DEA
@@ -1811,27 +1851,6 @@ KG
 120,0
 1,43449
 172,14
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Totali inventario
-474.981,8 carico
-6.378.109,73 scarico
-6.385.064,81 esistenza
-468.026,72
-Valore
-449.087,78
-Continua...31/12/2019
-[SPA] sim pan chem
-STAMPA INVENTARIO a P.zzo medio ponderato
-Pag.
-2
-Totale Magazzini.
-Codice e descrizione articolo
-Cod. secondario UM inventario
-carico
-scarico esistenza
-prezzo
-valore
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 A3806
 ESAIDROTRIAZINA
 KG
@@ -2139,6 +2158,7 @@ VALVOLA SOTTO LAMINATO PORTATA 1000 BIG BAGS PICCOLI NR
 2.752,04
 B6200
 SECCHIO BIANCO PLASTICA LT.19 ANONIMO COMPLETO DI MANICO E COPERCHIO
+SECCHIO BIANCO
 NR
 0,0
 321,0
@@ -2595,10 +2615,10 @@ Panchem 5040 protettivo
 KG
 192,0
 7.480,0
-7.657,0
-15,0
+7.192,0
+480,0
 2,55656
-38,35
+1.227,15
 H5305
 Panchem 5305
 5305
@@ -3086,10 +3106,10 @@ MP430005 MANDRINO COMPLETO MOD.80-B
 NR
 3,0
 1,0
-1,0
 3,0
+1,0
 342,235
-1.026,71
+342,24
 MP560001 RETTIFICA PUNTE-AFFILATRICE NG80
 NR
 2,0
@@ -3173,10 +3193,10 @@ MQ010083 SET TAZZE PER ELEVATORE COMPLETE DI BULLONI M7X25
 NR
 9,0
 0,0
-0,0
-9,0
+-26,0
+35,0
 53,2
-478,8
+1.862,0
 MQ010084 NASTRO GOMMA PER ELEVATORE TR1 COGEIM
 NR
 1,0
@@ -3201,14 +3221,6 @@ NR
 1,0
 644,02
 644,02
-MQ010246 GRANO DI FERMO TR1 -DIS. TR1GIR11
-NR
-45,0
-0,0
-0,0
-45,0
-2,41933
-108,87
 MQ010247 BUSSOLA/DISTANZIALE TR1 DWG.TR1-609
 NR
 66,0
@@ -3330,10 +3342,10 @@ MQ020077 BUSSOLA GUIDAFILO 35x15 FORO 20
 NR
 2,0
 11,0
-0,0
-13,0
+1,0
+12,0
 26,03846
-338,5
+312,46
 MQ020078 CUBO ABRASIVO 30mmx30mmx30mm size 150
 NR
 109,0
@@ -3420,18 +3432,18 @@ MQ020093 BANDA ABRASIVA VSM KK712X P80
 NR
 10,0
 0,0
-0,0
-10,0
+1,0
+9,0
 22,991
-229,91
+206,92
 MQ020095 BUSSOLA GUIDAFILO 25,4x21 FORO 12
 NR
 0,0
 12,0
-0,0
-12,0
+2,0
+10,0
 26,5
-318,0
+265,0
 MQ030032 CASSETTA SAPONE PER LPL43/1 DWG. LPL5-14-L (LPL43L)
 NR
 7,0
@@ -3460,9 +3472,9 @@ DIS.LPL 43/18A
 NR
 22,0
 0,0
-0,0
-22,0 158,32455
-3.483,14
+7,0
+15,0 158,32455
+2.374,87
 MQ030109 CANOTTO LPL 43 DIAM. 43 SENZA FORI SUP.EST. CERAMIZ.
 NR
 25,0
@@ -3483,10 +3495,10 @@ MQ030174 TESTATA LPL 43 DIAM.43SENZA FORI OMAC
 NR
 15,0
 0,0
-0,0
-15,0
+-1,0
+16,0
 965,0
-14.475,0
+15.440,0
 MQ030181 TAPPO BLOCCAGGIO PORTAFILIERA ROTANTE LPL43 (DWG 43-24A)
 N.
 1,0
@@ -3536,23 +3548,16 @@ NR
 1,0
 2.520,31
 2.520,31
-MQ120026 RESISTENZA A FORNETTO LUNGA 480-60 X ESSICATORE
-NR
-3,0
-0,0
-0,0
-3,0 466,86667
-1.400,6
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Totali inventario
-676.919,8 carico
+676.871,8 carico
 7.156.225,73 scarico
-7.149.721,56 esistenza
-683.423,97
+7.148.541,56 esistenza
+684.555,97
 Valore
-718.556,97
+720.491,88
 Continua...31/12/2019
-[SPA] sim pan chem
+[PAN] panchemicals no lotti
 STAMPA INVENTARIO a P.zzo medio ponderato
 Pag.
 3
@@ -3564,6 +3569,13 @@ scarico esistenza
 prezzo
 valore
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MQ120026 RESISTENZA A FORNETTO LUNGA 480-60 X ESSICATORE
+NR
+3,0
+0,0
+0,0
+3,0 466,86667
+1.400,6
 MQ120029 RESISTENZA A IMMERSIONE 4 KW 500 V 60 HZ
 NR
 5,0
@@ -3845,14 +3857,6 @@ NR
 4,0
 145,0
 580,0
-MQ190163 LUBE APPLICATOR TYPE LA-7
-NR
-1,0
-0,0
-0,0
-1,0
-165,0
-165,0
 MQ190171 FILIERA FINITA IN PCD D15 43x27 Dia.1,18
 NR
 0,0
@@ -3909,68 +3913,14 @@ NR
 2,0
 158,0
 316,0
-MQ190206 FILIERA RND NIB GA3 /Case 43x30
-Diam. 3,78 mm
-NR
-0,0
-2,0
-1,0
-1,0
-124,52
-124,52
-MQ190207 FILIERA RND NIB GA3 /Case 43x30
-Diam. 3,80 mm
-NR
-0,0
-2,0
-1,0
-1,0
-124,52
-124,52
-MQ190209 FILIERA RND NIB GB3 /Case 43x30
-Diam. 4,70 mm
-NR
-0,0
-2,0
-1,0
-1,0
-144,225
-144,23
-MQ190210 FILIERA RND NIB GC3 /Case 43x30
-Diam. 5,90 mm
-NR
-0,0
-2,0
-1,0
-1,0
-190,81
-190,81
-MQ190212 FILIERA RND NIB HB3 /Case 43x30
-Diam. 7,00 mm
-NR
-0,0
-2,0
-1,0
-1,0
-292,04
-292,04
-MQ190214 FILIERA RND NIB HC3 /Case 43x30
-Diam. 8,50 mm
-NR
-0,0
-2,0
-1,0
-1,0
-352,055
-352,06
 MQ190229 FILIERA RND NIB GB1 /Case 43x27
 NR
 0,0
 4,0
 3,0
 1,0
-87,1675
-87,17
+87,135
+87,14
 MQ190233 FILIERA RND NIB FA1 /Case 43x27
 NR
 0,0
@@ -4096,10 +4046,10 @@ MQ220002 PERNO A SALDARE MD 60
 NR
 10,0
 0,0
-0,0
-10,0
+2,0
+8,0
 24,79
-247,9
+198,32
 MQ220005 BUSSOLA A SALDARE ANTERIORE DESTRA PER PUL. MD 60
 NR
 15,0
@@ -4253,10 +4203,10 @@ MQ220037 PERNO PER PULEGGIA LP 55 DWG. RC50-9
 NR
 9,0
 0,0
-1,0
-8,0
+3,0
+6,0
 12,66667
-101,33
+76,0
 MQ220038 CAPPUCCIO PER BUSSOLA VIDIA
 DWG. RC50-5
 NR
@@ -4319,26 +4269,26 @@ MQ220103 SUPPORTO POSTERIORE CASS. LPL5 DIS.LPL5-15 POS.1
 NR
 5,0
 0,0
-0,0
-5,0
+2,0
+3,0
 72,728
-363,64
+218,18
 MQ220105 PERNO SUPPORTO LPL 5 - DIS. LPL 5-15POS.2
 NR
 5,0
 0,0
-0,0
-5,0
+2,0
+3,0
 15,0
-75,0
+45,0
 MQ220106 BLOCCO FERMO CASSETTA LPL 5 - DIS. LPL5-15 POS.03
 NR
 5,0
 0,0
-0,0
-5,0
+2,0
+3,0
 20,0
-100,0
+60,0
 MQ220117 PULEGGIA TEMPRATA DIAM. 390
 NR
 4,0
@@ -4359,19 +4309,19 @@ MQ220119 PERNO LUNGO DESTRO PER PULEGGIA MD 600
 NR
 19,0
 0,0
-0,0
-19,0
+4,0
+15,0
 18,07579
-343,44
+271,14
 MQ220123 PARTE A E B PULEGGIA LP 55
 PULITORE
 NR
 8,0
 0,0
-1,0
-7,0
+3,0
+5,0
 35,44625
-248,12
+177,23
 MQ220127 PARTE A E B PULEGGIA MD 600 U-V DIS. MD600-31
 NR
 6,0
@@ -4434,19 +4384,19 @@ MQ220195 SUPPORTO PER PULEGGIA LPL55 DIAM.90 DISEGNO LPL 5-16
 NR
 9,0
 0,0
-0,0
-9,0
+2,0
+7,0
 18,0
-162,0
+126,0
 MQ220196 UGELLO ANULARE BUSSOLA DIA.18
 DIS. UG-00-R11
 NR
 0,0
 8,0
-0,0
-8,0
+4,0
+4,0
 187,5
-1.500,0
+750,0
 MQ220197 PARTICOLARE LASER RC60 spessore 10' in Fe360 - Pos. 1 (DWG. RC 50-17)
 NR
 79,0
@@ -4514,14 +4464,6 @@ NR
 1,0
 3.400,0
 3.400,0
-MQ330002 RULLIERA GUIDAFILO GQ 142
-NR
-1,0
-0,0
-0,0
-1,0
-295,5
-295,5
 MQ330006 RULLO PER RULLIERA GQ14
 NR
 3,0
@@ -4568,10 +4510,10 @@ MQ340049 SPAZZOLA SPIRALE DIAM.58mm Mod.SP5839
 NR
 106,0
 244,0
-202,0
-148,0
+203,0
+147,0
 42,91669
-6.351,67
+6.308,75
 MQ340050 SPAZZOLA SPIRALE DIAM.40mm Mod.SP4034
 4034
 NR
@@ -4586,10 +4528,10 @@ MQ340054 SPAZZOLA SPIRALE DIAM.40mm Mod.SP4034-Ny/SS
 NR
 20,0
 100,0
-97,0
-23,0
+96,0
+24,0
 30,627
-704,42
+735,05
 MQ340055 WIPING PADS 4260 REGULAR DENSITY 25x25x50
 WP
 NR
@@ -4649,19 +4591,19 @@ SP 3034 SS
 NR
 43,0
 450,0
-372,0
-121,0
+367,0
+126,0
 45,69998
-5.529,7
+5.758,2
 MQ340062 WIPING PADS 25x25x50 TYPE M
 WP
 NR
 2.372,0
 11.000,0
-12.462,0
-910,0
+12.470,0
+902,0
 1,20369
-1.095,36
+1.085,73
 MQ340066 WIPING PADS 30x30x75 TYPE V
 WP
 NR
@@ -4937,10 +4879,10 @@ MQ340109 SPAZZOLA SPIRALE DIAM.57mm Mod.SP5734-Ny/SS
 NR
 24,0
 150,0
-137,0
-37,0
+136,0
+38,0
 35,085
-1.298,15
+1.333,23
 MQ340110 TRECCIA VETRO 20x20MM TEFLONATA
 KG
 16,84
@@ -5220,27 +5162,6 @@ NR
 45,0
 1,16511
 52,43
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Totali inventario
-700.700,64 carico
-7.311.963,73 scarico
-7.302.281,56 esistenza
-710.382,81
-Valore
-815.340,55
-Continua...31/12/2019
-[SPA] sim pan chem
-STAMPA INVENTARIO a P.zzo medio ponderato
-Pag.
-4
-Totale Magazzini.
-Codice e descrizione articolo
-Cod. secondario UM inventario
-carico
-scarico esistenza
-prezzo
-valore
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 MQ340177 WIPING PADS 28,7x28,7x76 TYPE M
 WP
 NR
@@ -5273,10 +5194,10 @@ WP
 NR
 1.039,0
 0,0
-100,0
-939,0
-0,0
-0,0
+112,0
+927,0
+1,40179u
+1.299,46
 MQ340183 WIPING PADS 25x25x60 TYPE XD HARD
 WP
 NR
@@ -5304,6 +5225,27 @@ NR
 29,0
 1,13
 32,77
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Totali inventario
+701.800,14 carico
+7.311.981,73 scarico
+7.301.260,56 esistenza
+712.521,31
+Valore
+817.558,28
+Continua...31/12/2019
+[PAN] panchemicals no lotti
+STAMPA INVENTARIO a P.zzo medio ponderato
+Pag.
+4
+Totale Magazzini.
+Codice e descrizione articolo
+Cod. secondario UM inventario
+carico
+scarico esistenza
+prezzo
+valore
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 MQ340188 WIPING PADS 20x20x70 TYPE V
 WP
 NR
@@ -5953,10 +5895,10 @@ O3048 7 Panlube L 3048/7
 kg
 75,0
 1.225,0
-1.280,0
-20,0
+1.227,0
+73,0
 2,19412
-43,88
+160,17
 O30SP 2 Panlube L 30 SP/2
 30SP/2
 KG
@@ -5981,10 +5923,10 @@ Panlube L 3104
 KG
 0,0
 850,0
-750,0
-100,0
+755,0
+95,0
 2,94642
-294,64
+279,91
 O3109
 Panlube L 3109
 3109
@@ -6389,8 +6331,8 @@ RECUPERO FOSFAT KG
 14.740,0
 1.340,0
 13.400,0
-0,49716u
-6.661,94
+0,0
+0,0
 S0007M
 Panlube S 7 M
 7M
@@ -7051,26 +6993,6 @@ KG
 1.025,0
 0,82588
 846,53
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Totali inventario
-1.157.303,554 carico
-11.475.675,23 scarico 11.436.030,064 esistenza
-1.196.948,72
-Valore
-1.190.591,4
-Continua...31/12/2019
-[SPA] sim pan chem
-STAMPA INVENTARIO a P.zzo medio ponderato
-Pag.
-5
-Totale Magazzini.
-Codice e descrizione articolo
-Cod. secondario UM inventario
-carico
-scarico esistenza
-prezzo
-valore
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 S0402T1 Panlube S 402/1T
 402/1T
 KG
@@ -7135,6 +7057,26 @@ KG
 300,0
 0,80947
 242,84
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Totali inventario
+1.169.911,554 carico
+11.585.952,23 scarico 11.545.296,064 esistenza
+1.210.567,72
+Valore
+1.195.905,01
+Continua...31/12/2019
+[PAN] panchemicals no lotti
+STAMPA INVENTARIO a P.zzo medio ponderato
+Pag.
+5
+Totale Magazzini.
+Codice e descrizione articolo
+Cod. secondario UM inventario
+carico
+scarico esistenza
+prezzo
+valore
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 S0410T
 Panlube S 410 T
 410T
@@ -8371,11 +8313,11 @@ KG
 374,55
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Totali inventario
-1.452.907,554 carico
-13.254.463,23 scarico 13.223.305,064 esistenza
-1.484.065,72
+1.452.860,554 carico
+13.254.451,23 scarico 13.222.107,064 esistenza
+1.485.204,72
 Valore
-1.463.401,92
+1.458.809,9
 Legenda
 La lettera minuscola accanto al prezzo, indica l'utilizzo di un prezzo diverso dalla selezione,
 per la valorizzazione della esistenza, 'c' P.zzo medio di carico, 'i' P.zzo medio di inventario, 'u' Costo ultimo.
