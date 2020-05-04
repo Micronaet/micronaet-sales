@@ -57,7 +57,6 @@ def trim_text(value, limit):
 def account_date(value):
     """ Format date for account program
     """
-    value = (value or '').strip()
     if not value:
         return ''
     date = ('%s' % value)[:10]
