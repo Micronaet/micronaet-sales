@@ -134,7 +134,7 @@ for order in order_pool.browse(order_ids):
         default_code = product.default_code
         if not default_code:
             default_code = '#%s' % product.id
-        detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r\n' % (
+        detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\n\r' % (
             header,
             trim_text(default_code, 24),
             trim_text(product.name, 40),
