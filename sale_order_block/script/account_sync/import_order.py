@@ -152,7 +152,7 @@ for order in order_pool.browse(order_ids):
     # Launch Account import:
     # -------------------------------------------------------------------------
     #os.system(command)
-    wait = input('''
+    wait = raw_input('''
         Preparato ordine: %s, lanciare l'importazione da Mexal... 
         (premere INVIO quando finito)
         ''' % order.name)
@@ -178,4 +178,4 @@ for order in order_pool.browse(order_ids):
     else:
         print('Importazione %s non confermata!' % order.name)
 
-wait = input('Procedura terminata, premere INVIO per chiudere.')
+wait = raw_input('Procedura terminata, premere INVIO per chiudere.')
