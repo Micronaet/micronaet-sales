@@ -153,7 +153,7 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     #os.system(command)
     wait = input('''
-        'Preparato ordine: %s, lanciare l'importazione da Mexal... 
+        Preparato ordine: %s, lanciare l'importazione da Mexal... 
         (premere INVIO quando finito)
         ''' % order.name)
 
