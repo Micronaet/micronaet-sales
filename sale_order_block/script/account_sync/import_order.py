@@ -162,6 +162,7 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     account_file = open(file_out, 'r')
     result = account_file.readline()
+    account_file.close()
     if result.startswith('OK'):
         if not update_id:
             partner_pool.write([update_id], {
@@ -173,8 +174,8 @@ for order in order_pool.browse(order_ids):
             'account_state': 'imported',
             })
         print('Importazione %s confermata!' % order.name)
-        # TODO os.remove(file_in)
-        # TODO os.remove(file_out)
+        os.remove(file_in)
+        os.remove(file_out)
     else:
         print('Importazione %s non confermata!' % order.name)
 
