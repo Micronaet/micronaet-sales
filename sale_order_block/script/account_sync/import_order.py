@@ -87,7 +87,6 @@ partner_pool = odoo.env['res.partner']
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
 print('Trovati %s ordini confermati in importazione...' % len(order_ids))
-import pdb; pdb.set_trace()
 for order in order_pool.browse(order_ids):
     partner = order.partner_id
 
@@ -158,6 +157,7 @@ for order in order_pool.browse(order_ids):
         )
         try:
             account_file.write(detail)
+            account_file.flush()
             print 'Riga esportata: %s' % row    
         except:
             print 'Errore esportando riga: %s' % row
