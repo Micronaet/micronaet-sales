@@ -146,7 +146,10 @@ for order in order_pool.browse(order_ids):
             line.discount,  # Scale!!
             vat_code,
         )
-        account_file.write(detail)
+        try:
+            account_file.write(detail)
+        except:
+            import pdb; pdb.set_trace()    
     account_file.close()
 
     # -------------------------------------------------------------------------
