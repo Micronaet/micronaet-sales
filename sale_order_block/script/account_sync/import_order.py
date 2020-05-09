@@ -66,6 +66,14 @@ def account_date(value):
         date[8:10],
     )
 
+def clean_text(data):
+    res = ''
+    for c in data:
+        if ord(c) < 127:
+            res += c
+        else:
+            res += '.'
+    return res        
 
 # -----------------------------------------------------------------------------
 #                               Start procedure:
@@ -137,13 +145,12 @@ for order in order_pool.browse(order_ids):
         default_code = product.default_code
         if not default_code:
             default_code = '#%s' % product.id
-        print 'Riga esportata: %s' % row    
         detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r' % (
             header,
-            trim_text(default_code, 24),
-            trim_text(product.name, 40),
+            clean_text(trim_text(default_code, 24)),
+            clean_text(trim_text(product.name, 40)),
             product.uom_id.account_ref or '',
-            trim_text(line.name, 40),
+            clean_text(trim_text(line.name, 40)),
             line.product_uom_qty,
             line.price_unit,
             line.discount,  # Scale!!
@@ -151,8 +158,9 @@ for order in order_pool.browse(order_ids):
         )
         try:
             account_file.write(detail)
+            print 'Riga esportata: %s' % row    
         except:
-            import pdb; pdb.set_trace()    
+            print 'Errore esportando riga: %s' % row
     account_file.close()
 
     # -------------------------------------------------------------------------
