@@ -51,7 +51,6 @@ def trim_text(value, limit):
     """ Trim text for max value passes
     """
     value = (value or '').strip()
-    clean_text(value)
     return value[:limit]
 
 
@@ -147,10 +146,10 @@ for order in order_pool.browse(order_ids):
             default_code = '#%s' % product.id
         detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r' % (
             header,
-            trim_text(default_code, 24),
-            trim_text(product.name, 40),
+            trim_text(clean_text(default_code), 24),
+            trim_text(clean_text(product.name), 40),
             product.uom_id.account_ref or '',
-            trim_text(line.name, 40),
+            trim_text(clean_text(line.name), 40),
             line.product_uom_qty,
             line.price_unit,
             line.discount,  # Scale!!
