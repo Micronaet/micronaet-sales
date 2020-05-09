@@ -146,10 +146,10 @@ for order in order_pool.browse(order_ids):
             default_code = '#%s' % product.id
         detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r' % (
             header,
-            clean_text(trim_text(default_code, 24)),
-            clean_text(trim_text(product.name, 40)),
+            trim_text(clean_text(default_code), 24),
+            trim_text(clean_text(product.name), 40),
             product.uom_id.account_ref or '',
-            clean_text(trim_text(line.name, 40)),
+            trim_text(clean_text(line.name), 40),
             line.product_uom_qty,
             line.price_unit,
             line.discount,  # Scale!!
