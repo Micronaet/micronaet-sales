@@ -69,9 +69,11 @@ def account_date(value):
 def clean_text(data):
     res = ''
     for c in data:
-        if ord(c) < 127:
+        if c in '\r\n\t':
+            res += ' '
+        elif ord(c) < 127:
             res += c
-        else:
+        else:  # replaced char
             res += '.'
     return res        
 
