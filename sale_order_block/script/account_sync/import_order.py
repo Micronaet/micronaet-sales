@@ -209,7 +209,6 @@ for order in order_pool.browse(order_ids):
             'account_state': 'imported',
             })
         print('Importazione %s confermata!' % order.name)
-        import pdb; pdb.set_trace()
         os.remove(file_in)
         os.remove(file_out)
     else:
