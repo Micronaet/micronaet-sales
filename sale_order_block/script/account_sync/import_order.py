@@ -47,6 +47,21 @@ command = config.get('account', 'command')
 # -----------------------------------------------------------------------------
 # Utility:
 # -----------------------------------------------------------------------------
+def get_block_margin(block, history):
+    """ Get block margin
+    """
+    if not block:
+       return 1.0
+    if block not in history:        
+        current_total = block.current_total  # sum of subtotal
+        if not current_total:
+            history[block] = 1.0  # as is
+        else:    
+            # Forced or calculated
+            history[block] = (block.total or block.real_total) / current_total
+    return history[block]
+        
+        
 def trim_text(value, limit):
     """ Trim text for max value passes
     """
@@ -80,6 +95,7 @@ def clean_text(data):
 # -----------------------------------------------------------------------------
 #                               Start procedure:
 # -----------------------------------------------------------------------------
+history = {}  # Block margin history
 odoo = odoorpc.ODOO(server, port=port)
 odoo.login(database, user, password)
 
@@ -89,7 +105,7 @@ partner_pool = odoo.env['res.partner']
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
 print('Trovati %s ordini confermati in importazione...' % len(order_ids))
-for order in order_pool.browse(order_ids):
+for order in order_pool.browse(order_ids):    
     partner = order.partner_id
 
     # Write file
@@ -138,6 +154,8 @@ for order in order_pool.browse(order_ids):
     row = 0
     for line in order.order_line:
         row += 1
+        block = line.block_id
+        margin = get_block_margin(block, history)
         product = line.product_id
         try:
             vat_code = line.tax_id[0].account_ref or ''
@@ -153,7 +171,7 @@ for order in order_pool.browse(order_ids):
             product.uom_id.account_ref or '',
             trim_text(clean_text(line.name), 40),
             line.product_uom_qty,
-            line.price_unit,
+            line.price_unit * margin,
             line.discount,  # Scale!!
             vat_code,
         )
