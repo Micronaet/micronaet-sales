@@ -100,6 +100,7 @@ class SaleOrderBlockGroup(models.Model):
             total = 0.0
             for sol in block.line_ids:
                 total += sol.price_subtotal
+            block.current_total = total
 
             if block.block_margin:
                 total *= 100.0 + block.block_margin
@@ -121,11 +122,18 @@ class SaleOrderBlockGroup(models.Model):
     total = fields.Float(
         'Forced total', digits=(16, 2),
         help='Total written in offer block')
+    current_total = fields.Float(
+        string='Current total',
+        store=False,
+        multi=True,
+        compute='_function_get_total_block',
+        help='Total sum of sale line in this block')
     real_total = fields.Float(
         string='Real total',
         store=False,
+        multi=True,
         compute='_function_get_total_block',
-        help='Total sum of sale line in this block')
+        help='Total sum of sale line in this block (with margin)')
     order_id = fields.Many2one(
         'sale.order',
         'Order',
