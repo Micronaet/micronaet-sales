@@ -266,6 +266,22 @@ class SaleOrder(models.Model):
         })
 
     @api.multi
+    def account_cancel_accounting(self):
+        """ Confirm case import in accounting
+        """
+        return self.write({
+            'account_state': 'cancel',
+        })
+
+    @api.multi
+    def account_restart(self):
+        """ Confirm case import in accounting
+        """
+        return self.write({
+            'account_state': 'draft',
+        })
+
+    @api.multi
     def dummy_action(self):
         """ Dummy button to refresh data
         """

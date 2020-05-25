@@ -286,6 +286,10 @@
                     <attribute name="attrs">{'invisible': [('account_state', 'in', ('cancel', 'imported'))]}</attribute>
                     <attribute name="states">0</attribute>
                 </button>
+                <button name="action_cancel" position="after">
+                   <button name="account_cancel_accounting" string="Annulla (già a gestionale)" type="object" attrs="{'invisible': [('account_state','!=','imported')]}" groups="sale_order_block.group_block_admin" confirm="Ricordarsi di eliminare l'ordina anche a gestionale, confermi?"/>
+                   <button name="account_restart" string="Ripristina" type="object" attrs="{'invisible': [('account_state','!=','cancel')]}" />
+                </button>
 
                  <group name="sale_total" position="attributes">
                       <attribute name="invisible">1</attribute>
