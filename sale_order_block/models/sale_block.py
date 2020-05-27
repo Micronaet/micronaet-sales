@@ -483,13 +483,14 @@ class SaleOrderLine(models.Model):
         if self.prefilter:
             domain = [
                 ('default_code', '=ilike', '%s%%' % self.prefilter)]
-            product_ids = self.env['product.product'].search(domain)
-            if len(product_ids) == 1:
-                self.product_id = product_ids[0].id
-                return True
+            products = self.env['product.product'].search(domain)
+            if len(products) == 1:
+                import pdb; pdb.set_trace()
+                self.product_id = products[0].id
+            else:
+                return {'domain': {'product_id': domain}}
         else:
-            domain = []
-        return {'domain': {'product_id': domain}}
+            return {'domain': {'product_id': []}}
 
     # -------------------------------------------------------------------------
     # Columns:
