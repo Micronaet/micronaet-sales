@@ -485,7 +485,6 @@ class SaleOrderLine(models.Model):
                 ('default_code', '=ilike', '%s%%' % self.prefilter)]
             products = self.env['product.product'].search(domain)
             if len(products) == 1:
-                import pdb; pdb.set_trace()
                 self.product_id = products[0].id
             else:
                 return {'domain': {'product_id': domain}}
