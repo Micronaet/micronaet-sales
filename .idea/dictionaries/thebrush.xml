@@ -6,9 +6,12 @@
       <w>docids</w>
       <w>doctype</w>
       <w>fiscalcode</w>
+      <w>ilike</w>
       <w>micronaet</w>
       <w>odoo</w>
       <w>ordine</w>
+      <w>prefilter</w>
+      <w>prefiltro</w>
       <w>preventivo</w>
       <w>pricelist</w>
       <w>qweb</w>

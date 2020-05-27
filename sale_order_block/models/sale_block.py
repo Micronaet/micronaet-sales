@@ -476,10 +476,16 @@ class SaleOrderLine(models.Model):
         """
         self.map_code = (self.map_code or '').upper()
 
+    @api.onchange('prefilter')
+    def onchange_domain_filter_default_code(self):
+        return {'domain': {'product_id': [
+            ('default_code', '=ilike', '%s%%' % self.prefilter)]}}
+
     # -------------------------------------------------------------------------
     # Columns:
     # -------------------------------------------------------------------------
     map_code = fields.Char('Map code', size=15)
+    prefilter = fields.Char(string='Prefiltro', size=25)
 
     # Override:
     order_id = fields.Many2one(
