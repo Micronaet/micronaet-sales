@@ -215,6 +215,13 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_tree"/>
             <field name="arch" type="xml">
+                <field name="confirmation_date" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="confirmation_date" position="before">
+                    <field name="client_order_ref"/>
+                </field>
+
                 <xpath expr="//field[@name='invoice_status']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
@@ -256,6 +263,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <field name="validity_date" position="after">
+                    <field name="write_date"/>
+                </field>
                 <!--Discount block-->
                 <xpath expr="//field[@name='payment_term_id']" position="after">
                     <button name="update_all_multi_discount" type="object" string="Default multi discount" colspan="1" groups="sale.group_discount_per_so_line" help="Setup all line with this discount rate!" confirm="Set all lines with this discount value (no undo operation), confirm?"/>
