@@ -483,7 +483,7 @@ class SaleOrderLine(models.Model):
         if self.prefilter:
             domain = [
                 ('default_code', '=ilike', '%s%%' % self.prefilter)]
-            product_ids = self.env['product.template'].search(domain)
+            product_ids = self.env['product.product'].search(domain)
             if len(product_ids) == 1:
                 self.product_id = product_ids[0]
                 return True
