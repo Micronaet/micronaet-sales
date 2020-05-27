@@ -242,6 +242,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_quotation_tree"/>
             <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="client_order_ref"/>
+                </field>
                 <xpath expr="//field[@name='state']" position="after">
                     <field name="account_state" />
                 </xpath>
