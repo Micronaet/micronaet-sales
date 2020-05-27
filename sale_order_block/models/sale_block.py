@@ -478,9 +478,15 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('prefilter')
     def onchange_domain_filter_default_code(self):
+        """ Prefilter search
+        """
         if self.prefilter:
             domain = [
                 ('default_code', '=ilike', '%s%%' % self.prefilter)]
+            product_ids = self.search(domain)
+            if len(product_ids) == 1:
+                self.product_id = product_ids[0]
+                return True
         else:
             domain = []
         return {'domain': {'product_id': domain}}
