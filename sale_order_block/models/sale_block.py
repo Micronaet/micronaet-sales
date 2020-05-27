@@ -478,8 +478,12 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('prefilter')
     def onchange_domain_filter_default_code(self):
-        return {'domain': {'product_id': [
-            ('default_code', '=ilike', '%s%%' % self.prefilter)]}}
+        if self.prefilter:
+            domain = [
+                ('default_code', '=ilike', '%s%%' % self.prefilter)]
+        else:
+            domain = []
+        return {'domain': {'product_id': domain}}
 
     # -------------------------------------------------------------------------
     # Columns:
