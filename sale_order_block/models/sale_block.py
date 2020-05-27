@@ -91,6 +91,20 @@ class SaleOrderBlockGroup(models.Model):
         return order.print_quotation()
 
     @api.multi
+    def delete_only_this(self):
+        """ Delete block and linked lines
+        """
+        block_id = self.id
+        line_pool = self.env['sale.order.line']
+        lines = line_pool.search([('block_id', '=', block_id)])
+        lines.unlink()
+        self.unlink()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
+
+    @api.multi
     def _function_get_total_block(self):
         """ Fields function for calculate
             # for sol in block.order_id.order_line:
