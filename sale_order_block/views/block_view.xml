@@ -339,6 +339,7 @@
                      <field name="order_id" invisible="1" />
                      <field name="block_id" domain="[('order_id', '=', order_id)]" context="{'default_order_id': order_id}" />
                      <field name="map_code"/>
+                     <field name="prefilter"/>
                  </xpath>
                  <xpath expr="//page[1]" position="after">
                      <page string="Block">
