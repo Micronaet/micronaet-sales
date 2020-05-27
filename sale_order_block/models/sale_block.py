@@ -485,7 +485,7 @@ class SaleOrderLine(models.Model):
                 ('default_code', '=ilike', '%s%%' % self.prefilter)]
             product_ids = self.env['product.product'].search(domain)
             if len(product_ids) == 1:
-                self.product_id = product_ids[0]
+                self.product_id = product_ids[0].id
                 return True
         else:
             domain = []
