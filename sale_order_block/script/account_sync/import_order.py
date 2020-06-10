@@ -121,18 +121,18 @@ for order in order_pool.browse(order_ids):
 
     header = '%-9s%-40s%1s%-40s%-40s%-5s%-40s%-20s%-60s%-60s%-15s' % (
          partner.ref or '',
-         trim_text(partner.name, 40),
+         trim_text(clean_text(partner.name), 40),
          'C' if partner.is_company else 'P',
          trim_text(
-             '%s %s' % (
-                 partner.street or '', partner.street2 or ''), 40),
-         trim_text(partner.city, 40),
+             clean_text('%s %s' % (
+                 partner.street or '', partner.street2 or '')), 40),
+         trim_text(clean_text(partner.city), 40),
          partner.zip or '',
          trim_text(
-            partner.country_id.name if partner.country_id else '', 40),
-         trim_text(partner.phone, 20),
-         trim_text(partner.email, 60),
-         trim_text(partner.website, 60),
+            clean_text(partner.country_id.name if partner.country_id else ''), 40),
+         trim_text(clean_text(partner.phone), 20),
+         trim_text(clean_text(partner.email), 60),
+         trim_text(clean_text(partner.website), 60),
          partner.vat or '',
          )
 
