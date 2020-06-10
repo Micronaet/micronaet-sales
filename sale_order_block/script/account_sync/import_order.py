@@ -83,7 +83,7 @@ def account_date(value):
 
 def clean_text(data):
     res = ''
-    for c in data:
+    for c in (data or ''):
         if c in '\r\n\t':
             res += ' '
         elif ord(c) < 127:
@@ -105,7 +105,6 @@ partner_pool = odoo.env['res.partner']
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
 print('Trovati %s ordini confermati in importazione...' % len(order_ids))
-import pdb; pdb.set_trace()
 for order in order_pool.browse(order_ids):    
     partner = order.partner_id
 
@@ -153,7 +152,6 @@ for order in order_pool.browse(order_ids):
     # Export line:
     # -------------------------------------------------------------------------
     row = 0
-    import pdb; pdb.set_trace()
     for line in order.order_line:
         row += 1
         block = line.block_id
