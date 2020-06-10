@@ -152,6 +152,7 @@ for order in order_pool.browse(order_ids):
     # Export line:
     # -------------------------------------------------------------------------
     row = 0
+    import pdb; pdb.set_trace()
     for line in order.order_line:
         row += 1
         block = line.block_id
