@@ -52,16 +52,16 @@ def get_block_margin(block, history):
     """
     if not block:
        return 1.0
-    if block not in history:        
+    if block not in history:
         current_total = block.current_total  # sum of subtotal
         if not current_total:
             history[block] = 1.0  # as is
-        else:    
+        else:
             # Forced or calculated
             history[block] = (block.total or block.real_total) / current_total
     return history[block]
-        
-        
+
+
 def trim_text(value, limit):
     """ Trim text for max value passes
     """
@@ -90,7 +90,7 @@ def clean_text(data):
             res += c
         else:  # replaced char
             res += '.'
-    return res        
+    return res
 
 # -----------------------------------------------------------------------------
 #                               Start procedure:
@@ -105,7 +105,7 @@ partner_pool = odoo.env['res.partner']
 
 order_ids = order_pool.search([('account_state', '=', 'confirmed')])
 print('Trovati %s ordini confermati in importazione...' % len(order_ids))
-for order in order_pool.browse(order_ids):    
+for order in order_pool.browse(order_ids):
     partner = order.partner_id
 
     # Write file
@@ -120,20 +120,20 @@ for order in order_pool.browse(order_ids):
         update_id = partner.id
 
     header = '%-9s%-40s%1s%-40s%-40s%-5s%-40s%-20s%-60s%-60s%-15s' % (
-         partner.ref or '',
+         trim_text(partner.ref or '', 9),
          trim_text(clean_text(partner.name), 40),
          'C' if partner.is_company else 'P',
          trim_text(
              clean_text('%s %s' % (
                  partner.street or '', partner.street2 or '')), 40),
          trim_text(clean_text(partner.city), 40),
-         partner.zip or '',
+         trim_text(partner.zip or '', 5),
          trim_text(
             clean_text(partner.country_id.name if partner.country_id else ''), 40),
          trim_text(clean_text(partner.phone), 20),
          trim_text(clean_text(partner.email), 60),
          trim_text(clean_text(partner.website), 60),
-         partner.vat or '',
+         trim_text(partner.vat or '', 15),
          )
 
     # -------------------------------------------------------------------------
@@ -178,15 +178,16 @@ for order in order_pool.browse(order_ids):
         try:
             account_file.write(detail)
             account_file.flush()
-            print 'Riga esportata: %s' % row    
+            print('Riga esportata: %s' % row)
         except:
-            print 'Errore esportando riga: %s' % row
+            print('Errore esportando riga: %s' % row)
     account_file.close()
 
     # -------------------------------------------------------------------------
     # Launch Account import:
     # -------------------------------------------------------------------------
-    #os.system(command)
+    # import pdb; pdb.set_trace()
+    # os.system(command)
     wait = raw_input('''
         Preparato ordine: %s, lanciare l'importazione da Mexal... 
         (premere INVIO quando finito)
