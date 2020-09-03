@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import logging
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 _logger = logging.getLogger(__name__)
 
@@ -505,8 +505,14 @@ class SaleOrderLine(models.Model):
             record_ids = [record[0] for record in records]
 
             # Set default if one present:
-            if len(record_ids) == 1:
+            total = len(record_ids)
+            if total == 1:
                 self.product_id = record_ids[0]
+            elif not total:
+                raise exceptions.Error(
+                    'Not found product with code start with: {}'.format(
+                        self.prefilter,
+                    ))
 
         if record_ids:
             return {'domain': {'product_id': [
