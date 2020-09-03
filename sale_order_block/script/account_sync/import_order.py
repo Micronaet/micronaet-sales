@@ -129,7 +129,8 @@ for order in order_pool.browse(order_ids):
          trim_text(clean_text(partner.city), 40),
          trim_text(partner.zip or '', 5),
          trim_text(
-            clean_text(partner.country_id.name if partner.country_id else ''), 40),
+            clean_text(
+                partner.country_id.name if partner.country_id else ''), 40),
          trim_text(clean_text(partner.phone), 20),
          trim_text(clean_text(partner.email), 60),
          trim_text(clean_text(partner.website), 60),
@@ -139,13 +140,14 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     # Header Order:
     # -------------------------------------------------------------------------
-    header += '%-15s%-8s%-8s%-9s%-9s' % (
+    header += '%-15s%-8s%-8s%-9s%-9s' % (  # TODO %-16%
         # Order:
         trim_text(order.name or '', 15),
         account_date(order.date_order),
         account_date(order.validity_date),
         order.payment_term_id.account_ref or '',
         order.user_id.account_ref or '',
+        # TODO trim_text(order.client_order_ref or '', 16),
     )
 
     # -------------------------------------------------------------------------
@@ -165,6 +167,7 @@ for order in order_pool.browse(order_ids):
         if not default_code:
             default_code = '#%s' % product.id
         detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r' % (
+            # TODO %-10s
             header,
             trim_text(clean_text(default_code), 24),
             trim_text(clean_text(product.name), 40),
@@ -174,6 +177,7 @@ for order in order_pool.browse(order_ids):
             line.price_unit * margin,
             line.discount,  # Scale!!
             vat_code,
+            # TODO trim_text(clean_text(line.map_code), 10),
         )
         try:
             account_file.write(detail)

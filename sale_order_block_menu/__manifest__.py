@@ -20,6 +20,7 @@
         'sales_team',
         'product',
         'sale_pricelist_import',
+        'sale',
         'web',
     ],
     'data': [

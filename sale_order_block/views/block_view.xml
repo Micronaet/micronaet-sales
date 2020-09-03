@@ -211,16 +211,6 @@
         </record>
 
         <!--sale.order-->
-        <!--<record id="view_sale_order_my_search" model="ir.ui.view">
-            <field name="name">My sale order</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
-            <field name="arch" type="xml">
-                <xpath expr="//filter[1]" position="before">
-                    <filter string="My sales" name="my_sales_order" domain="[('user_id', '=', uid)]"/>
-                </xpath>
-           </field>
-        </record>-->
         <record model="ir.ui.view" id="view_sale_order_quotation_block_tree">
             <field name="name">Block list</field>
             <field name="model">sale.order</field>
