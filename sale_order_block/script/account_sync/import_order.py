@@ -23,7 +23,6 @@
 import os
 import odoorpc
 import ConfigParser
-import sys
 
 # -----------------------------------------------------------------------------
 #                             Read Parameters:
@@ -81,6 +80,7 @@ def account_date(value):
         date[8:10],
     )
 
+
 def clean_text(data):
     res = ''
     for c in (data or ''):
@@ -91,6 +91,7 @@ def clean_text(data):
         else:  # replaced char
             res += '.'
     return res
+
 
 # -----------------------------------------------------------------------------
 #                               Start procedure:
