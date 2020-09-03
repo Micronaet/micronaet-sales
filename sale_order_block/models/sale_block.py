@@ -509,7 +509,7 @@ class SaleOrderLine(models.Model):
             if total == 1:
                 self.product_id = record_ids[0]
             elif not total:
-                raise exceptions.Error(
+                raise exceptions.Warning(
                     'Not found product with code start with: {}'.format(
                         self.prefilter,
                     ))
