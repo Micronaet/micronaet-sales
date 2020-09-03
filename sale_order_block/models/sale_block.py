@@ -495,15 +495,22 @@ class SaleOrderLine(models.Model):
         """ Prefilter search
         """
         if self.prefilter:
-            domain = [
-                ('default_code', '=ilike', '%s%%' % self.prefilter)]
-            products = self.env['product.product'].search(domain)
-            if len(products) == 1:
-                self.product_id = products[0].id
+            cr = self.env.cr
+            cr.execute('''
+                SELECT id FROM product_product 
+                WHERE default_code ilike '%s%%'; 
+                ''' % self.prefilter)
+            records = cr.fetchall()
+            total = len(records)
+            if not total:
+                pass  # Normal end
+            elif total == 1:
+                self.product_id = records[0][0]
             else:
-                return {'domain': {'product_id': domain}}
-        else:
-            return {'domain': {'product_id': []}}
+                return {'domain': {'product_id': [
+                    ('id', 'in', [record[0] for record in records])
+                ]}}
+        return {'domain': {'product_id': []}}
 
     # -------------------------------------------------------------------------
     # Columns:
