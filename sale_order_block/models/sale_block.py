@@ -494,6 +494,7 @@ class SaleOrderLine(models.Model):
     def onchange_domain_filter_default_code(self):
         """ Prefilter search
         """
+        record_ids = False
         if self.prefilter:
             cr = self.env.cr
             cr.execute('''
@@ -501,16 +502,18 @@ class SaleOrderLine(models.Model):
                 WHERE default_code ilike '%s%%'; 
                 ''' % self.prefilter)
             records = cr.fetchall()
-            total = len(records)
-            if not total:
-                pass  # Normal end
-            elif total == 1:
-                self.product_id = records[0][0]
-            else:
-                return {'domain': {'product_id': [
-                    ('id', 'in', [record[0] for record in records])
-                ]}}
-        return {'domain': {'product_id': []}}
+            record_ids = [record[0] for record in records]
+
+            # Set default if one present:
+            if len(record_ids) == 1:
+                self.product_id = record_ids[0]
+
+        if record_ids:
+            return {'domain': {'product_id': [
+                ('id', 'in', record_ids)
+            ]}}
+        else:
+            return {'domain': {'product_id': []}}
 
     # -------------------------------------------------------------------------
     # Columns:
