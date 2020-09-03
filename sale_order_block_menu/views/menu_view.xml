@@ -14,21 +14,24 @@
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">sale.order</field>
          <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
-         <field name="domain">[('user_id', '=', uid), ('account_state', 'in', ('sent', 'draft'))]</field>
+         <field name="domain">[('account_state', 'in', ('sent', 'draft'))]</field> <!--('user_id', '=', uid), -->
+         <field name="context">{'default_my_sale_orders_filter': True}</field>
      </record>
      <record id="action_orders" model="ir.actions.act_window">
          <field name="name">My order</field>
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">sale.order</field>
          <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
-         <field name="domain">[('user_id', '=', uid), ('account_state', 'in', ('confirmed', 'imported'))]</field>
+         <field name="domain">[('account_state', 'in', ('confirmed', 'imported'))]</field>
+         <field name="context">{'default_my_sale_orders_filter': True}</field>
      </record>
      <record id="action_cancels" model="ir.actions.act_window">
          <field name="name">My order removed</field>
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">sale.order</field>
          <field name="view_mode">tree,form,kanban,calendar,pivot,graph</field>
-         <field name="domain">[('user_id', '=', uid), ('account_state', '=', 'cancel')]</field>
+         <field name="domain">[('account_state', '=', 'cancel')]</field>
+         <field name="context">{'default_my_sale_orders_filter': True}</field>
      </record>
      <menuitem
          name="SALES"
