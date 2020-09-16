@@ -141,14 +141,14 @@ for order in order_pool.browse(order_ids):
     # -------------------------------------------------------------------------
     # Header Order:
     # -------------------------------------------------------------------------
-    header += '%-15s%-8s%-8s%-9s%-9s' % (  # TODO %-16%
+    header += '%-15s%-8s%-8s%-9s%-9s%-16s' % (
         # Order:
         trim_text(order.name or '', 15),
         account_date(order.date_order),
         account_date(order.validity_date),
         order.payment_term_id.account_ref or '',
         order.user_id.account_ref or '',
-        # TODO trim_text(order.client_order_ref or '', 16),
+        trim_text(order.client_order_ref or '', 16),
     )
 
     # -------------------------------------------------------------------------
@@ -160,25 +160,41 @@ for order in order_pool.browse(order_ids):
         block = line.block_id
         margin = get_block_margin(block, history)
         product = line.product_id
+
         try:
             vat_code = line.tax_id[0].account_ref or ''
         except:
             vat_code = False
+
         default_code = product.default_code
         if not default_code:
             default_code = '#%s' % product.id
+        
+        product_name = product.name            
+        line_name = line.name
+            
+        # Clean if present product/line code:    
+        if ']' in line_name:
+            line_name = ''.join(line_name.split(']')[1:])
+
+        map_code = (line.map_code or '').strip()
+        if map_code:
+            line_name = '[%s] %s' % (
+                map_code,
+                line_name,
+                )
+                        
         detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r' % (
-            # TODO %-10s
             header,
             trim_text(clean_text(default_code), 24),
-            trim_text(clean_text(product.name), 40),
+            trim_text(clean_text(product_name), 40),
             product.uom_id.account_ref or '',
-            trim_text(clean_text(line.name), 40),
+            trim_text(clean_text(line_name), 40),
             line.product_uom_qty,
             line.price_unit * margin,
             line.discount,  # Scale!!
             vat_code,
-            # TODO trim_text(clean_text(line.map_code), 10),
+            # trim_text(clean_text(line.map_code), 10),
         )
         try:
             account_file.write(detail)
