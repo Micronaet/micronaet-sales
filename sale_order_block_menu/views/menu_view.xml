@@ -128,11 +128,18 @@
                  id="menu_product_pricelist_import"
                  parent="menu_master_sales_configuration"
                  sequence="5"
-                 action="sale_pricelist_import.excel_pricelist_item_act_window"/>
+                 action="sale_pricelist_import.excel_pricelist_item_minimal_act_window"/>
+                 <menuitem
+                     id="menu_product_pricelist_import_status"
+                     parent="menu_product_pricelist_import"
+                     sequence="10"
+                     action="sale_pricelist_import.excel_pricelist_item_act_window"
+                     name="Stato caricamento"
+                 />
                  <menuitem
                      id="menu_product_pricelist_imported_product"
                      parent="menu_product_pricelist_import"
-                     sequence="10"
+                     sequence="20"
                      action="sale_pricelist_import.product_product_editable_action"/>
 
              <menuitem
