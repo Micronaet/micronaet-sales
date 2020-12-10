@@ -6,10 +6,9 @@ import sys
 import base64
 import logging
 import xlrd
-from odoo import fields, api, models
+import pdb
+from odoo import fields, api, models, exceptions
 from odoo.tools.translate import _
-from odoo.exceptions import (
-    AccessError, UserError, RedirectWarning, ValidationError, Warning)
 
 
 _logger = logging.getLogger(__name__)
@@ -427,12 +426,12 @@ class ExcelPricelistItem(models.Model):
                 AND id NOT IN (
                     SELECT product_id 
                     FROM sale_order_line);
-            )
             """
         parameters = (self.id, )
         self.execute_query(query, parameters)
 
         # 2. Call original method for remove all pricelist (no hide remain):
+        pdb.set_trace()
         self.with_context({
             'remain_not_hidden': True,
         }).remove_pricelist_form_file()
