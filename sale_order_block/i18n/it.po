@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 07:44+0000\n"
-"PO-Revision-Date: 2020-04-24 07:44+0000\n"
+"POT-Creation-Date: 2020-12-10 15:59+0000\n"
+"PO-Revision-Date: 2020-12-10 15:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,23 @@ msgstr "Aggiungi extra ricarico sul totale calcolato"
 #. module: sale_order_block
 #: model:res.groups,name:sale_order_block.group_block_admin
 msgid "Admin"
-msgstr "Amministratore"
+msgstr "Admin"
+
+#. module: sale_order_block
+#: selection:sale.order,discount_mode:0
+#: selection:sale.order.block.group,discount_mode:0
+msgid "All"
+msgstr "Sempre"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Annulla (già a gestionale)"
+msgstr "Annulla (già a gestionale)"
+
+#. module: sale_order_block
+#: selection:sale.order.block.group,discount_mode:0
+msgid "As in header"
+msgstr "Come in testata"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_ids
@@ -65,6 +81,16 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Cancella righe e blocco"
+msgstr "Cancella righe e blocco"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
+msgid "Cancellare il blocco e le righe collegate?"
+msgstr "Cancellare il blocco e le righe collegate?"
+
+#. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_name
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
 msgid "Code"
@@ -74,6 +100,11 @@ msgstr "Codice"
 #: selection:sale.order,account_state:0
 msgid "Confirmed"
 msgstr "Confermato"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_create_uid
@@ -88,6 +119,11 @@ msgstr "Creato da"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_create_date
 msgid "Created on"
 msgstr "Creato il"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_current_total
+msgid "Current total"
+msgstr "Current total"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
@@ -110,6 +146,12 @@ msgid "Detail"
 msgstr "Dettagli"
 
 #. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_discount_mode
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_discount_mode
+msgid "Discount mode"
+msgstr "Sconto in stampa"
+
+#. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_discount_multi_rate
 msgid "Discount multi rates"
 msgstr "Multi sconto"
@@ -120,7 +162,7 @@ msgstr "Multi sconto"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_display_name
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_display_name
 msgid "Display Name"
-msgstr "Nome visualizzato"
+msgstr "Nome Completo"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
@@ -189,6 +231,12 @@ msgid "ID"
 msgstr "ID"
 
 #. module: sale_order_block
+#: selection:sale.order,discount_mode:0
+#: selection:sale.order.block.group,discount_mode:0
+msgid "If present value in block"
+msgstr "Se presente, mostra"
+
+#. module: sale_order_block
 #: selection:sale.order,account_state:0
 msgid "Imported"
 msgstr "Importato"
@@ -218,7 +266,7 @@ msgstr "Ultima modifica il"
 #. module: sale_order_block
 #: model:res.groups,name:sale_order_block.group_block_manager
 msgid "Manager"
-msgstr "Gestore"
+msgstr "Manager"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_map_code
@@ -229,6 +277,12 @@ msgstr "Mappale"
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_name
 msgid "Name"
 msgstr "Nome"
+
+#. module: sale_order_block
+#: selection:sale.order,discount_mode:0
+#: selection:sale.order.block.group,discount_mode:0
+msgid "Never"
+msgstr "Mai"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_not_confirmed
@@ -280,6 +334,11 @@ msgstr "Testo pre"
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_form
 msgid "Pre text:"
 msgstr "Testo pre:"
+
+#. module: sale_order_block
+#: model:ir.model.fields,field_description:sale_order_block.field_sale_order_line_prefilter
+msgid "Prefiltro"
+msgstr "Prefiltro"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
@@ -356,12 +415,22 @@ msgid "Report text"
 msgstr "Testi stampa"
 
 #. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Ricordarsi di eliminare l'ordina anche a gestionale, confermi?"
+msgstr "Ricordarsi di eliminare l'ordina anche a gestionale, confermi?"
+
+#. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_account_payment_term_account_ref
 #: model:ir.model.fields,field_description:sale_order_block.field_account_tax_account_ref
 #: model:ir.model.fields,field_description:sale_order_block.field_product_uom_account_ref
 #: model:ir.model.fields,field_description:sale_order_block.field_res_users_account_ref
 msgid "Rif. contabile"
 msgstr "Rif. contabile"
+
+#. module: sale_order_block
+#: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
+msgid "Ripristina"
+msgstr "Ripristina"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.report_sale_block_lang
@@ -371,7 +440,7 @@ msgstr "SCONTO"
 #. module: sale_order_block
 #: model:ir.actions.report,name:sale_order_block.action_report_sale_block_lang
 msgid "Sale Block report"
-msgstr "Blocco di vendita"
+msgstr "Report vendite a blocchi"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_order_id
@@ -477,7 +546,7 @@ msgstr "Mostra prezzi"
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_block_group_show_total
 msgid "Show total"
-msgstr "Mostra totale blocco"
+msgstr "Mostrare totale"
 
 #. module: sale_order_block
 #: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_show_price
@@ -513,7 +582,7 @@ msgstr "TOTALE OFFERTA"
 #. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_account_tax
 msgid "Tax"
-msgstr "IVA"
+msgstr "Imposta"
 
 #. module: sale_order_block
 #: model:ir.model.fields,field_description:sale_order_block.field_sale_order_text_rel_text_id
@@ -547,15 +616,25 @@ msgid "Total"
 msgstr "Totale"
 
 #. module: sale_order_block
-#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_real_total
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_current_total
 #: model:ir.model.fields,help:sale_order_block.field_sale_order_real_total
 msgid "Total sum of sale line in this block"
 msgstr "Somma totale delle righe di questo blocco"
 
 #. module: sale_order_block
+#: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_real_total
+msgid "Total sum of sale line in this block (with margin)"
+msgstr "Totale summa delle righe di questo blocco (con margine)"
+
+#. module: sale_order_block
 #: model:ir.model.fields,help:sale_order_block.field_sale_order_block_group_total
 msgid "Total written in offer block"
 msgstr "Totale scritto nel blocco offerta"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
 
 #. module: sale_order_block
 #: model:ir.ui.view,arch_db:sale_order_block.view_sale_order_block_group_page_form
@@ -601,6 +680,16 @@ msgstr "Utenti"
 #: model:ir.ui.view,arch_db:sale_order_block.sale_order_block_view_tree
 msgid "real_sum"
 msgstr "Somma reale"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_report_logistic_account_report_report_ddt_lang
+msgid "report.logistic_account_report.report_ddt_lang"
+msgstr "report.logistic_account_report.report_ddt_lang"
+
+#. module: sale_order_block
+#: model:ir.model,name:sale_order_block.model_report_logistic_account_report_report_invoice_lang
+msgid "report.logistic_account_report.report_invoice_lang"
+msgstr "report.logistic_account_report.report_invoice_lang"
 
 #. module: sale_order_block
 #: model:ir.model,name:sale_order_block.model_report_sale_order_block_report_sale_block_lang

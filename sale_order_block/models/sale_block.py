@@ -192,7 +192,9 @@ class SaleOrderBlockGroup(models.Model):
             ('never', 'Never'),
             ('present', 'If present value in block'),
             ('header', 'As in header'),
-        ], required=True, default='header')
+        ], required=True, default='header',
+        help='Indica se visualizzare la colonna sconto in stampa',
+    )
 
 
 class AccountPaymentTerm(models.Model):
@@ -503,7 +505,9 @@ class SaleOrder(models.Model):
             ('all', 'All'),
             ('never', 'Never'),
             ('present', 'If present value in block'),
-        ], required=True, default='present')
+        ], required=True, default='present',
+        help='Indica se visualizzare la colonna sconto in stampa',
+    )
 
 
 class SaleOrderLine(models.Model):
