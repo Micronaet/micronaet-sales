@@ -377,16 +377,63 @@ class ExcelPricelistItem(models.Model):
         self.execute_query(query, parameters)
 
         # 3. Hide remain template product:
-        query = """
-            UPDATE product_template 
-            SET active = 'f', sale_ok = 'f', purchase_ok = 'f'
-            WHERE excel_pricelist_id=%s
+        if not self.env.context.get('remain_not_hidden'):
+            # This part is executed only for original method removed, not for
+            # Dump mode:
+            query = """
+                UPDATE product_template 
+                SET active = 'f', sale_ok = 'f', purchase_ok = 'f'
+                WHERE excel_pricelist_id=%s
+                """
+            parameters = (self.id, )
+            self.execute_query(query, parameters)
+
+            return self.write({
+                'state': 'removed',
+            })
+        return True
+
+    # Dump pricelist:
+    @api.multi
+    def dump_pricelist_odoo_table(self):
+        """ Dump all unused product in product dump table
+        """
+        _logger.warning(
+            'Dump all unused product and remove from original object')
+
+        # 1. Create dump of unused in sold product:
+        query = """ 
+            INSERT INTO product_product_dump(
+                name, product_link, active, sale_ok, purchase_ok,
+                excel_pricelist_id, pricelist_version, real_code,
+                default_code, uom_id, list_price
+            )
+            SELECT
+                name, product_link, active, sale_ok, purchase_ok,
+                excel_pricelist_id, pricelist_version, real_code,
+                default_code, uom_id, list_price
+            FROM product_template
+            WHERE 
+                product_tmpl_id IN (
+                    SELECT id 
+                    FROM product_template 
+                    WHERE excel_pricelist_id=%s)
+                AND id NOT IN (
+                    SELECT product_id 
+                    FROM sale_order_line);
+            )
             """
         parameters = (self.id, )
         self.execute_query(query, parameters)
 
+        # 2. Call original method for remove all pricelist (no hide remain):
+        self.with_context({
+            'remain_not_hidden': True,
+        }).remove_pricelist_form_file()
+
+        # 3. Update new state:
         return self.write({
-            'state': 'removed',
+            'state': 'dumped',
         })
 
     # Fields function:
@@ -480,6 +527,7 @@ class ExcelPricelistItem(models.Model):
             ('available', 'Available'),
             ('hide', 'Hide'),
             ('removed', 'Removed'),  # Return to draft?
+            ('dumped', 'Dumped'),  # Dump in another table
             # ('error', 'Error'),
         ],
         required=True,
@@ -500,8 +548,8 @@ class ProductProduct(models.Model):
         """
         return self.env['dialog.box.wizard'].open_dialog(
             message=_('The product will be hided, <b>you cannot use again</b> '
-                    'but remain in sale order where yet present, <br/>'
-                    'confirm?'),
+                      'but remain in sale order where yet present, <br/>'
+                      'confirm?'),
             action='self.env["product.product"].browse(%s).write('
                    '{"active": False})' % self.id,
             title=_('Confirm request:'),
@@ -541,3 +589,49 @@ class ExcelPricelistItemRelation(models.Model):
     product_total = fields.Integer(
         string='Total product', compute='get_total_product_pricelist')
 
+
+class ProductProductDump(models.Model):
+    """ Dump data for product.product - template as history external database
+    """
+    _name = 'product.product.dump'
+    _description = 'Product Dump'
+    _order = 'default_code'
+
+    # product.template
+    name = fields.Char('Name', size=80)
+    product_link = fields.Char('Name', size=80)
+    active = fields.Boolean('Active')
+    sale_ok = fields.Boolean('Sale OK')
+    purchase_ok = fields.Boolean('Purchase OK')
+    excel_pricelist_id = fields.Many2one(
+        comodel_name='excel.pricelist.item',
+        string='Excel pricelist',
+    )
+    pricelist_version = fields.Integer(
+        string='Pricelist version',
+    )
+    real_code = fields.Char(
+        string='Real code')
+    default_code = fields.Char(
+        string='Default code')
+    uom_id = fields.Many2one(
+        comodel_name='product.uom',
+        string='UOM',
+    )
+    list_price = fields.Float(
+        string='List price',
+    )
+    # service_type 'manual'
+    # type 'service', 'consu', 'manual'
+    # invoice_policy 'order'
+    # categ_id 1
+    # rental f
+    # lst_price
+    # product_tmpl_id
+    # barcode
+    # active
+    # default_code
+    # volume
+    # weight
+
+    # create_date, write_date, create_uid, write_uid
