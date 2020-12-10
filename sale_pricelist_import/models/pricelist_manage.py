@@ -397,12 +397,20 @@ class ExcelPricelistItem(models.Model):
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
-        pricelist_id = self.id
+        selection_product_ids = self.env.context.get('selection_product_ids')
+        if selection_product_ids:
+            domain = [('id', 'in', selection_product_ids)]
+            _logger.info('Restore dumped selection: %s' % (
+                selection_product_ids))
+        else:
+            pricelist_id = self.id
+            domain = [('excel_pricelist_id', '=', pricelist_id)]
+            _logger.info('Restore pricelist: %s' % self.name)
+
         # 1. Restore as product (template/product):
         dump_pool = self.env['product.product.dump']
         product_pool = self.env['product.product']
-        for dump in dump_pool.search([
-                ('excel_pricelist_id', '=', pricelist_id)]):
+        for dump in dump_pool.search(domain):
             product_pool.create({
                 'name': dump.name,
                 'product_link': dump.product_link,
@@ -426,9 +434,9 @@ class ExcelPricelistItem(models.Model):
                 # Mandatory fields:
                 'type': dump.type,
                 'categ_id': dump.categ_id.id,
-                'responsible_id': dump.responsible_id.id or 1,
-                'tracking': dump.tracking,
-                'sale_line_warn': dump.sale_line_warn,
+                'responsible_id': dump.responsible_id.id,  # or 1,
+                'tracking': dump.tracking,  # or 'none',
+                'sale_line_warn': dump.sale_line_warn,  # or 'no-message'
 
             })
 
@@ -462,14 +470,14 @@ class ExcelPricelistItem(models.Model):
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id, responsible_id,
+                uom_po_id, responsible_id, tracking, sale_line_warn,
                 create_uid, create_date, write_uid, write_date
             )
             SELECT
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id, responsible_id,
+                uom_po_id, responsible_id, tracking, sale_line_warn,
                 create_uid, create_date, write_uid, write_date
             FROM product_template
             WHERE
@@ -658,6 +666,14 @@ class ProductProductDump(models.Model):
     _description = 'Product Dump'
     _order = 'default_code'
 
+    @api.multi
+    def restore_this(self):
+        """ Restore only selected
+        """
+        pricelist_pool = self.env['excel.pricelist.item']
+        pricelist_pool.with_context(
+            selection_product_ids=self.mapped(
+                'id')).restore_pricelist_odoo_table()
     # product.template
     name = fields.Char('Name', size=80)
     product_link = fields.Char('Name', size=80)
