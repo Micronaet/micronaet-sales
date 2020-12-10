@@ -397,41 +397,37 @@ class ExcelPricelistItem(models.Model):
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
-        # 1. Restore as template:
-        query = """ 
-            INSERT INTO product_template(
-                name, product_link, active, sale_ok, purchase_ok,
-                excel_pricelist_id, pricelist_version, real_code,
-                default_code, uom_id, list_price
-            )
-            SELECT
-                name, product_link, active, sale_ok, purchase_ok,
-                excel_pricelist_id, pricelist_version, real_code,
-                default_code, uom_id, list_price
-            FROM product_product_dump
-            WHERE 
-                id IN (
-                    SELECT id 
-                    FROM product_product_dump 
-                    WHERE excel_pricelist_id=%s);
-            RETURNING id;                    
-            """
-        parameters = (self.id, )
-        template_ids = self.execute_query(query, parameters)
-
-        # 2. Restore product.product
+        # 1. Restore as product (template/product):
+        dump_pool = self.env['product.product.dump']
         product_pool = self.env['product.product']
-        for item_id in template_ids:
+        for dump in dump_pool.search([('excel_pricelist_id', '=', self.id)]):
             product_pool.create({
-                'product_tmpl_id': item_id,
+                'name': dump.name,
+                'product_link': dump.product_link,
+                'active': dump.active,
+                'sale_ok': dump.sale_ok,
+                'purchase_ok': dump.purchase_ok,
+                'excel_pricelist_id': dump.excel_pricelist_id,
+                'pricelist_version': dump.pricelist_version,
+                'real_code': dump.real_code,
+                'default_code': dump.default_code,
+                'uom_id:': dump.uom_id.id,
+                'list_price': dump.list_price,
+                # TODO:
+                'uom_po_id': dump.uom_id.id,
+                'type': 'consu',
+                'categ_id': 1,
+                'responsible_id': 1,
+                'tracking': 'none',
+                'sale_line_warn': 'no-message',
             })
 
         # 3. Clean dump table:
-        query = """ 
+        query = """
             DELETE FROM product_product_dump
             WHERE id IN (
-                SELECT id 
-                FROM product_product_dump 
+                SELECT id
+                FROM product_product_dump
                 WHERE excel_pricelist_id=%s);
             """
         parameters = (self.id, )
@@ -451,7 +447,7 @@ class ExcelPricelistItem(models.Model):
             'Dump all unused product and remove from original object')
 
         # 1. Create dump of unused in sold product:
-        query = """ 
+        query = """
             INSERT INTO product_product_dump(
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
@@ -462,14 +458,14 @@ class ExcelPricelistItem(models.Model):
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price
             FROM product_template
-            WHERE 
+            WHERE
                 id IN (
-                    SELECT id 
-                    FROM product_template 
+                    SELECT id
+                    FROM product_template
                     WHERE excel_pricelist_id=%s)
                 AND id NOT IN (
-                    SELECT product_tmpl_id 
-                    FROM product_product 
+                    SELECT product_tmpl_id
+                    FROM product_product
                     WHERE id IN
                         (SELECT product_id FROM sale_order_line)
                     );
