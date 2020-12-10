@@ -397,17 +397,19 @@ class ExcelPricelistItem(models.Model):
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
+        pricelist_id = self.id
         # 1. Restore as product (template/product):
         dump_pool = self.env['product.product.dump']
         product_pool = self.env['product.product']
-        for dump in dump_pool.search([('excel_pricelist_id', '=', self.id)]):
+        for dump in dump_pool.search([
+                ('excel_pricelist_id', '=', pricelist_id)]):
             product_pool.create({
                 'name': dump.name,
                 'product_link': dump.product_link,
                 'active': dump.active,
                 'sale_ok': dump.sale_ok,
                 'purchase_ok': dump.purchase_ok,
-                'excel_pricelist_id': dump.excel_pricelist_id,
+                'excel_pricelist_id': pricelist_id,
                 'pricelist_version': dump.pricelist_version,
                 'real_code': dump.real_code,
                 'default_code': dump.default_code,
@@ -474,7 +476,6 @@ class ExcelPricelistItem(models.Model):
         self.execute_query(query, parameters)
 
         # 2. Call original method for remove all pricelist (no hide remain):
-        pdb.set_trace()
         self.with_context({
             'remain_not_hidden': True,
         }).remove_pricelist_form_file()
