@@ -426,7 +426,7 @@ class ExcelPricelistItem(models.Model):
                 # Mandatory fields:
                 'type': dump.type,
                 'categ_id': dump.categ_id.id,
-                'responsible_id': dump.responsible_id.id,
+                'responsible_id': dump.responsible_id.id or 1,
                 'tracking': dump.tracking,
                 'sale_line_warn': dump.sale_line_warn,
 
@@ -462,14 +462,14 @@ class ExcelPricelistItem(models.Model):
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id,
+                uom_po_id, responsible_id,
                 create_uid, create_date, write_uid, write_date
             )
             SELECT
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id,
+                uom_po_id, responsible_id,
                 create_uid, create_date, write_uid, write_date
             FROM product_template
             WHERE
