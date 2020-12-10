@@ -417,7 +417,7 @@ class ExcelPricelistItem(models.Model):
                 'active': dump.active,
                 'sale_ok': dump.sale_ok,
                 'purchase_ok': dump.purchase_ok,
-                'excel_pricelist_id': dump.pricelist_id.id,
+                'excel_pricelist_id': dump.excel_pricelist_id.id,
                 'pricelist_version': dump.pricelist_version,
                 'real_code': dump.real_code,
                 'default_code': dump.default_code,

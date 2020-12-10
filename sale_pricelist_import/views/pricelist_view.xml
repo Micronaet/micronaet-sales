@@ -24,6 +24,9 @@
             <field name="model">product.product.dump</field>
             <field name="arch" type="xml">
                 <form string="Pricelist">
+                    <header>
+                        <button name="restore_this" type="object" string="Restore this"/>
+                    </header>
                     <sheet>
                         <group col="4">
                             <field name="excel_pricelist_id" />
@@ -68,6 +71,7 @@
 
                     <field name="purchase_ok" />
                     <field name="uom_id" />
+                    <button name="restore_this" type="object" string="Restore this"/>
                 </tree>
             </field>
         </record>
