@@ -146,7 +146,7 @@
 
                         <button name="remove_pricelist_form_file" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}"/>
 
-                        <button name="new_pricelist_form_file" type="object" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}"/>
+                        <button name="new_pricelist_form_file" type="object" string="New version" attrs="{'invisible': [('state', 'in', ('draft', 'dumped'))]}"/>
 
                         <button name="return_original_pricelist" type="object" string="Download stored" colspan="1" attrs="{'invisible': [('state', '=', 'draft')]}" class="oe_highlight"/>
 
@@ -230,7 +230,7 @@
 
                    <!--<button name="remove_pricelist_form_file" icon="fa-bitucket fa-2x" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}" invisible="context.get('my_version')"/>-->
 
-                    <button name="new_pricelist_form_file" type="object" icon="fa-plus-square fa-2x" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}" invisible="context.get('my_version')"/>
+                    <button name="new_pricelist_form_file" type="object" icon="fa-plus-square fa-2x" string="New version" attrs="{'invisible': [('state', 'in', ('draft', 'dumped'))]}" invisible="context.get('my_version')"/>
 
                     <button name="return_original_pricelist" type="object" icon="fa-cloud-download fa-2x" string="Download stored" colspan="1" attrs="{'invisible': [('state', '=', 'draft')]}" class="oe_highlight" invisible="context.get('my_version')"/>
                     <field name="state"/>
@@ -257,7 +257,7 @@
                     <button name="hide_pricelist_form_file" type="object" icon="fa-star-o fa-2x" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}" invisible="context.get('my_version')"/>
                     <button name="show_pricelist_form_file" type="object" icon="fa-star fa-2x" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}" invisible="context.get('my_version')"/>
 
-                    <button name="new_pricelist_form_file" type="object" icon="fa-plus-square fa-2x" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}" invisible="context.get('my_version')"/>
+                    <button name="new_pricelist_form_file" type="object" icon="fa-plus-square fa-2x" string="New version" attrs="{'invisible': [('state', 'in', ('draft', 'dumped'))]}" invisible="context.get('my_version')"/>
 
                     <button name="return_original_pricelist" type="object" icon="fa-cloud-download fa-2x" string="Download stored" colspan="1" attrs="{'invisible': [('state', '=', 'draft')]}" class="oe_highlight" invisible="context.get('my_version')"/>
                     <field name="state"/>
