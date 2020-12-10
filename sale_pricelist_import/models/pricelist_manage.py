@@ -419,13 +419,16 @@ class ExcelPricelistItem(models.Model):
                 default_code, uom_id, list_price
             FROM product_template
             WHERE 
-                product_tmpl_id IN (
+                id NOT IN (
                     SELECT id 
                     FROM product_template 
                     WHERE excel_pricelist_id=%s)
                 AND id NOT IN (
-                    SELECT product_id 
-                    FROM sale_order_line);
+                    SELECT product_tmpl_id 
+                    FROM product_product 
+                    WHERE id IN
+                        (SELECT product_id FROM sale_order_line)
+                    );
             """
         parameters = (self.id, )
         self.execute_query(query, parameters)
