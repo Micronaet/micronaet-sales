@@ -397,7 +397,6 @@ class ExcelPricelistItem(models.Model):
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
-        pdb.set_trace()
         selection_product_ids = self.env.context.get('selection_product_ids')
         if selection_product_ids:
             domain = [('id', 'in', selection_product_ids)]
@@ -411,7 +410,8 @@ class ExcelPricelistItem(models.Model):
         # 1. Restore as product (template/product):
         dump_pool = self.env['product.product.dump']
         product_pool = self.env['product.product']
-        for dump in dump_pool.search(domain):
+        dumps = dump_pool.search(domain)
+        for dump in dumps:
             product_pool.create({
                 'name': dump.name,
                 'product_link': dump.product_link,
@@ -441,21 +441,25 @@ class ExcelPricelistItem(models.Model):
 
             })
 
-        # 3. Clean dump table:
-        query = """
-            DELETE FROM product_product_dump
-            WHERE id IN (
-                SELECT id
-                FROM product_product_dump
-                WHERE excel_pricelist_id=%s);
-            """
-        parameters = (self.id, )
-        self.execute_query(query, parameters)
+        if selection_product_ids:
+            # 3a. Clean dump table:
+            dumps.unlink()
+        else:
+            # 3b. Clean dump table:
+            query = """
+                DELETE FROM product_product_dump
+                WHERE id IN (
+                    SELECT id
+                    FROM product_product_dump
+                    WHERE excel_pricelist_id=%s);
+                """
+            parameters = (self.id, )
+            self.execute_query(query, parameters)
 
-        # 4. Update status:
-        return self.write({
-                'state': 'available',
-            })
+            # 4. Update status:
+            return self.write({
+                    'state': 'available',
+                })
 
     # Dump pricelist:
     @api.multi
