@@ -397,6 +397,7 @@ class ExcelPricelistItem(models.Model):
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
+        pdb.set_trace()
         selection_product_ids = self.env.context.get('selection_product_ids')
         if selection_product_ids:
             domain = [('id', 'in', selection_product_ids)]
