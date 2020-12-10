@@ -426,7 +426,18 @@ class ExcelPricelistItem(models.Model):
                 'product_tmpl_id': item_id,
             })
 
-        # 3. Update status:
+        # 3. Clean dump table:
+        query = """ 
+            DELETE FROM product_product_dump
+            WHERE id IN (
+                SELECT id 
+                FROM product_product_dump 
+                WHERE excel_pricelist_id=%s);
+            """
+        parameters = (self.id, )
+        self.execute_query(query, parameters)
+
+        # 4. Update status:
         return self.write({
                 'state': 'available',
             })
