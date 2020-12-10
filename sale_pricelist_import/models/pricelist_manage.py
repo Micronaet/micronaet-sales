@@ -461,15 +461,15 @@ class ExcelPricelistItem(models.Model):
             INSERT INTO product_product_dump(
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
-                default_code, uom_id, list_price, categ_id, type
-                uom_po_id
+                default_code, uom_id, list_price, categ_id, type,
+                uom_po_id,
                 create_uid, create_date, write_uid, write_date
             )
             SELECT
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id
+                uom_po_id,
                 create_uid, create_date, write_uid, write_date
             FROM product_template
             WHERE
