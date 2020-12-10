@@ -419,7 +419,7 @@ class ExcelPricelistItem(models.Model):
                 default_code, uom_id, list_price
             FROM product_template
             WHERE 
-                id NOT IN (
+                id IN (
                     SELECT id 
                     FROM product_template 
                     WHERE excel_pricelist_id=%s)
