@@ -414,14 +414,22 @@ class ExcelPricelistItem(models.Model):
                 'real_code': dump.real_code,
                 'default_code': dump.default_code,
                 'uom_id:': dump.uom_id.id,
+                'uom_po_id': dump.uom_po_id.id,
                 'list_price': dump.list_price,
-                # TODO:
-                'uom_po_id': dump.uom_id.id,
-                'type': 'consu',
-                'categ_id': 1,
-                'responsible_id': 1,
-                'tracking': 'none',
-                'sale_line_warn': 'no-message',
+
+                # Auto fields:
+                'create_uid': dump.create_uid.id,
+                'create_date': dump.create_date,
+                'write_uid': dump.write_uid.id,
+                'write_date': dump.write_date,
+
+                # Mandatory fields:
+                'type': dump.type,
+                'categ_id': dump.categ_id.id,
+                'responsible_id': dump.responsible_id.id,
+                'tracking': dump.tracking,
+                'sale_line_warn': dump.sale_line_warn,
+
             })
 
         # 3. Clean dump table:
@@ -453,12 +461,16 @@ class ExcelPricelistItem(models.Model):
             INSERT INTO product_product_dump(
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
-                default_code, uom_id, list_price
+                default_code, uom_id, list_price, categ_id, type
+                uom_po_id
+                create_uid, create_date, write_uid, write_date
             )
             SELECT
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
-                default_code, uom_id, list_price
+                default_code, uom_id, list_price, categ_id, type,
+                uom_po_id
+                create_uid, create_date, write_uid, write_date
             FROM product_template
             WHERE
                 id IN (
@@ -667,20 +679,30 @@ class ProductProductDump(models.Model):
         comodel_name='product.uom',
         string='UOM',
     )
+    uom_po_id = fields.Many2one(
+        comodel_name='product.uom',
+        string='UOM Po',
+    )
     list_price = fields.Float(
         string='List price',
     )
+    type = fields.Char('Type')
+    categ_id = fields.Many2one('product.category', 'Category')
+    responsible_id = fields.Many2one('res.users', 'Responsibile')
+    tracking = fields.Char('Tracking')
+    sale_line_warn = fields.Char('Sale line warn.')
+
+    create_uid = fields.Many2one('res.users', 'Create by')
+    write_uid = fields.Many2one('res.users', 'Write by')
+    create_date = fields.Datetime('Create')
+    write_date = fields.Datetime('Write')
+
     # service_type 'manual'
     # type 'service', 'consu', 'manual'
     # invoice_policy 'order'
-    # categ_id 1
     # rental f
-    # lst_price
-    # product_tmpl_id
     # barcode
     # active
     # default_code
     # volume
     # weight
-
-    # create_date, write_date, create_uid, write_uid
