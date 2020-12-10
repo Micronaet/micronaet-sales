@@ -155,6 +155,7 @@
                     <field name="order_id" invisible="1" />
                     <field name="name" />
                     <field name="title" />
+                    <field name="discount_mode" />
                     <field name="show_header" string="Header"/>
                     <field name="show_detail" string="Detail"/>
                     <field name="show_price" string="Price"/>
@@ -199,6 +200,8 @@
 
                             <field name="real_total" readonly="1"/>
                             <field name="total" />
+
+                            <field name="discount_mode" />
 
                             <separator string="Order:" colspan="4" />
                             <field name="hide_block" />
@@ -272,6 +275,7 @@
                 </field>
                 <!--Discount block-->
                 <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="discount_mode" />
                     <button name="update_all_multi_discount" type="object" string="Default multi discount" colspan="1" groups="sale.group_discount_per_so_line" help="Setup all line with this discount rate!" confirm="Set all lines with this discount value (no undo operation), confirm?"/>
                     <field name="discount_multi_rate" groups="sale.group_discount_per_so_line" nolabel="1" colspan="1"/>
                 </xpath>
