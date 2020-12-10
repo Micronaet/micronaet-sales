@@ -141,6 +141,12 @@
                      parent="menu_product_pricelist_import"
                      sequence="20"
                      action="sale_pricelist_import.product_product_editable_action"/>
+                <menuitem
+                     name="Dump product"
+                     id="product_product_dump_menu"
+                     parent="menu_product_pricelist_import"
+                     action="sale_pricelist_import.product_product_dump_action"
+                     sequence="30"/>
 
              <menuitem
                  id="menu_sale_order_text_action"
