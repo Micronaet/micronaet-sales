@@ -141,6 +141,9 @@
                         <button name="hide_pricelist_form_file" type="object" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}"/>
                         <button name="show_pricelist_form_file" type="object" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}"/>
 
+                        <button name="dump_pricelist_odoo_table" type="object" icon="fa-stack-overflow fa-2x" string="Dump product" attrs="{'invisible': [('state', '!=', 'available')]}" invisible="context.get('my_version')"/>
+                        <button name="restore_pricelist_odoo_table" type="object" icon="fa-arrows-alt fa-2x" string="Restore product" attrs="{'invisible': [('state', '!=', 'dumped')]}" invisible="context.get('my_version')"/>
+
                         <button name="remove_pricelist_form_file" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}"/>
 
                         <button name="new_pricelist_form_file" type="object" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}"/>
@@ -225,7 +228,7 @@
                     <button name="hide_pricelist_form_file" type="object" icon="fa-star-o fa-2x" string="Hide product" attrs="{'invisible': [('state', '!=', 'available')]}" invisible="context.get('my_version')"/>
                     <button name="show_pricelist_form_file" type="object" icon="fa-star fa-2x" string="Show product" attrs="{'invisible': [('state', '!=', 'hide')]}" invisible="context.get('my_version')"/>
 
-                    <!--<button name="remove_pricelist_form_file" icon="fa-bitucket fa-2x" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}" invisible="context.get('my_version')"/>-->
+                   <!--<button name="remove_pricelist_form_file" icon="fa-bitucket fa-2x" type="object" string="Remove product" attrs="{'invisible': [('state', 'not in', ('available', 'hide'))]}" invisible="context.get('my_version')"/>-->
 
                     <button name="new_pricelist_form_file" type="object" icon="fa-plus-square fa-2x" string="New version" attrs="{'invisible': [('state', 'in', ('draft', ))]}" invisible="context.get('my_version')"/>
 

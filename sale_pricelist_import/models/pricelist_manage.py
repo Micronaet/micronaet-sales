@@ -393,6 +393,12 @@ class ExcelPricelistItem(models.Model):
             })
         return True
 
+    @api.multi
+    def restore_pricelist_odoo_table(self):
+        """ Restore dumped database in available state
+        """
+        return True
+
     # Dump pricelist:
     @api.multi
     def dump_pricelist_odoo_table(self):
