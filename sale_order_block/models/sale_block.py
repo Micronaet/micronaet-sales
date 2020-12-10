@@ -59,7 +59,19 @@ class SaleOrderBlockGroup(models.Model):
     def has_discount(self):
         """ Check if there's one line with discount
         """
-        return any([line.discount_multi_rate for line in self.line_ids])
+        # Read discount mode:
+        if self.discount_mode == 'header':
+            discount_mode = self.order_id.discount_mode
+        else:
+            discount_mode = self.discount_mode
+
+        # Apply discount mode:
+        if discount_mode == 'all':
+            return True
+        elif discount_mode == 'never':
+            return False
+        else:  # discount_mode: present
+            return any([line.discount_multi_rate for line in self.line_ids])
 
     # Button events:
     @api.multi
@@ -173,6 +185,15 @@ class SaleOrderBlockGroup(models.Model):
     # 'show_subtotal = fields.Boolean('Show Subtotal', default=True)
     show_total = fields.Boolean('Show total', default=True)
 
+    discount_mode = fields.Selection(
+        string='Discount mode',
+        selection=[
+            ('all', 'All'),
+            ('never', 'Never'),
+            ('present', 'If present value in block'),
+            ('header', 'As in header'),
+        ], required=True, default='header')
+
 
 class AccountPaymentTerm(models.Model):
     """ Model name: Account payment term
@@ -219,6 +240,7 @@ class ProductTemplateExtraFields(models.Model):
         self.default_code = (self.default_code or '').upper()
 
     product_link = fields.Char('Product link', size=120)
+
 
 class ProductProductExtraFields(models.Model):
     """ Model name: Product product
@@ -475,6 +497,13 @@ class SaleOrder(models.Model):
         string='Report text',
         help='Extra document add after report text',
     )
+    discount_mode = fields.Selection(
+        string='Discount mode',
+        selection=[
+            ('all', 'All'),
+            ('never', 'Never'),
+            ('present', 'If present value in block'),
+        ], required=True, default='present')
 
 
 class SaleOrderLine(models.Model):
