@@ -444,6 +444,8 @@ class ExcelPricelistItem(models.Model):
         if selection_product_ids:
             # 3a. Clean dump table:
             dumps.unlink()
+
+            # TODO update state if is last?
         else:
             # 3b. Clean dump table:
             query = """
