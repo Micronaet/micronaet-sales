@@ -396,7 +396,9 @@ class ExcelPricelistItem(models.Model):
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
-        return True
+        return self.write({
+                'state': 'available',
+            })
 
     # Dump pricelist:
     @api.multi
