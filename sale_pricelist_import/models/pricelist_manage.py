@@ -392,10 +392,41 @@ class ExcelPricelistItem(models.Model):
             })
         return True
 
+    # Restore:
     @api.multi
     def restore_pricelist_odoo_table(self):
         """ Restore dumped database in available state
         """
+        # 1. Restore as template:
+        query = """ 
+            INSERT INTO product_template(
+                name, product_link, active, sale_ok, purchase_ok,
+                excel_pricelist_id, pricelist_version, real_code,
+                default_code, uom_id, list_price
+            )
+            SELECT
+                name, product_link, active, sale_ok, purchase_ok,
+                excel_pricelist_id, pricelist_version, real_code,
+                default_code, uom_id, list_price
+            FROM product_product_dump
+            WHERE 
+                id IN (
+                    SELECT id 
+                    FROM product_product_dump 
+                    WHERE excel_pricelist_id=%s);
+            RETURNING id;                    
+            """
+        parameters = (self.id, )
+        template_ids = self.execute_query(query, parameters)
+
+        # 2. Restore product.product
+        product_pool = self.env['product.product']
+        for item_id in template_ids:
+            product_pool.create({
+                'product_tmpl_id': item_id,
+            })
+
+        # 3. Update status:
         return self.write({
                 'state': 'available',
             })
