@@ -435,10 +435,9 @@ class ExcelPricelistItem(models.Model):
                 # Mandatory fields:
                 'type': dump.type,
                 'categ_id': dump.categ_id.id,
-                'responsible_id': dump.responsible_id.id,  # or 1,
-                'tracking': dump.tracking,  # or 'none',
+                'responsible_id': 1,  # dump.responsible_id.id,  # or 1,
+                'tracking': 'none',  # dump.tracking,  # or 'none',
                 'sale_line_warn': dump.sale_line_warn,  # or 'no-message'
-
             })
 
         if selection_product_ids:
@@ -472,19 +471,20 @@ class ExcelPricelistItem(models.Model):
             'Dump all unused product and remove from original object')
 
         # 1. Create dump of unused in sold product:
+        # XXX REMOVED: responsible_id, tracking,
         query = """
             INSERT INTO product_product_dump(
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id, responsible_id, tracking, sale_line_warn,
+                uom_po_id, sale_line_warn,
                 create_uid, create_date, write_uid, write_date
             )
             SELECT
                 name, product_link, active, sale_ok, purchase_ok,
                 excel_pricelist_id, pricelist_version, real_code,
                 default_code, uom_id, list_price, categ_id, type,
-                uom_po_id, responsible_id, tracking, sale_line_warn,
+                uom_po_id, sale_line_warn,
                 create_uid, create_date, write_uid, write_date
             FROM product_template
             WHERE
