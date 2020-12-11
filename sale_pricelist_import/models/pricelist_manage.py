@@ -435,8 +435,6 @@ class ExcelPricelistItem(models.Model):
                 # Mandatory fields:
                 'type': dump.type,
                 'categ_id': dump.categ_id.id,
-                'responsible_id': 1,  # dump.responsible_id.id,  # or 1,
-                'tracking': 'none',  # dump.tracking,  # or 'none',
                 'sale_line_warn': dump.sale_line_warn,  # or 'no-message'
             })
 
@@ -471,7 +469,6 @@ class ExcelPricelistItem(models.Model):
             'Dump all unused product and remove from original object')
 
         # 1. Create dump of unused in sold product:
-        # XXX REMOVED: responsible_id, tracking,
         query = """
             INSERT INTO product_product_dump(
                 name, product_link, active, sale_ok, purchase_ok,
@@ -682,8 +679,8 @@ class ProductProductDump(models.Model):
             selection_product_ids=self.mapped(
                 'id')).restore_pricelist_odoo_table()
     # product.template
-    name = fields.Char('Name', size=80)
-    product_link = fields.Char('Name', size=80)
+    name = fields.Char('Name')
+    product_link = fields.Char('Name', size=200)
     active = fields.Boolean('Active')
     sale_ok = fields.Boolean('Sale OK')
     purchase_ok = fields.Boolean('Purchase OK')
@@ -711,8 +708,6 @@ class ProductProductDump(models.Model):
     )
     type = fields.Char('Type')
     categ_id = fields.Many2one('product.category', 'Category')
-    responsible_id = fields.Many2one('res.users', 'Responsibile')
-    tracking = fields.Char('Tracking')
     sale_line_warn = fields.Char('Sale line warn.')
 
     create_uid = fields.Many2one('res.users', 'Create by')

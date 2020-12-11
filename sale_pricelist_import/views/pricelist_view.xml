@@ -47,10 +47,7 @@
                             <field name="uom_id" />
 
                             <field name="type" />
-                            <field name="responsible_id" />
-
                             <field name="categ_id" />
-                            <field name="tracking" />
 
                             <field name="sale_line_warn" />
 
