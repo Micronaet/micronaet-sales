@@ -45,14 +45,13 @@ class ReportSaleOrderBlock(models.AbstractModel):
     def get_price(self, line):
         """ Extract price depend on discount visibility:
         """
-        pdb.set_trace()
         if line.block_id.has_discount()[0]:
+            return line.price_unit
+        else:
             if line.product_uom_qty:
                 return line.price_subtotal / line.product_uom_qty
             else:
                 return 0.0
-        else:
-            return line.price_unit
 
     @api.model
     def show_the_block(self, block, data=None):
