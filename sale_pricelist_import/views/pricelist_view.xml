@@ -45,6 +45,20 @@
 
                             <field name="purchase_ok" />
                             <field name="uom_id" />
+
+                            <field name="type" />
+                            <field name="responsible_id" />
+
+                            <field name="categ_id" />
+                            <field name="tracking" />
+
+                            <field name="sale_line_warn" />
+
+                            <field name="create_uid" />
+                            <field name="create_date" />
+
+                            <field name="write_uid" />
+                            <field name="write_date" />
                         </group>
                     </sheet>
                 </form>
