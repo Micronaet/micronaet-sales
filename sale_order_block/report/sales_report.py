@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import logging
+import pdb
 from odoo import fields, api, models
 
 _logger = logging.getLogger(__name__)
@@ -34,11 +35,25 @@ class ReportSaleOrderBlock(models.AbstractModel):
             # Parser functions:
             'clean_name': self.clean_name,
             'show_the_block': self.show_the_block,
+            'get_price': self.get_price,
         }
 
     # -------------------------------------------------------------------------
     # Parser function:
     # -------------------------------------------------------------------------
+    @api.model
+    def get_price(self, line):
+        """ Extract price depend on discount visibility:
+        """
+        pdb.set_trace()
+        if line.block_id.has_discount()[0]:
+            if line.product_uom_qty:
+                return line.price_subtotal / line.product_uom_qty
+            else:
+                return 0.0
+        else:
+            return line.price_unit
+
     @api.model
     def show_the_block(self, block, data=None):
         """ Check if the block need to be showed

@@ -88,7 +88,7 @@
                                                         </t>
                                                     </td>
                                                     <td class="text-right"><span t-esc="l.product_uom_qty"/> <span t-esc="(l.product_uom and l.product_uom.name) or ''"/></td>
-                                                    <td t-if="block.show_price" class="text-right"><span t-esc="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                                    <td t-if="block.show_price" class="text-right"><span t-esc="get_price(l)" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
                                                     <!--TODO format currency and symbol-->
                                                     <td t-if="block.show_price and show_discount" class="text-right"><span t-esc="l.discount_multi_rate" /></td>
                                                     <td t-if="block.show_price" class="text-right"><span t-esc="l.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
