@@ -169,11 +169,11 @@ for order in order_pool.browse(order_ids):
         default_code = product.default_code
         if not default_code:
             default_code = '#%s' % product.id
-        
-        product_name = product.name            
+
+        product_name = product.name
         line_name = line.name
-            
-        # Clean if present product/line code:    
+
+        # Clean if present product/line code:
         if ']' in line_name:
             line_name = ''.join(line_name.split(']')[1:])
 
@@ -183,7 +183,7 @@ for order in order_pool.browse(order_ids):
                 map_code,
                 line_name,
                 )
-                        
+
         detail = '%s%-24s%-40s%-3s%-40s%15.2f%15.2f%-30s%-4s\r' % (
             header,
             trim_text(clean_text(default_code), 24),
@@ -221,7 +221,7 @@ for order in order_pool.browse(order_ids):
     result = account_file.readline()
     account_file.close()
     if result.startswith('OK'):
-        if not update_id:
+        if update_id:
             partner_pool.write([update_id], {
                 'ref': result.split(';')[-1].strip(),
             })
