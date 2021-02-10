@@ -122,8 +122,8 @@
 
                             <!-- END OF PAGE: -->
                             <div class="row">
-                                <div class="col-xs-12" >
-                                    <u><strong>N.B.: I prezzi si intendono esclusi di IVA (ove applicata).</strong><br/></u>
+                                <div class="col-xs-12" align="center">
+                                    <u><strong><span t-esc="'TUTTI I PREZZI SONO NETTI E CON IVA ESCLUSA' if o.discount_mode == 'all' else 'TUTTI I PREZZI SONO IVA ESCLUSA'" /></strong><br/></u>
                                     <strong t-if="o.payment_term_id">TERMINI DI PAGAMENTO:</strong> <span t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/>
                                 </div>
                             </div>
