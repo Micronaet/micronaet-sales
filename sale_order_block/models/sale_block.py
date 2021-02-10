@@ -192,7 +192,7 @@ class SaleOrderBlockGroup(models.Model):
             ('never', 'Never'),
             ('present', 'If present value in block'),
             ('header', 'As in header'),
-        ], required=True, default='header',
+        ], required=True, default='never',
         help='Indica se visualizzare la colonna sconto in stampa',
     )
 
