@@ -57,7 +57,7 @@
                                     <t t-if="block.show_header">
                                         <h3 t-esc="(block.title or '/').upper()" style="page-break-after: avoid"/>
                                     </t>
-                                    <div t-raw="block.pre_text or ''" style="page-break-after: avoid"/>
+                                    <div t-raw="block.pre_text or ''" style="page-break-after: avoid" t-if="block.pre_text"/>
                                     <t t-if="block.show_detail">
                                         <table class="table table-condensed">
                                             <!-- Detail header -->
