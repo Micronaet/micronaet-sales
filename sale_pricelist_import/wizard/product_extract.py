@@ -44,9 +44,19 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
     def excel_extract(self):
         """ Extract excel movement for selected order
         """
-        excel_pool = self.env['excel.writer']
+        report_pool = self.env['excel.report']
         product_pool = self.env['product.product']
         line_pool = self.env['sale.order.line']
+        user_pool = self.env['res.users']
+
+        # Preload sold product:
+        lines = line_pool.search([])
+        sold_product = [line.product_id for line in lines]
+
+        # Preload User
+        creators = {}
+        for user in user_pool.search([]):
+            creators[user.id] = user.name
 
         # Domain generation:
         domain = [
@@ -56,53 +66,34 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
 
         if self.start_code:
             domain.append(
-                ('default_code', '%ilike', '%s%%' % self.start_code))
+                ('default_code', '=ilike', '%s%%' % self.start_code))
 
         # ---------------------------------------------------------------------
         #                       Excel Extract:
         # ---------------------------------------------------------------------
         ws_name = 'Prodotti manuali'
-        excel_pool.create_worksheet(ws_name)
-
-        # ---------------------------------------------------------------------
-        # Format:
-        # ---------------------------------------------------------------------
-        excel_pool.set_format()
-        f_title = excel_pool.get_format('title')
-        f_header = excel_pool.get_format('header')
-
-        f_white_text = excel_pool.get_format('text')
-        # f_green_text = excel_pool.get_format('bg_green')
-        # f_yellow_text = excel_pool.get_format('bg_yellow')
-
-        f_white_number = excel_pool.get_format('number')
-        # f_green_number = excel_pool.get_format('bg_green_number')
-        # f_yellow_number = excel_pool.get_format('bg_yellow_number')
+        report_pool.create_worksheet(ws_name, format_code='DEFAULT')
 
         # ---------------------------------------------------------------------
         # Setup page:
         # ---------------------------------------------------------------------
-        excel_pool.column_width(ws_name, [
-            20, 15, 25, 2, 2, 20, 10,
-            8, 8, 8, 8, 8, 8, 8, 8,
-            20, 20,
+        report_pool.column_width(ws_name, [
+            18, 18, 40, 8, 5, 15, 20, 50,
             ])
 
         # ---------------------------------------------------------------------
         # Extra data:
         # ---------------------------------------------------------------------
-        now = fields.Datetime.now()
-
         row = 0
-        excel_pool.write_xls_line(ws_name, row, [
+        report_pool.write_xls_line(ws_name, row, [
             'Filtro = Stato prodotto manuali (non servizio), inizio codice: "%s"' % (
                 self.start_code or '',
-                )], default_format=f_title)
+                )], style_code='title')
 
         row += 1
-        excel_pool.write_xls_line(ws_name, row, [
-             'Codice', 'Codice reale', 'Nome', 'UM', 'Usato',
-             ], default_format=f_header)
+        report_pool.write_xls_line(ws_name, row, [
+             'Codice', 'Codice reale', 'Nome', 'UM', 'Usato', 'Creazione', 'Utente', 'Note'
+             ], style_code='header')
 
         # ---------------------------------------------------------------------
         # Read data
@@ -113,21 +104,26 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         for product in products:  # TODO sort?
             row += 1
 
-            'Codice', 'Codice reale', 'Nome', 'UM', 'Usato',
-
-            excel_pool.write_xls_line(ws_name, row, [
+            if product.real_code:
+                note = 'Prodotto residuo da eliminazione listino'
+            else:
+                note = ''
+            report_pool.write_xls_line(ws_name, row, [
                 # description
                 product.default_code,
                 product.real_code,
                 product.name,
                 product.uom_id.name,
-                '',  # TODO check in order
-                ], default_format=f_white_text)
+                'X' if product in sold_product else '',  # TODO check in order
+                product.create_date,
+                product.create_uid.name,
+                note,
+                ], style_code='text')
 
         # ---------------------------------------------------------------------
         # Save file:
         # ---------------------------------------------------------------------
-        return excel_pool.return_attachment('Stato_prodotti_non_usati')
+        return report_pool.return_attachment('Stato_prodotti_non_usati')
 
     # -------------------------------------------------------------------------
     #                             COLUMNS DATA:
