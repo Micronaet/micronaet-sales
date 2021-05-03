@@ -27,6 +27,8 @@ import logging
 from odoo import api, fields, models, tools, exceptions, SUPERUSER_ID
 from odoo.addons import decimal_precision as dp
 from odoo.tools.translate import _
+import base64
+import xlrd
 
 
 _logger = logging.getLogger(__name__)
@@ -39,7 +41,68 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
     # -------------------------------------------------------------------------
     #                               BUTTON EVENT:
     # -------------------------------------------------------------------------
-    # Order phase:
+    # Import phase:
+    # -------------------------------------------------------------------------
+    # Workflow confirmed to pending (or ready if all line are ready)
+    # -------------------------------------------------------------------------
+    @api.multi
+    def import_pending_deletion(self):
+        """ Import sale order line selected where q. is present
+        """
+        product_pool = self.env['product.product']
+
+        # ---------------------------------------------------------------------
+        # Save passed file:
+        # ---------------------------------------------------------------------
+        b64_file = base64.decodebytes(self.file)
+        now = ('%s' % fields.Datetime.now())[:19]
+        filename = '/tmp/sale_%s.xlsx' % \
+                   now.replace(':', '_').replace('-', '_')
+        f = open(filename, 'wb')
+        f.write(b64_file)
+        f.close()
+
+        # ---------------------------------------------------------------------
+        # Open Excel file:
+        # ---------------------------------------------------------------------
+        try:
+            wb = xlrd.open_workbook(filename)
+        except:
+            raise exceptions.Warning(_('Cannot read XLS file'))
+
+        ws = wb.sheet_by_index(0)
+
+        # Check sheet mode:
+        sheet_mode = ws.cell_value(0, 0)
+        if sheet_mode != 'pricelist_manual_product':
+            raise exceptions.Warning(
+                'File di Excel non corretto, non è quello per la procedura di pulizia')
+
+        start_import = False
+        for row in range(ws.nrows):
+            line_ref = ws.cell_value(row, 0)
+            if not start_import and line_ref == 'ID':
+                start_import = True
+                _logger.info('%s. Header line' % row)
+                continue
+            if not start_import:
+                _logger.info('%s. Jump line' % row)
+                continue
+
+            # Extract needed data:
+            product_id = ws.cell_value(row, 0)
+            delete_code = ws.cell_value(row, 1)
+            if not product_id or not delete_code or delete_code not in 'xXsS':
+                continue  # Jump line not to be deleted
+
+            # Hide not delete:
+            product_pool.write([product_id], {
+                'active': False,
+                'sale_ok': False,
+                'purchase_ok': False,
+            })
+
+    # Extract phase:
     @api.multi
     def excel_extract(self):
         """ Extract excel movement for selected order
@@ -86,7 +149,7 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         # ---------------------------------------------------------------------
         row = 0
         report_pool.write_xls_line(ws_name, row, [
-            '', 'Filtro = Stato prodotto manuali (non servizio), inizio codice: "%s"' % (
+            'pricelist_manual_product', 'Filtro = Stato prodotto manuali (non servizio), inizio codice: "%s"' % (
                 self.start_code or '',
                 )], style_code='title')
 
@@ -104,7 +167,7 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         for product in products:  # TODO sort?
             row += 1
 
-            if product product in sold_product:
+            if product in sold_product:
                 used = 'X'
                 product_id = ''
                 delete = ''
@@ -141,4 +204,6 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
     # -------------------------------------------------------------------------
     start_code = fields.Char(
         string='Inizio codice')
-
+    file = fields.Binary(
+        'XLSX file', filters=None,
+        help='Importa il file con le selezioni da eliminare')
