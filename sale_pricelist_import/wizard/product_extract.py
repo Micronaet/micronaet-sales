@@ -174,8 +174,8 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
             domain, total))
         for product in products:  # TODO sort?
             row += 1
-            #if not (row % 50):
-            _logger.warning('Export %s of %s' % (row, total))
+            if not (row % 50):
+                _logger.warning('Export %s of %s' % (row, total))
             if product in sold_product:
                 used = 'X'
                 product_id = ''
