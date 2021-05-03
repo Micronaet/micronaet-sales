@@ -147,6 +147,12 @@
                      parent="menu_product_pricelist_import"
                      action="sale_pricelist_import.product_product_dump_action"
                      sequence="30"/>
+                <menuitem
+                    parent="menu_product_pricelist_import"
+                    sequence="50"
+                    id="menu_excel_pricelist_extract_product_wizard"
+                    action="sale_pricelist_import.action_excel_pricelist_extract_product_wizard"
+                    />
 
              <menuitem
                  id="menu_sale_order_text_action"

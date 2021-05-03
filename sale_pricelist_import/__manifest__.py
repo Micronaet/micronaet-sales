@@ -18,14 +18,15 @@
         'web',
         'mail',
         'confirm_dialog_wizard',
+        'xlsxwriter_report',
     ],
     'data': [
         'security/ir.model.access.csv',
         'views/pricelist_view.xml',
+        'wizard/product_extract_view.xml',
         # 'import_pricelist_scheduler.xml',
     ],
     'external_dependencies': {
-
     },
     'application': False,
     'installable': True,

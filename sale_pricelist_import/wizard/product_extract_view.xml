@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="view_excel_pricelist_extract_product_wizard" model="ir.ui.view">
+            <field name="name">Status extract wizard</field>
+            <field name="model">excel.pricelist.extract.product.wizard</field>
+            <field name="arch" type="xml">
+              <form string="Extract excel status:">
+                  <header>
+                      <button string="Cancel" class="btn-default" special="cancel" />
+                      <button name="excel_extract" string="Excel report" type="object" class="btn-primary" />
+                  </header>
+                  <sheet>
+                      <group colspan="4" col="2">
+                          <field name="start_code" />
+                      </group>
+                  </sheet>
+              </form>
+            </field>
+        </record>
+        <record id="action_excel_pricelist_extract_product_wizard" model="ir.actions.act_window">
+            <field name="name">Prodotti scollegati</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">excel.pricelist.extract.product.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_excel_pricelist_extract_product_wizard"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem
+            parent="excel_pricelist_item_menu"
+            sequence="50"
+            id="menu_excel_pricelist_extract_product_wizard"
+            action="action_excel_pricelist_extract_product_wizard"
+            />
+    </data>
+</openerp>
+
