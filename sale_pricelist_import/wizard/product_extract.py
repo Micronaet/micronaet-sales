@@ -78,21 +78,21 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         # Setup page:
         # ---------------------------------------------------------------------
         report_pool.column_width(ws_name, [
-            18, 18, 40, 8, 5, 15, 20, 50,
+            1, 8, 18, 18, 40, 8, 5, 15, 20, 50,
             ])
-
+        report_pool.column_hidden(ws_name, [0])
         # ---------------------------------------------------------------------
         # Extra data:
         # ---------------------------------------------------------------------
         row = 0
         report_pool.write_xls_line(ws_name, row, [
-            'Filtro = Stato prodotto manuali (non servizio), inizio codice: "%s"' % (
+            '', 'Filtro = Stato prodotto manuali (non servizio), inizio codice: "%s"' % (
                 self.start_code or '',
                 )], style_code='title')
 
         row += 1
         report_pool.write_xls_line(ws_name, row, [
-             'Codice', 'Codice reale', 'Nome', 'UM', 'Usato', 'Creazione', 'Utente', 'Note'
+             'ID', 'Rimuovi', 'Codice', 'Codice reale', 'Nome', 'UM', 'Usato', 'Creazione', 'Utente', 'Note'
              ], style_code='header')
 
         # ---------------------------------------------------------------------
@@ -104,17 +104,28 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         for product in products:  # TODO sort?
             row += 1
 
+            if product product in sold_product:
+                used = 'X'
+                product_id = ''
+                delete = ''
+            else:
+                used = ''
+                product_id = product.id
+                delete = 'X'
+
             if product.real_code:
                 note = 'Prodotto residuo da eliminazione listino'
             else:
                 note = ''
             report_pool.write_xls_line(ws_name, row, [
                 # description
+                product_id,
+                delete,
                 product.default_code,
                 product.real_code,
                 product.name,
                 product.uom_id.name,
-                'X' if product in sold_product else '',  # TODO check in order
+                used,
                 product.create_date,
                 product.create_uid.name,
                 note,
