@@ -22,6 +22,7 @@
 ###############################################################################
 
 import os
+import pdb
 import sys
 import logging
 from odoo import api, fields, models, tools, exceptions, SUPERUSER_ID
@@ -79,6 +80,7 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
                 'File di Excel non corretto, non è quello per la procedura di pulizia')
 
         start_import = False
+        delete_ids = []
         for row in range(ws.nrows):
             line_ref = ws.cell_value(row, 0)
             if not start_import and line_ref == 'ID':
@@ -96,11 +98,16 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
                 continue  # Jump line not to be deleted
 
             # Hide not delete:
-            product_pool.write([product_id], {
-                'active': False,
-                'sale_ok': False,
-                'purchase_ok': False,
-            })
+            product_id = int(product_id)
+            delete_ids.append(product_id)
+
+        delete_product = product_pool.browse(delete_ids)
+        _logger.info('Deleted #%s product' % len(delete_ids))
+        return delete_product.write({
+            'active': False,
+            'sale_ok': False,
+            'purchase_ok': False,
+        })
 
     # Extract phase:
     @api.multi

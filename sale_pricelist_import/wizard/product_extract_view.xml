@@ -10,15 +10,16 @@
                       <button string="Cancel" class="btn-default" special="cancel" />
                   </header>
                   <sheet>
-                      <group colspan="4" col="2">
+                      <group colspan="4" col="4">
+                          <separator string="Esportazione Excel" colspan="4"/>
                           <field name="start_code" colspan="2"/>
                           <button name="excel_extract" string="Excel report" type="object" class="btn-primary" />
                       </group>
 
-                      <group colspan="4" col="2">
+                      <group colspan="4" col="4">
+                          <separator string="Eliminazione da Excel" colspan="4"/>
                           <field name="file" colspan="2"/>
                           <button name="import_pending_deletion" string="Elimina selezione" type="object" class="btn-primary" attrs="{'invisible': [('file', '=', False)]}"/>
-
                       </group>
                   </sheet>
               </form>
