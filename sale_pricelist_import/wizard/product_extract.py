@@ -169,11 +169,13 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         # Read data
         # ---------------------------------------------------------------------
         products = product_pool.search(domain)
+        total = len(products)
         _logger.warning('Report status filter with: %s [Tot. %s]' % (
-            domain, len(products)))
+            domain, total))
         for product in products:  # TODO sort?
             row += 1
-
+            #if not (row % 50):
+            _logger.warning('Export %s of %s' % (row, total))
             if product in sold_product:
                 used = 'X'
                 product_id = ''
