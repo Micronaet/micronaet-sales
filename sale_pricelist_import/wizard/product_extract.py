@@ -77,7 +77,8 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         sheet_mode = ws.cell_value(0, 0)
         if sheet_mode != 'pricelist_manual_product':
             raise exceptions.Warning(
-                'File di Excel non corretto, non è quello per la procedura di pulizia')
+                'File di Excel non corretto, '
+                'non è quello per la procedura di pulizia')
 
         start_import = False
         delete_ids = []
@@ -156,14 +157,17 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
         # ---------------------------------------------------------------------
         row = 0
         report_pool.write_xls_line(ws_name, row, [
-            'pricelist_manual_product', 'Filtro = Stato prodotto manuali (non servizio), inizio codice: "%s"' % (
+            'pricelist_manual_product',
+            'Filtro = Stato prodotto manuali (non servizio), '
+            'inizio codice: "%s"' % (
                 self.start_code or '',
                 )], style_code='title')
 
         row += 1
         report_pool.write_xls_line(ws_name, row, [
-             'ID', 'Rimuovi', 'Codice', 'Codice reale', 'Nome', 'UM', 'Usato', 'Creazione', 'Utente', 'Note'
-             ], style_code='header')
+            'ID', 'Rimuovi', 'Codice', 'Codice reale', 'Nome', 'UM', 'Usato',
+            'Creazione', 'Utente', 'Note'
+            ], style_code='header')
 
         # ---------------------------------------------------------------------
         # Read data
@@ -176,14 +180,12 @@ class ExcelPricelistExtractProductWizard(models.TransientModel):
             row += 1
             if not (row % 50):
                 _logger.warning('Export %s of %s' % (row, total))
+            product_id = product.id
+            delete = 'X'
             if product in sold_product:
                 used = 'X'
-                product_id = ''
-                delete = ''
             else:
                 used = ''
-                product_id = product.id
-                delete = 'X'
 
             if product.real_code:
                 note = 'Prodotto residuo da eliminazione listino'
