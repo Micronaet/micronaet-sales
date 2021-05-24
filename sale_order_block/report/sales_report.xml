@@ -122,7 +122,7 @@
                             <!-- END OF PAGE: -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <u><strong><span t-esc="'PREZZI NETTI IVA ESCLUSA' if o.discount_mode == 'never' else 'I PREZZI SI INTENDONO IVA ESCLUSA'" /></strong><br/></u>
+                                    <u><strong><span t-esc="'Prezzi netti IVA esclusa' if o.discount_mode == 'never' else 'I prezzi si intendono IVA esclusa'" /></strong><br/></u>
                                     <strong t-if="o.payment_term_id">TERMINI DI PAGAMENTO:</strong> <span t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/>
                                 </div>
                             </div>
